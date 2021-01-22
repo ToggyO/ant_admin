@@ -1,0 +1,28 @@
+module.exports = {
+  extends: [require.resolve('@umijs/fabric/dist/eslint')],
+  globals: {
+    ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION: true,
+    page: true,
+    REACT_APP_ENV: true,
+  },
+  rules: {
+    "arrow-body-style": ["error", "as-needed"],
+    "arrow-parens": "error",
+    "curly": ["error", "all"],
+    "func-names": "off",
+    "import/prefer-default-export": "off",
+    "import/order": ["error", { "newlines-between": "always-and-inside-groups" }],
+    "no-param-reassign": "off",
+    "no-plusplus": "off",
+    "no-tabs": "off",
+    "prefer-promise-reject-errors": "off",
+    "no-underscore-dangle": "off",
+    "jsx-a11y/mouse-events-have-key-events": "off",
+    "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+    "react/jsx-props-no-spreading": "off",
+    "react/state-in-constructor": "error",
+    "react/destructuring-assignment": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "error",
+  },
+};
