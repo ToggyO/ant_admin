@@ -1,16 +1,18 @@
+import path from 'path';
+import fs from 'fs';
+
 import * as IWebpackChainConfig from 'webpack-chain';
-import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
+
+const appDirectory = fs.realpathSync(process.cwd());
+export const resolveApp = (relativePath: string) => path.resolve(appDirectory, relativePath);
 
 export const webpackPlugin = (config: IWebpackChainConfig) => {
-  if (
-    process.env.ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION === 'site' ||
-    process.env.NODE_ENV !== 'production'
-  ) {
-    config.plugin('fork-ts-checker-webpack-plugin').use(new ForkTsCheckerWebpackPlugin({
-      async: true,
-      checkSyntacticErrors: true,
-      useTypescriptIncrementalApi: false,
-      // eslint: true,
-    }));
-  }
+  config.resolve.alias.set('components', resolveApp('src/components'));
+  config.resolve.alias.set('constants', resolveApp('src/constants'));
+  config.resolve.alias.set('enums', resolveApp('src/enums'));
+  config.resolve.alias.set('locales', resolveApp('src/locales'));
+  config.resolve.alias.set('models', resolveApp('src/models'));
+  config.resolve.alias.set('pages', resolveApp('src/pages'));
+  config.resolve.alias.set('services', resolveApp('src/services'));
+  config.resolve.alias.set('utils', resolveApp('src/utils'));
 };

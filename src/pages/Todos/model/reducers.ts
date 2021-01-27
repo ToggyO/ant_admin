@@ -2,7 +2,9 @@
  * Description: Todos module model reducers
  */
 
-import type { ITodosReducers } from './interfaces';
+import { CommonReducers } from 'models/common-reducers';
+
+import type { ITodosReducers, ITodosState } from './interfaces';
 
 export default {
   saveTodos(state, { payload }) {
@@ -12,19 +14,20 @@ export default {
   clearTodos(state) {
     return { ...state, todos: [] };
   },
-
-  putErrors(state, { payload }) {
-    const { errors = [] } = payload;
-    return {
-      ...state,
-      errors,
-    };
-  },
-
-  clearErrors(state) {
-    return {
-      ...state,
-      errors: [],
-    };
-  },
+  ...new CommonReducers<ITodosState>(),
 } as ITodosReducers;
+
+// putErrors(state, { payload }) {
+//   const { errors = [] } = payload;
+//   return {
+//     ...state,
+//     errors,
+//   };
+// },
+//
+// clearErrors(state) {
+//   return {
+//     ...state,
+//     errors: [],
+//   };
+// },

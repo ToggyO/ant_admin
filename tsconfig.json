@@ -20,7 +20,7 @@
     "paths": {
       "@/*": ["./src/*"],
       "@@/*": ["./src/.umi/*"],
-      "components/*": ["./src/components/*"],
+      "components": ["./src/components"],
       "constants/*": ["./src/constants/*"],
       "enums/*": ["./src/enums/*"],
       "locales/*": ["./src/locales/*"],
@@ -44,6 +44,5 @@
     "jest.config.js",
     "mock/*"
   ],
-  "exclude": ["node_modules", "build", "dist", "scripts",
-    "src/.umi/*", "webpack", "jest"]
+  "exclude": ["node_modules", "build", "dist", "scripts", "src/.umi/*", "webpack", "jest"]
 }

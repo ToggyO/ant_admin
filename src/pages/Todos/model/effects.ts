@@ -2,7 +2,7 @@
  * Description: Todos module model effects
  */
 
-import { getTodos } from '@/services/todos';
+import { getTodos } from '../service';
 
 import { TODOS } from './constants';
 import type { ITodosEffects } from './interfaces';

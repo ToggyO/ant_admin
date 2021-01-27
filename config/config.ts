@@ -5,6 +5,7 @@ import defaultSettings from './defaultSettings';
 import proxy from './proxy';
 import routes from './routes';
 import { env } from './env';
+import { webpackPlugin } from './plugin.config';
 
 const { REACT_APP_ENV } = process.env;
 
@@ -50,4 +51,5 @@ export default defineConfig({
     async: true,
     typescript: true,
   },
+  chainWebpack: webpackPlugin,
 });

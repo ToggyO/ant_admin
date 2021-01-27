@@ -7,7 +7,6 @@ export const env = (() => {
   const { NODE_ENV = 'development' } = process.env;
   const dotenvDir = path.join(__dirname, `../.env.${NODE_ENV}`);
   const envVars = dotenv.parse(fs.readFileSync(dotenvDir));
-
   return {
     ...envVars,
   };
