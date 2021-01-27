@@ -8,7 +8,6 @@ import { env } from './env';
 
 const { REACT_APP_ENV } = process.env;
 
-console.log('test')
 export default defineConfig({
   hash: true,
   antd: {},

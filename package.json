@@ -26,6 +26,11 @@
     "start:pre": "cross-env REACT_APP_ENV=pre UMI_ENV=dev umi dev",
     "tsc": "tsc --noEmit"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "lint-staged": {
     "**/*.less": "stylelint --syntax less",
     "**/*.{js,jsx,ts,tsx}": "npm run lint-staged:js",
@@ -85,6 +90,7 @@
     "enzyme": "^3.11.0",
     "eslint": "^7.1.0",
     "express": "^4.17.1",
+    "husky": "^4.3.0",
     "jsdom-global": "^3.0.2",
     "lint-staged": "^10.0.0",
     "prettier": "^2.0.1",
