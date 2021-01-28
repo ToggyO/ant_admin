@@ -1,28 +1,28 @@
-﻿export default [
+﻿import { ROUTES } from './constants';
+
+const { AUTH } = ROUTES;
+
+export default [
   {
-    path: '/user',
+    path: AUTH.SIGN_IN,
     layout: false,
+    component: '../components/Layouts/LoginLayout',
     routes: [
-      // {
-      //   path: '/user',
-      //   routes: [
-      //     {
-      //       name: 'login',
-      //       path: '/user/login',
-      //       component: './User/login',
-      //     },
-      //   ],
-      // },
+      {
+        name: 'login',
+        path: AUTH.SIGN_IN,
+        component: './Auth',
+      },
     ],
   },
-  // {
-  //   path: '/admin',
-  //   name: 'admin',
-  //   icon: 'crown',
-  //   access: 'canAdmin',
-  //   component: './Admin',
-  //   routes: [],
-  // },
+  {
+    path: '/admin',
+    name: 'admin',
+    icon: 'crown',
+    access: 'canAdmin',
+    component: './Admin',
+    routes: [],
+  },
   {
     name: 'Todos',
     icon: 'user',

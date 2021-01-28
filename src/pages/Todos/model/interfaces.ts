@@ -3,7 +3,8 @@
  */
 
 import type { Effect, Reducer, Subscription } from 'umi';
-import type { AnyAction } from 'redux';
+
+import type { ICommonReducers } from 'models/common-reducers';
 
 import type { Todo } from './types';
 
@@ -16,11 +17,9 @@ export interface ITodosEffects {
   fetchTodos: Effect;
 }
 
-export interface ITodosReducers {
-  saveTodos: Reducer<ITodosState, AnyAction>;
-  clearTodos: Reducer<ITodosState, AnyAction>;
-  // putErrors: Reducer<ITodosState, AnyAction>;
-  // clearErrors: Reducer<ITodosState, AnyAction>;
+export interface ITodosReducers extends ICommonReducers<ITodosState> {
+  saveTodos: Reducer<ITodosState>;
+  clearTodos: Reducer<ITodosState>;
 }
 
 export interface ITodosSubscriptions {

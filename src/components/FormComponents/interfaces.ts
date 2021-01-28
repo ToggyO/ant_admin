@@ -13,7 +13,7 @@ export interface IStandardFormContextType {
 }
 
 export interface IStandardFormProps extends Omit<FormProps, 'onFinish'> {
-  onFinish: <T>(values: T) => void;
+  onFinish: (values: any) => void;
   options: FunctionType | Record<string, FieldsOptions>;
   outerFormInstance?: FormInstance;
   asyncInitValues?: Record<string, any>;
@@ -30,7 +30,8 @@ export interface IFormItemWrapperProps {
     | 'text-area'
     | 'date-picker'
     | 'range-picker'
-    | 'phoneNumber'
+    | 'phone-number'
+    | 'check-box'
     | 'custom-component';
   name: string;
   dataSource?: SelectOptions[];

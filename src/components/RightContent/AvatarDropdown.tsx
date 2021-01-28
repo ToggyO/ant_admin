@@ -5,7 +5,9 @@ import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons
 import { Avatar, Menu, Spin } from 'antd';
 import { history, useModel } from 'umi';
 
-import { outLogin } from '@/services/login';
+// import { outLogin } from '@/services/login';
+
+import { ROUTES } from 'config/constants';
 
 import HeaderDropdown from '../HeaderDropdown';
 
@@ -19,14 +21,14 @@ export type GlobalHeaderRightProps = {
  * 退出登录，并且将当前的 url 保存
  */
 const loginOut = async () => {
-  await outLogin();
+  // await outLogin();
   const { query, pathname } = history.location;
   // @ts-ignore
   const { redirect } = query;
   // Note: There may be security issues, please note
-  if (window.location.pathname !== '/user/login' && !redirect) {
+  if (window.location.pathname !== ROUTES.AUTH.SIGN_IN && !redirect) {
     history.replace({
-      pathname: '/user/login',
+      pathname: ROUTES.AUTH.SIGN_IN,
       search: stringify({
         redirect: pathname,
       }),

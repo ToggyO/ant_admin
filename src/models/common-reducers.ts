@@ -2,14 +2,13 @@
  * Description: Common DVA model reducers
  */
 
-import type { AnyAction } from 'redux';
 import type { Reducer } from 'redux';
 
 import { autobind } from 'utils/utils';
 
 export interface ICommonReducers<T extends { errors: any[] }> {
-  putErrors: Reducer<T, AnyAction>;
-  clearErrors: Reducer<T, AnyAction>;
+  putErrors: Reducer<T>;
+  clearErrors: Reducer<T>;
 }
 
 export class CommonReducers<T extends { errors: any[] }> implements ICommonReducers<T> {
@@ -17,7 +16,7 @@ export class CommonReducers<T extends { errors: any[] }> implements ICommonReduc
     autobind(this);
   }
 
-  public putErrors: Reducer<T, AnyAction> = (state, { payload }): T => {
+  public putErrors: Reducer<T> = (state, { payload }): T => {
     const { errors = [] } = payload;
     return {
       ...state,
@@ -25,10 +24,9 @@ export class CommonReducers<T extends { errors: any[] }> implements ICommonReduc
     } as T;
   };
 
-  public clearErrors(state: T | undefined): T {
-    return {
+  public clearErrors: Reducer<T> = (state): T =>
+    ({
       ...state,
       errors: [] as any[],
-    } as T;
-  }
+    } as T);
 }

@@ -3,9 +3,8 @@
  */
 
 import { ACCESS_TOKEN, REFRESH_TOKEN } from '@/constants';
-import { getFromLocalState } from 'utils/storage';
 
-import type { User } from 'pages/Auth/model/types';
+import { getFromLocalState } from 'services/storage';
 
 import effects from './effects';
 import reducers from './reducers';
@@ -19,7 +18,6 @@ const Model: IAuthModel = {
       accessToken: getFromLocalState<string>(ACCESS_TOKEN),
       refreshToken: getFromLocalState<string>(REFRESH_TOKEN),
     },
-    user: {} as User,
     errors: [],
   },
   effects,

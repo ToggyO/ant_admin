@@ -7,7 +7,10 @@ export const API_ENDPOINTS = {
     GET_TODOS: 'https://jsonplaceholder.typicode.com/todos',
   },
   AUTH: {
-    SIGN_IN: '/sing.in',
+    SIGN_IN: '/sign.in',
     SING_OUT: '/sign.out',
+  },
+  PROFILE: {
+    ME: '/self',
   },
 } as const;

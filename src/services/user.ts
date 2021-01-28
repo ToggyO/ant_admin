@@ -1,13 +1,15 @@
+/**
+ * Description: User module API service
+ */
+
 import { request } from 'umi';
 
-export async function query() {
-  return request<API.CurrentUser[]>('/api/users');
-}
+import { API_ENDPOINTS } from '@/constants';
+import type { User } from 'pages/Profile/model/types';
 
-export async function queryCurrent() {
-  return request<API.CurrentUser>('/api/currentUser');
-}
+const { PROFILE } = API_ENDPOINTS;
 
-export async function queryNotices(): Promise<any> {
-  return request<{ data: API.NoticeIconData[] }>('/api/notices');
+// FIXME: change response payload
+export async function fetchCurrentUser() {
+  return request<API.SuccessResponse<{ user: User }>>(PROFILE.ME);
 }

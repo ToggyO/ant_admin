@@ -29,7 +29,7 @@ export function getFromLocalState<T>(key: string, defaultValue?: T): T {
   return state;
 }
 
-export function clearLocalState(key: string): void {
+export function removeFromLocalState(key: string): void {
   try {
     localStorage.removeItem(`${APP_PREFIX}_${key}`);
     sessionStorage.removeItem(`${APP_PREFIX}_${key}`);

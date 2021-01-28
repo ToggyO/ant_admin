@@ -14,20 +14,6 @@ export default {
   clearTodos(state) {
     return { ...state, todos: [] };
   },
+
   ...new CommonReducers<ITodosState>(),
 } as ITodosReducers;
-
-// putErrors(state, { payload }) {
-//   const { errors = [] } = payload;
-//   return {
-//     ...state,
-//     errors,
-//   };
-// },
-//
-// clearErrors(state) {
-//   return {
-//     ...state,
-//     errors: [],
-//   };
-// },

@@ -4,7 +4,7 @@ import { DefaultFooter } from '@ant-design/pro-layout';
 
 export default () => (
   <DefaultFooter
-    copyright="2021 Acaudio"
+    copyright="2021 AcAudio"
     links={[
       {
         key: 'Ant Design Pro',

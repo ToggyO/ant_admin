@@ -1,22 +1,33 @@
 /**
- * Description: Auth module model effects
+ * Description: Auth module DVA model effects
  */
 
-import { signIn, signOut } from '../service';
+import { PROFILE } from 'pages/Profile/model/constants';
 
-import type { IAuthEffects } from './interfaces';
+import { writeTokens } from 'services/auth';
+
+import { signIn, signOut } from '../service';
+import type { AuthCredentialsDTO } from '../types';
+
 import { AUTH } from './constants';
+import type { IAuthEffects } from './interfaces';
+import type { AuthDTO } from './types';
 
 export default {
   *signIn({ payload }, { call, put }) {
     try {
-      // Add response type
-      const response = yield call(signIn, payload);
-      // debugger;
+      // FIXME: change response payload
+      const { email, password, rememberMe } = payload as AuthCredentialsDTO;
+      const response: API.SuccessResponse<AuthDTO> = yield call(signIn, { email, password });
+      const { accessToken, refreshToken } = response;
+
+      writeTokens(accessToken, refreshToken, rememberMe);
+
       yield put({
         type: AUTH.ACTIONS.SAVE_AUTH_INFO,
-        payload: response.data,
+        payload: { accessToken, refreshToken },
       });
+      yield put({ type: PROFILE.getNamespace(PROFILE.EFFECTS.FETCH_CURRENT) });
     } catch (error) {
       yield put({ type: AUTH.ACTIONS.PUT_ERRORS, payload: error });
     }

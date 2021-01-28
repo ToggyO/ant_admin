@@ -7,6 +7,9 @@ import type { MenuDataItem } from '@ant-design/pro-layout';
 
 import type { ITodosState } from 'pages/Todos/model/interfaces';
 
+import type { IAuthState } from 'pages/Auth/model/interfaces';
+import type { IProfileState } from 'pages/Profile/model/interfaces';
+
 import { DefaultSettings as SettingModelState } from '../../config/defaultSettings';
 
 export { GlobalModelState, SettingModelState };
@@ -15,43 +18,27 @@ export type LoadingEffects = Record<string, boolean | undefined>;
 
 export type LoadingModels = {
   todos: boolean | undefined;
+  auth: boolean | undefined;
+  profile: boolean | undefined;
 };
 
 export interface ILoading {
   global: boolean;
   effects: LoadingEffects;
-  models: LoadingModels
+  models: LoadingModels;
 }
 
 export interface ConnectState {
   loading: ILoading;
   todos: ITodosState;
+  auth: IAuthState;
+  profile: IProfileState;
 }
 
 export interface Route extends MenuDataItem {
   routes?: Route[];
 }
 
-// TODO: check back-end response
-// export interface BasicResponse {
-//   data: {};
-//   code: string;
-// }
-//
-// export interface ErrorsFromBackend {
-//   code: string;
-//   message: string;
-//   field: string | null;
-// }
-//
-// export interface ErrorResponse {
-//   message: string;
-//   errors: ErrorsFromBackend[];
-//   code: string;
-// }
-//
-// export interface ErrorResponseData {
-//   data: ErrorResponse;
-// }
-
-export type ActionPayload<T> = Action<T> & Record<string, any>;
+export interface ActionPayload<T, R extends string = string> extends Action<R> {
+  payload: T;
+}

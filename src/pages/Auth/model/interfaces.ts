@@ -1,14 +1,15 @@
 /**
- * Description: Auth module model interfaces
+ * Description: Auth module DVA model interfaces
  */
 
 import type { Effect, Reducer } from 'umi';
 
-import type { AuthDTO, User } from './types';
+import type { ICommonReducers } from 'models/common-reducers';
+
+import type { AuthDTO } from './types';
 
 export interface IAuthState {
   authInfo: AuthDTO;
-  user: User;
   errors: any[];
 }
 
@@ -17,7 +18,7 @@ export interface IAuthEffects {
   signOut: Effect;
 }
 
-export interface IAuthReducers {
+export interface IAuthReducers extends ICommonReducers<IAuthState> {
   saveAuthInfo: Reducer<IAuthState>;
   clearAuthInfo: Reducer<IAuthState>;
 }

@@ -1,9 +1,9 @@
 /**
  * Description :Wrapper on ant design Form.Item component
  */
-// TODO: add description
+
 import React, { useContext } from 'react';
-import { DatePicker, Form, Input, InputNumber, Select } from 'antd';
+import { Checkbox, DatePicker, Form, Input, InputNumber, Select } from 'antd';
 import type { OptionProps } from 'antd/lib/select';
 import MaskedInput from 'antd-mask-input';
 
@@ -51,7 +51,7 @@ export const FormItemWrapper: React.FC<IFormItemWrapperProps> = ({
         return <Input.TextArea {...componentProps} {...propsToChild} />;
       case 'select':
         return (
-          <Select {...componentProps} {...propsToChild} >
+          <Select {...componentProps} {...propsToChild}>
             {selectOptions.map((option: OptionProps) => (
               <Select.Option value={option.key!} key={option.key}>
                 {option.label}
@@ -61,7 +61,7 @@ export const FormItemWrapper: React.FC<IFormItemWrapperProps> = ({
         );
       case 'async-load-select':
         return (
-          <Select {...componentProps} {...propsToChild} >
+          <Select {...componentProps} {...propsToChild}>
             {dataSource.map((data: SelectOptions) => (
               <Select.Option value={data.key} key={data.key}>
                 {data.label}
@@ -69,9 +69,17 @@ export const FormItemWrapper: React.FC<IFormItemWrapperProps> = ({
             ))}
           </Select>
         );
-      case 'phoneNumber': {
+      case 'phone-number': {
         const { mask, ...restMaskedInputProps } = componentProps;
-        return <MaskedInput mask={mask} {...restMaskedInputProps} {...propsToChild}  />;
+        return <MaskedInput mask={mask} {...restMaskedInputProps} {...propsToChild} />;
+      }
+      case 'check-box': {
+        const { text, ...restComponentProps } = componentProps;
+        return (
+          <Checkbox {...restComponentProps} {...propsToChild}>
+            {text}
+          </Checkbox>
+        );
       }
       case 'date-picker':
         return <DatePicker {...componentProps} {...propsToChild} />;
@@ -85,7 +93,12 @@ export const FormItemWrapper: React.FC<IFormItemWrapperProps> = ({
   };
 
   return (
-    <Form.Item name={name} style={formItemStyle || fomItemStyleFromOptions} {...restFormItemProps} {...restItemProps}>
+    <Form.Item
+      name={name}
+      style={formItemStyle || fomItemStyleFromOptions}
+      {...restFormItemProps}
+      {...restItemProps}
+    >
       {fieldType()}
     </Form.Item>
   );

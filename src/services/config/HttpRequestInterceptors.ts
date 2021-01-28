@@ -5,7 +5,7 @@
 import type { RequestOptionsInit } from 'umi-request';
 
 import { ACCESS_TOKEN } from '@/constants';
-import { getFromLocalState } from 'utils/storage';
+import { getFromLocalState } from 'services/storage';
 import { autobind } from 'utils/utils';
 
 export type HeadersWithAuthHeader = HeadersInit & {
@@ -27,7 +27,9 @@ export class HttpRequestInterceptors {
 
     const requestHeaders = options.headers as HeadersWithAuthHeader;
     if (accessToken) {
-      headers.Authorization = requestHeaders.Authorization || `Bearer ${accessToken}`;
+      // Uncomment for `Bearer` token
+      // headers.Authorization = requestHeaders.Authorization || `Bearer ${accessToken}`;
+      headers.Authorization = requestHeaders.Authorization || `${accessToken}`;
     }
 
     options.headers = {

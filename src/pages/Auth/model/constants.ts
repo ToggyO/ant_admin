@@ -1,12 +1,12 @@
 /**
- * Description: Auth module model constants
+ * Description: Auth module DVA model constants
  */
 
 export const AUTH = {
   NAMESPACE: 'auth',
 
   EFFECTS: {
-    SIGN_IN: 'singIn',
+    SIGN_IN: 'signIn',
     SIGN_OUT: 'signOut',
   },
 

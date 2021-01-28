@@ -16,7 +16,7 @@ export default defineConfig({
     hmr: true,
   },
   layout: {
-    name: 'Ant Design Pro',
+    name: 'AcAudio',
     // Set to true, if you need localization
     locale: false,
     siderWidth: 208,
