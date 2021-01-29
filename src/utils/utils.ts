@@ -1,3 +1,5 @@
+import { parse } from 'qs';
+
 /* eslint no-useless-escape:0 import/prefer-default-export:0 */
 const reg = /(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(?::\d+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/;
 
@@ -58,6 +60,9 @@ export const isEmpty = (val: any): boolean => val === undefined || val == null |
  * Checking if object is empty
  */
 export function isObjectEmpty(object: Record<any, any>): boolean {
+  if (typeof object === 'undefined') {
+    return false;
+  }
   if (Object.keys(object).length) {
     return false;
   }
@@ -102,4 +107,27 @@ export function autobind(instance: Record<string, any>, proto?: Record<string, a
       instance[name] = prototype![name].bind(instance);
     }
   }
+}
+
+/**
+ * Create pathname for redirect
+ */
+export function getRedirectUrl() {
+  const urlParams = new URL(window.location.href);
+  const params = parse(window.location.href.split('?')[1]);
+  let { redirect } = params as { redirect: string };
+  if (redirect) {
+    const redirectUrlParams = new URL(redirect);
+    if (redirectUrlParams.origin === urlParams.origin) {
+      redirect = redirect.substr(urlParams.origin.length);
+      if (redirect.match(/^\/.*#/)) {
+        redirect = redirect.substr(redirect.indexOf('#') + 1);
+      }
+    }
+    // else {
+    //   window.location.href = '/';
+    //   return;
+    // }
+  }
+  return redirect;
 }

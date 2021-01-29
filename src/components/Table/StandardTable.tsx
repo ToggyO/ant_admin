@@ -22,11 +22,7 @@ export function StandardTable<T extends object>({
 }: IStandardTableProps<T>): JSX.Element {
   const history = useHistory<any>();
   return (
-    <Space
-      className={styles.container}
-      direction="vertical"
-      size="middle"
-    >
+    <Space className={styles.container} direction="vertical" size="middle">
       <div>{extraContent && extraContent}</div>
       <Table<T>
         // FIXME:
@@ -37,7 +33,7 @@ export function StandardTable<T extends object>({
         rowKey={rowKey}
         locale={{
           emptyText: renderNoDataContent(6, dataSource, loading),
-          // FIXME:
+          // FIXME: delete
           // triggerDesc: 'Сортировать по убыванию',
           // triggerAsc: 'Сортировать по возрастанию',
           // cancelSort: 'Сбросить сортировку',
@@ -45,11 +41,11 @@ export function StandardTable<T extends object>({
         dataSource={dataSource}
         pagination={pagination}
         loading={loading}
-        onChange={(paginationParams, filters, sorter) => (
+        onChange={(paginationParams, filters, sorter) =>
           onTableChange(paginationParams, filters, sorter, history)
-        )}
+        }
         {...rest}
       />
     </Space>
-  )
+  );
 }

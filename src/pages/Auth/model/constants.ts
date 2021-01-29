@@ -12,6 +12,7 @@ export const AUTH = {
 
   ACTIONS: {
     SAVE_AUTH_INFO: 'saveAuthInfo',
+    SET_SIGNED_IN: 'setSignedIn',
     CLEAR_AUTH_INFO: 'clearAuthInfo',
     PUT_ERRORS: 'putErrors',
     CLEAR_ERRORS: 'clearErrors',

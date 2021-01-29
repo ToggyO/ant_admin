@@ -1,23 +1,30 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch } from 'dva';
+import { useSelector } from 'umi';
+
+import type { ConnectState, ILoading } from 'models/connect';
 
 import type { LoginFormState } from './types';
 import { LoginForm } from './_components/LoginForm';
-
-import styles from './index.less';
 import { signInActionCreator } from './model/actions';
 
+import styles from './index.less';
+
 const AuthLogin: React.FC = () => {
+  const { models } = useSelector<ConnectState, ILoading>((state) => state.loading);
   const dispatch = useDispatch();
 
-  function onSubmit(values: LoginFormState) {
-    delete values.submit;
-    dispatch(signInActionCreator(values));
-  }
+  const onSubmit = useCallback(
+    (values: LoginFormState) => {
+      delete values.submit;
+      dispatch(signInActionCreator(values));
+    },
+    [dispatch],
+  );
 
   return (
     <div className={styles.container}>
-      <LoginForm onFinish={onSubmit} />
+      <LoginForm onFinish={onSubmit} loading={models.auth} />
     </div>
   );
 };

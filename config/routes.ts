@@ -17,11 +17,11 @@ export default [
   },
   {
     path: '/admin',
-    name: 'admin',
+    name: 'Admin',
     icon: 'crown',
-    access: 'canAdmin',
+    // access: 'canAdmin',
     component: './Admin',
-    routes: [],
+    // routes: [],
   },
   {
     name: 'Todos',
@@ -31,7 +31,7 @@ export default [
   },
   {
     path: '/',
-    redirect: '/welcome',
+    redirect: '/admin',
   },
   {
     component: './404',

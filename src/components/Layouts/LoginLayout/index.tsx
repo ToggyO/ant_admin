@@ -7,8 +7,7 @@ import { Link } from 'umi';
 import { HelmetProvider, Helmet } from 'react-helmet-async';
 import { getPageTitle } from '@ant-design/pro-layout';
 
-// import { AppLogo } from 'components';
-import AppLogo from '../../SVGIcons/logo.svg';
+import { AppLogo } from 'components';
 
 import { Footer } from '../../index';
 
@@ -18,13 +17,13 @@ import styles from './index.less';
 
 const LoginLayout: React.FC<ILoginLayoutProps> = (props) => {
   const { children, location } = props;
-
   const title = getPageTitle({
     pathname: location.pathname,
     // breadcrumb,
     // formatMessage,
     ...props,
   });
+
   return (
     <HelmetProvider>
       <Helmet>
@@ -37,7 +36,7 @@ const LoginLayout: React.FC<ILoginLayoutProps> = (props) => {
           <div className={styles.top}>
             <div className={styles.header}>
               <Link to="/">
-                <img alt="logo" className={styles.logo} src={AppLogo} />
+                <AppLogo className={styles.logo} />
               </Link>
             </div>
             <div className={styles.desc}>Welcome to AcAudio!</div>
