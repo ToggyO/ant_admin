@@ -37,7 +37,7 @@ export const FormItemWrapper: React.FC<IFormItemWrapperProps> = ({
     formItemStyle: fomItemStyleFromOptions = {},
     ...restItemProps
   }: FieldsOptions = getOptions[name] || {};
-  const { selectOptions } = componentProps as any;
+  const { selectoptions } = componentProps as any;
 
   const fieldType = () => {
     switch (type) {
@@ -52,7 +52,7 @@ export const FormItemWrapper: React.FC<IFormItemWrapperProps> = ({
       case 'select':
         return (
           <Select {...componentProps} {...propsToChild}>
-            {selectOptions.map((option: OptionProps) => (
+            {selectoptions.map((option: OptionProps) => (
               <Select.Option value={option.key!} key={option.key}>
                 {option.label}
               </Select.Option>

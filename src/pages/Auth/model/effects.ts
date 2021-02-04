@@ -2,9 +2,10 @@
  * Description: Auth module DVA model effects
  */
 
-import { checkTokens, writeTokens } from 'services/auth';
+import { checkTokens, signOutRedirect, writeTokens } from 'services/auth';
 import { PROFILE } from 'pages/Profile/model/constants';
 import { getRedirectUrl } from 'utils/utils';
+import { clearTokens } from 'services/auth';
 
 import { signIn, signOut } from '../service';
 import type { AuthCredentialsDTO } from '../types';
@@ -20,14 +21,13 @@ export default {
         return;
       }
 
-      // FIXME: change response payload
       const { email, password, rememberMe } = payload as AuthCredentialsDTO;
       const response: API.SuccessResponse<AuthDTO> = yield call(signIn, { email, password });
-      const { accessToken, refreshToken } = response;
+      const { accessToken, refreshToken } = response.data;
 
-      writeTokens(accessToken, refreshToken, rememberMe);
+      yield writeTokens(accessToken, refreshToken, rememberMe);
 
-      const redirect = getRedirectUrl();
+      const redirect = yield getRedirectUrl();
 
       yield put({
         type: AUTH.ACTIONS.SAVE_AUTH_INFO,
@@ -50,6 +50,8 @@ export default {
       yield call(signOut);
       yield put({ type: AUTH.ACTIONS.CLEAR_AUTH_INFO });
       yield put({ type: PROFILE.getNamespace(PROFILE.ACTIONS.CLEAR_USER_INFO) });
+      yield clearTokens();
+      yield signOutRedirect();
     } catch (error) {
       yield put({ type: AUTH.ACTIONS.PUT_ERRORS, payload: error });
     }

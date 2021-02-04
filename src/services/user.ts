@@ -9,7 +9,6 @@ import type { User } from 'pages/Profile/model/types';
 
 const { PROFILE } = API_ENDPOINTS;
 
-// FIXME: change response payload
 export async function fetchCurrentUser() {
-  return request<API.SuccessResponse<{ user: User }>>(PROFILE.ME);
+  return request<API.SuccessResponse<User>>(PROFILE.ME);
 }

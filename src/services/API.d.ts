@@ -5,14 +5,15 @@ declare namespace API {
     pageSize: number;
   };
 
-  export interface Response {
-    status: string;
-    code: number;
+  export interface BaseResponse {
+    code: string;
   }
 
-  export type SuccessResponse<T extends Record<string, any>> = Response & T;
+  export interface SuccessResponse<T extends Record<string, any>> extends BaseResponse {
+    data: T;
+  }
 
-  export interface ErrorResponse extends Response {
+  export interface ErrorResponse extends BaseResponse {
     message: string;
   }
 }

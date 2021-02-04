@@ -18,10 +18,9 @@ export function writeToLocalState<T = any>(key: string, state: T, rememberMe = t
 export function getFromLocalState<T>(key: string, defaultValue?: T): T {
   let state: T;
   try {
-    if (sessionStorage.length) {
+    state = JSON.parse(localStorage.getItem(`${APP_PREFIX}_${key}`) as string);
+    if (!state) {
       state = JSON.parse(sessionStorage.getItem(`${APP_PREFIX}_${key}`) as string);
-    } else {
-      state = JSON.parse(localStorage.getItem(`${APP_PREFIX}_${key}`) as string);
     }
   } catch (e) {
     state = defaultValue as T;

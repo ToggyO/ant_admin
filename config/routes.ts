@@ -1,6 +1,7 @@
-﻿import { ROUTES } from './constants';
+﻿import { Accesses } from './accesses.enum';
+import { ROUTES } from './constants';
 
-const { AUTH } = ROUTES;
+const { AUTH, PROFILE } = ROUTES;
 
 export default [
   {
@@ -19,9 +20,13 @@ export default [
     path: '/admin',
     name: 'Admin',
     icon: 'crown',
-    // access: 'canAdmin',
+    access: Accesses.CanAdmin,
     component: './Admin',
-    // routes: [],
+  },
+  {
+    path: PROFILE.ROOT,
+    access: Accesses.CanAdmin,
+    component: './Profile',
   },
   {
     name: 'Todos',

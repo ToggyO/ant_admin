@@ -9,6 +9,7 @@ export const API_ENDPOINTS = {
   AUTH: {
     SIGN_IN: '/sign.in',
     SING_OUT: '/sign.out',
+    REFRESH_TOKEN: '/refresh-tokens',
   },
   PROFILE: {
     ME: '/self',

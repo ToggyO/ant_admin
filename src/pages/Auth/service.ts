@@ -11,7 +11,6 @@ import type { AuthDTO } from './model/types';
 
 const { AUTH } = API_ENDPOINTS;
 
-// FIXME: change response payload
 export async function signIn(params: AuthCredentialsDTO) {
   return request<API.SuccessResponse<AuthDTO>>(AUTH.SIGN_IN, {
     method: 'POST',
@@ -20,7 +19,7 @@ export async function signIn(params: AuthCredentialsDTO) {
 }
 
 export async function signOut() {
-  return request<API.Response>(AUTH.SING_OUT, {
+  return request<API.BaseResponse>(AUTH.SING_OUT, {
     method: 'POST',
   });
 }

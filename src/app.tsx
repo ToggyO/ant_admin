@@ -27,15 +27,15 @@ export const initialStateConfig = {
 /**
  * Initial application state
  */
-// FIXME: change response payload
 // FIXME: нести роуты в конфиг
 export async function getInitialState(): Promise<AntProInitialState> {
   const fetchUserInfo = async () => {
     try {
+      // FIXME: change response payload
       const { user } = await fetchCurrentUser();
       return user;
     } catch (error) {
-      history.push('/user/login');
+      history.push('/sign-in');
     }
     return undefined;
   };
@@ -68,7 +68,6 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => ({
       history.push(ROUTES.AUTH.SIGN_IN);
     }
   },
-  menuHeaderRender: undefined,
   childrenRender: (children) => <AppLayout>{children}</AppLayout>,
   ...initialState?.settings,
 });

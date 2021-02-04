@@ -8,3 +8,4 @@ export { default as RightContent } from './RightContent';
 export { StandardTable, addFilterToTableColumn, addSortToTableColumns, onTableChange } from './Table';
 export * from './userHooks';
 export * from './SVGIcons';
+export * from './Forms';

@@ -1,5 +1,5 @@
 /**
- * Description: Enums described default pagination values
+ * Description: Enums - default pagination values
  */
 
 export enum DefaultPaginationValues {

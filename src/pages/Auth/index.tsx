@@ -4,8 +4,8 @@ import { useSelector } from 'umi';
 
 import type { ConnectState, ILoading } from 'models/connect';
 
-import type { LoginFormState } from './types';
 import { LoginForm } from './_components/LoginForm';
+import type { LoginFormState } from './types';
 import { signInActionCreator } from './model/actions';
 
 import styles from './index.less';
