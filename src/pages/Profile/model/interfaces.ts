@@ -10,7 +10,7 @@ import type { User } from './types';
 
 export interface IProfileState {
   user: User;
-  errors: any[];
+  validationErrors: any[];
 }
 
 export interface IProfileEffects {

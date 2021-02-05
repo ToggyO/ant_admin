@@ -41,7 +41,8 @@ export default {
         },
       });
     } catch (error) {
-      yield put({ type: AUTH.ACTIONS.PUT_ERRORS, payload: error });
+      const { data } = error;
+      yield put({ type: AUTH.ACTIONS.SET_LOGIN_ERROR, payload: data });
     }
   },
 
@@ -53,7 +54,7 @@ export default {
       yield clearTokens();
       yield signOutRedirect();
     } catch (error) {
-      yield put({ type: AUTH.ACTIONS.PUT_ERRORS, payload: error });
+      yield put({ type: AUTH.ACTIONS.PUT_VALIDATION_ERRORS, payload: error });
     }
   },
 } as IAuthEffects;

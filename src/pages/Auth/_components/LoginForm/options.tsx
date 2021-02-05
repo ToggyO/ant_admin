@@ -7,6 +7,16 @@ export const formComponentsProps = {
       placeholder: 'Email',
       prefix: <UserOutlined className="input-prefix-icon" />,
     },
+    // rules: [
+    //   {
+    //     required: true,
+    //     message: 'Login is required',
+    //   },
+    //   {
+    //     pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+    //     message: 'Login is invalid ',
+    //   },
+    // ],
   },
   password: {
     props: {
@@ -14,6 +24,12 @@ export const formComponentsProps = {
       placeholder: 'Password',
       prefix: <LockTwoTone className="input-prefix-icon" />,
     },
+    // rules: [
+    //   {
+    //     required: true,
+    //     message: 'Password is required',
+    //   }
+    // ],
   },
   rememberMe: {
     props: {

@@ -4,13 +4,16 @@ import { PageHeader } from 'antd';
 
 import { Loader, UserDetailsForm } from 'components';
 import type { UserDetailsFormValues } from 'components';
-import type { ConnectState } from 'models/connect';
+import type { ConnectState, ILoading } from 'models/connect';
 
 import type { User } from './model/types';
+import type { IProfileProps } from './interfaces';
 
-const Profile: React.FC = () => {
+const Profile: React.FC<IProfileProps> = () => {
   const user = useSelector<ConnectState, User>((state) => state.profile.user);
-  let loading = useSelector<ConnectState, boolean | undefined>((state) => state.loading.models.profile);
+  let {
+    models: { profile: loading },
+  } = useSelector<ConnectState, ILoading>((state) => state.loading);
 
   if (typeof loading === 'undefined') {
     loading = false;

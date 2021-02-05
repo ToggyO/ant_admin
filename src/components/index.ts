@@ -1,11 +1,14 @@
 export { AnimationWrapper } from './AnimationWrapper';
 export { default as Footer } from './Footer';
+export { ModalWithFormInstance } from './ModalWithFormInstance';
 export { StandardForm, StandardFormContext, FormItemWrapper } from './FormComponents';
 export { default as HeaderDropdown } from './HeaderDropdown';
 export { default as HeaderSearch } from './HeaderSearch';
 export { Loader, ProLoader } from './Loading';
 export { default as RightContent } from './RightContent';
+export { withModal, withModalState } from './HOC';
 export { StandardTable, addFilterToTableColumn, addSortToTableColumns, onTableChange } from './Table';
 export * from './userHooks';
 export * from './SVGIcons';
 export * from './Forms';
+export * from './Modals';

@@ -28,7 +28,7 @@ export class HttpRequestInterceptors {
     if (accessToken) {
       // Uncomment for `Bearer` token
       // headers.Authorization = requestHeaders.Authorization || `Bearer ${accessToken}`;
-      headers.Authorization = requestHeaders.Authorization || `${accessToken}`;
+      headers.Authorization = `${accessToken}`;
     }
 
     options.headers = {

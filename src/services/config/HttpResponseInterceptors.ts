@@ -1,81 +1,80 @@
 /**
  * Description: Class described response interceptors
  */
-
-import { request } from 'umi';
+import { autobind } from 'utils/utils';
+import { request as umiRequest } from '@@/plugin-request/request';
 import type { RequestOptionsInit } from 'umi-request';
 
-import { autobind } from 'utils/utils';
-import { HttpStatuses } from 'enums/HttpStatuses';
-import { getFromLocalState } from 'services/storage';
 import { API_ENDPOINTS, REFRESH_TOKEN } from '@/constants';
+import { getFromLocalState } from 'services/storage';
 import type { AuthDTO } from 'pages/Auth/model/types';
 import { writeTokens } from 'services/auth';
-import { HeadersWithAuthHeader } from 'services/config/HttpRequestInterceptors';
+import { HttpStatuses } from 'enums/HttpStatuses';
 import { ResponseCodes } from 'enums/ResponseCodes';
 
 let _isAlreadyFetchingToken = false;
-// @ts-ignore
-let _isLocalStorageUsed = true;
-let _subscribers: any[] = [];
+let failedQueue: any = [];
 
-function onAccessTokenFetched(accessToken: string) {
-  _subscribers = _subscribers.filter((callback: FunctionType) => callback(accessToken));
-}
+const processQueue = (error: any, token: any = null) => {
+  failedQueue.forEach((prom: any) => {
+    if (error) {
+      prom.reject(error);
+    } else {
+      prom.resolve(token);
+    }
+  });
 
-function addSubscriber(callback: FunctionType) {
-  _subscribers.push(callback);
-}
+  failedQueue = [];
+};
 
 export class HttpResponseInterceptors {
   constructor() {
     autobind(this);
-    // FIXME: delete
-    console.log('HttpResponseInterceptors is created');
   }
 
-  public async catchAccessTokenExpiration(
-    response: Response,
-    options: RequestOptionsInit,
-  ): Promise<Response> {
-    // console.log(response);
-    // console.log(options);
-    const clonedResponsePayload: API.BaseResponse = await response.clone().json();
-    const originalRequest = options;
-
+  public async onAccessTokenRefresh(response: Response, options: RequestOptionsInit): Promise<Response> {
+    const clonedResponse: API.BaseResponse = await response.clone().json();
     if (
       response.status === HttpStatuses.UNAUTHORIZED &&
-      clonedResponsePayload.code === ResponseCodes.AccessExpired
+      clonedResponse.code === ResponseCodes.AccessExpired
     ) {
-      if (!_isAlreadyFetchingToken) {
-        _isAlreadyFetchingToken = true;
-
-        if (sessionStorage) {
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          _isLocalStorageUsed = false;
-        }
-
-        const oldRefreshToken = getFromLocalState(REFRESH_TOKEN);
-        const { data } = await request<API.SuccessResponse<AuthDTO>>(API_ENDPOINTS.AUTH.REFRESH_TOKEN, {
-          method: 'POST',
-          data: { refreshToken: oldRefreshToken },
-        });
-        const { accessToken, refreshToken } = data;
-        writeTokens(accessToken, refreshToken);
-        _isAlreadyFetchingToken = false;
-        onAccessTokenFetched(accessToken);
+      if (_isAlreadyFetchingToken) {
+        return new Promise<Response>((resolve, reject) => {
+          failedQueue.push({ resolve, reject });
+        })
+          .then(() => umiRequest(response.url, options))
+          .catch((err) => Promise.reject(err));
       }
 
-      // const retryOriginalRequest = new Promise((resolve) => {
-      //   addSubscriber((accessToken: string) => {
-      //     (originalRequest.headers as HeadersWithAuthHeader).Authorization = `Bearer ${accessToken}`;
-      //     resolve(request(response.url, originalRequest));
-      //   });
-      // });
-      addSubscriber(async (accessToken: string) => {
-        (originalRequest.headers as HeadersWithAuthHeader).Authorization = `Bearer ${accessToken}`;
-        await request(response.url, originalRequest);
-      });
+      _isAlreadyFetchingToken = true;
+      const oldRefreshToken = getFromLocalState(REFRESH_TOKEN);
+      if (oldRefreshToken) {
+        return new Promise<Response>((resolve, reject) => {
+          umiRequest<API.SuccessResponse<AuthDTO>>(API_ENDPOINTS.AUTH.REFRESH_TOKEN, {
+            method: 'POST',
+            data: { refreshToken: oldRefreshToken },
+          })
+            .then((res) => {
+              const { accessToken, refreshToken } = res.data;
+              writeTokens(accessToken, refreshToken);
+              processQueue(null, accessToken);
+              resolve(
+                umiRequest(response.url, {
+                  ...options,
+                  headers: { Authorization: `${accessToken}` },
+                }),
+              );
+            })
+            .catch((err) => {
+              failedQueue = [];
+              processQueue(err, null);
+              reject(err);
+            })
+            .then(() => {
+              _isAlreadyFetchingToken = false;
+            });
+        });
+      }
     }
     return response;
   }

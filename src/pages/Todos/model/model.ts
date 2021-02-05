@@ -13,7 +13,7 @@ const Model: ITodosModelType = {
   namespace: TODOS.NAMESPACE,
   state: {
     todos: [],
-    errors: [],
+    validationErrors: [],
   },
   effects,
   reducers,

@@ -31,11 +31,10 @@ export const initialStateConfig = {
 export async function getInitialState(): Promise<AntProInitialState> {
   const fetchUserInfo = async () => {
     try {
-      // FIXME: change response payload
-      const { user } = await fetchCurrentUser();
-      return user;
+      const { data } = await fetchCurrentUser();
+      return data.user;
     } catch (error) {
-      history.push('/sign-in');
+      history.push(ROUTES.AUTH.SIGN_IN);
     }
     return undefined;
   };

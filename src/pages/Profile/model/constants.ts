@@ -12,8 +12,8 @@ export const PROFILE = {
   ACTIONS: {
     SAVE_USER_INFO: 'saveUserInfo',
     CLEAR_USER_INFO: 'clearUserInfo',
-    PUT_ERRORS: 'putErrors',
-    CLEAR_ERRORS: 'clearErrors',
+    PUT_VALIDATION_ERRORS: 'putValidationErrors',
+    CLEAR_VALIDATION_ERRORS: 'clearValidationErrors',
   },
 
   getNamespace(action: string) {
