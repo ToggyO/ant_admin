@@ -82,6 +82,7 @@ const UserDetailsForm: React.FC<IUserDetailsFormProps> = ({ onSubmit, userData, 
           </Col>
         </Row>
       </StandardForm>
+      {/* @ts-ignore */}
       <ChangeEmailModal />
     </>
   );

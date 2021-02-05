@@ -20,63 +20,69 @@ import type { ITableParams } from '../interfaces';
  * @returns {Array<object>} newColumns - array of objects with updated sortOrder field parameters
  */
 export const onTableChange = <RecordType>(
-    paginationParams: TablePaginationConfig,
-    filters: Record<string, (Key | boolean)[] | null>,
-    sorter: SorterResult<RecordType> | SorterResult<RecordType>[],
-    history: History,
+  paginationParams: TablePaginationConfig,
+  filters: Record<string, (Key | boolean)[] | null>,
+  sorter: SorterResult<RecordType> | SorterResult<RecordType>[],
+  history: History,
 ) => {
-    console.log('Various parameters', paginationParams, filters, sorter);
-    const { location } = history;
+  console.log('Various parameters', paginationParams, filters, sorter);
+  const { location } = history;
 
-    const params: ITableParams = {};
+  const params: ITableParams = {};
 
-    // sort
-    let sorterResult;
-    if (Array.isArray(sorter)) {
+  // sort
+  let sorterResult;
+  if (Array.isArray(sorter)) {
     // eslint-disable-next-line prefer-destructuring
-      sorterResult = sorter[0];
-    } else {
-      sorterResult = sorter;
-    }
-    const { field, order } = sorterResult;
-    const resultOrder = order === 'ascend';
-    if (!order) {
-      // FIXME:
-      // delete params.Order;
-      // delete params.Asc;
-    } else {
-      // FIXME:
-      // params.Order = field;
-      // params.Asc = resultOrder;
-    }
+    sorterResult = sorter[0];
+  } else {
+    sorterResult = sorter;
+  }
+  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { field, order } = sorterResult;
+  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const resultOrder = order === 'ascend';
+  if (!order) {
+    // FIXME:
+    // delete params.Order;
+    // delete params.Asc;
+  } else {
+    // FIXME:
+    // params.Order = field;
+    // params.Asc = resultOrder;
+  }
 
-    // pagination
-    const { current, pageSize } = paginationParams;
-    if (current === DefaultPaginationValues.Page) {
-      delete params.page;
-      delete params.pageSize;
-    } else {
-      params.page = current;
-      params.pageSize = pageSize;
-    }
+  // pagination
+  const { current, pageSize } = paginationParams;
+  if (current === DefaultPaginationValues.Page) {
+    delete params.page;
+    delete params.pageSize;
+  } else {
+    params.page = current;
+    params.pageSize = pageSize;
+  }
 
-    // filters
-    Object.keys(filters).forEach((key) => {
-      if (Array.isArray(filters[key])) {
-        if (filters[key].length) {
-            params[key] = arraySum(filters[key]);
-        } else {
-            delete params[key];
-        }
+  // filters
+  Object.keys(filters).forEach((key) => {
+    if (Array.isArray(filters[key])) {
+      // @ts-ignore
+      if (filters[key].length) {
+        // @ts-ignore
+        params[key] = arraySum(filters[key]);
+      } else {
+        delete params[key];
       }
-      if (typeof filters[key] === 'string') {
-        // TODO: возможная реализация
-      }
-    });
+    }
+    if (typeof filters[key] === 'string') {
+      // TODO: возможная реализация
+    }
+  });
 
-    const queriesString = stringify(params, { addQueryPrefix: true });
-    history.push(`${location.pathname}${queriesString}`);
-    window.scrollTo(0, 0);
+  const queriesString = stringify(params, { addQueryPrefix: true });
+  history.push(`${location.pathname}${queriesString}`);
+  window.scrollTo(0, 0);
 };
 
 export default onTableChange;

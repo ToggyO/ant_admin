@@ -26,6 +26,7 @@ const Profile: React.FC<IProfileProps> = () => {
   return (
     <Loader loading={loading}>
       <PageHeader title="Profile">
+        {/* @ts-ignore */}
         <UserDetailsForm onSubmit={onSubmit} userData={user} />
       </PageHeader>
     </Loader>

@@ -8,6 +8,7 @@ import { withModalState } from '../../HOC';
 
 import type { IChangeEmailModalProps } from './interfaces';
 
+// @ts-ignore
 const ChangeEmailModal: React.FC<IChangeEmailModalProps> = ({ modalKeys, closeModal }) => {
   const [key] = useState(MODAL_KEYS.CHANGE_EMAIL);
   const [form] = Form.useForm();
