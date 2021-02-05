@@ -5,10 +5,11 @@
 import type { Action } from 'umi';
 import type { MenuDataItem } from '@ant-design/pro-layout';
 
+import type { IModalState } from 'models/modal/interfaces';
 import type { ITodosState } from 'pages/Todos/model/interfaces';
-
 import type { IAuthState } from 'pages/Auth/model/interfaces';
 import type { IProfileState } from 'pages/Profile/model/interfaces';
+import type { IAcademicsState } from 'pages/academics/model/interfaces';
 
 import { DefaultSettings as SettingModelState } from '../../config/defaultSettings';
 
@@ -17,9 +18,11 @@ export { GlobalModelState, SettingModelState };
 export type LoadingEffects = Record<string, boolean | undefined>;
 
 export type LoadingModels = {
+  modal: boolean | undefined;
   todos: boolean | undefined;
   auth: boolean | undefined;
   profile: boolean | undefined;
+  academics: boolean | undefined;
 };
 
 export interface ILoading {
@@ -30,9 +33,11 @@ export interface ILoading {
 
 export interface ConnectState {
   loading: ILoading;
+  modal: IModalState;
   todos: ITodosState;
   auth: IAuthState;
   profile: IProfileState;
+  academics: IAcademicsState;
 }
 
 export interface Route extends MenuDataItem {
@@ -42,3 +47,7 @@ export interface Route extends MenuDataItem {
 export interface ActionPayload<T, R extends string = string> extends Action<R> {
   payload: T;
 }
+
+export type ActionCreator<T = any, R extends string = string> = (
+  ...args: any[]
+) => ActionPayload<T, R> | Action<R>;

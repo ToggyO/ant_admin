@@ -10,7 +10,8 @@ import type { AuthDTO } from './types';
 
 export interface IAuthState {
   authInfo: AuthDTO;
-  errors: any[];
+  loginError: API.ErrorResponse;
+  validationErrors: any[];
 }
 
 export interface IAuthEffects {
@@ -21,6 +22,8 @@ export interface IAuthEffects {
 export interface IAuthReducers extends ICommonReducers<IAuthState> {
   saveAuthInfo: Reducer<IAuthState>;
   clearAuthInfo: Reducer<IAuthState>;
+  setLoginError: Reducer<IAuthState>;
+  clearLoginError: Reducer<IAuthState>;
 }
 
 export interface IAuthModel {

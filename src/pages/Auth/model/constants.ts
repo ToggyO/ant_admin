@@ -12,10 +12,11 @@ export const AUTH = {
 
   ACTIONS: {
     SAVE_AUTH_INFO: 'saveAuthInfo',
-    SET_SIGNED_IN: 'setSignedIn',
     CLEAR_AUTH_INFO: 'clearAuthInfo',
-    PUT_ERRORS: 'putErrors',
-    CLEAR_ERRORS: 'clearErrors',
+    SET_LOGIN_ERROR: 'setLoginError',
+    CLEAR_LOGIN_ERROR: 'clearLoginError',
+    PUT_VALIDATION_ERRORS: 'putValidationErrors',
+    CLEAR_VALIDATION_ERRORS: 'clearValidationErrors',
   },
 
   getNamespace(action: string) {

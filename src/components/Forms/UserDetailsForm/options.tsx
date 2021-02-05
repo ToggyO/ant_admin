@@ -1,5 +1,6 @@
 import React from 'react';
 import { IdcardTwoTone, MailTwoTone } from '@ant-design/icons';
+
 import { UserRoles } from 'enums/UserRoles';
 
 const formOptions = {
@@ -9,6 +10,12 @@ const formOptions = {
       placeholder: 'Enter name',
       suffix: <IdcardTwoTone />,
     },
+    rules: [
+      {
+        required: true,
+        message: 'First name is required',
+      },
+    ],
   },
   surname: {
     props: {
@@ -16,6 +23,12 @@ const formOptions = {
       placeholder: 'Enter surname',
       suffix: <IdcardTwoTone />,
     },
+    rules: [
+      {
+        required: true,
+        message: 'Surname is required',
+      },
+    ],
   },
   email: {
     props: {

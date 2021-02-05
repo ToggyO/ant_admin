@@ -12,8 +12,8 @@ export const TODOS = {
   ACTIONS: {
     SAVE_TODOS: 'saveTodos',
     CLEAR_TODOS: 'clearTodos',
-    PUT_ERRORS: 'putErrors',
-    CLEAR_ERRORS: 'clearErrors',
+    PUT_VALIDATION_ERRORS: 'putValidationErrors',
+    CLEAR_VALIDATION_ERRORS: 'clearValidationErrors',
   },
 
   getNamespace(action: string) {

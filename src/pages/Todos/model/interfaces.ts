@@ -10,7 +10,7 @@ import type { Todo } from './types';
 
 export interface ITodosState {
   todos: Todo[];
-  errors: any[];
+  validationErrors: any[];
 }
 
 export interface ITodosEffects {

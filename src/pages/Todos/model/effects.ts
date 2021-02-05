@@ -16,7 +16,7 @@ export default {
         payload: response,
       });
     } catch (error) {
-      yield put({ type: TODOS.ACTIONS.PUT_ERRORS, payload: error });
+      yield put({ type: TODOS.ACTIONS.PUT_VALIDATION_ERRORS, payload: error });
     }
   },
 } as ITodosEffects;

@@ -6,27 +6,27 @@ import type { Reducer } from 'redux';
 
 import { autobind } from 'utils/utils';
 
-export interface ICommonReducers<T extends { errors: any[] }> {
-  putErrors: Reducer<T>;
-  clearErrors: Reducer<T>;
+export interface ICommonReducers<T extends { validationErrors: any[] }> {
+  putValidationErrors: Reducer<T>;
+  clearValidationErrors: Reducer<T>;
 }
 
-export class CommonReducers<T extends { errors: any[] }> implements ICommonReducers<T> {
+export class CommonReducers<T extends { validationErrors: any[] }> implements ICommonReducers<T> {
   constructor() {
     autobind(this);
   }
 
-  public putErrors: Reducer<T> = (state, { payload }): T => {
-    const { errors = [] } = payload;
+  public putValidationErrors: Reducer<T> = (state, { payload }): T => {
+    const { validationErrors = [] } = payload;
     return {
       ...state,
-      errors,
+      validationErrors,
     } as T;
   };
 
-  public clearErrors: Reducer<T> = (state): T =>
+  public clearValidationErrors: Reducer<T> = (state): T =>
     ({
       ...state,
-      errors: [] as any[],
+      validationErrors: [] as any[],
     } as T);
 }

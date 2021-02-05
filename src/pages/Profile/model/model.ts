@@ -13,7 +13,7 @@ const Model: IProfileModel = {
   namespace: PROFILE.NAMESPACE,
   state: {
     user: {} as User,
-    errors: [],
+    validationErrors: [],
   },
   effects,
   reducers,
