@@ -1,0 +1,9 @@
+version: '3.5'
+services:
+  aa-admin:
+    container_name: aa-admin
+    hostname: aa-admin
+    build: .
+    restart: always
+    ports:
+      - '80:80'
