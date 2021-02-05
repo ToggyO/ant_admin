@@ -47,9 +47,9 @@ export default defineConfig({
   define: {
     ...env,
   },
-  forkTSChecker: {
-    async: true,
-    typescript: true,
-  },
+  // forkTSChecker: {
+  //   async: true,
+  //   typescript: true,
+  // },
   chainWebpack: webpackPlugin,
 });
