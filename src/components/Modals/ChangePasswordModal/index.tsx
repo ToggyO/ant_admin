@@ -13,6 +13,7 @@ const ChangePasswordModal: React.FC<IChangePasswordModalProps> = ({
   closeModal,
   onSubmit,
   onCancel,
+  loading,
 }) => {
   const [key] = useState(MODAL_KEYS.CHANGE_PASSWORD);
   const [form] = Form.useForm();
@@ -34,6 +35,7 @@ const ChangePasswordModal: React.FC<IChangePasswordModalProps> = ({
       destroyOnClose
       onCancel={onCloseModal}
       closable={false}
+      confirmLoading={loading}
     >
       <ChangePasswordForm onSubmit={onSubmit} form={form} />
     </ModalWithFormInstance>

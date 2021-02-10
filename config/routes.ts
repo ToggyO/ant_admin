@@ -1,18 +1,28 @@
 ﻿import { Accesses } from './accesses.enum';
 import { ROUTES } from './constants';
 
-const { AUTH, PROFILE } = ROUTES;
+const { AUTH, PROFILE, ACADEMICS } = ROUTES;
 
 export default [
   {
-    path: AUTH.SIGN_IN,
+    path: AUTH.ROOT,
     layout: false,
     component: '../components/Layouts/LoginLayout',
     routes: [
       {
         name: 'login',
         path: AUTH.SIGN_IN,
-        component: './Auth',
+        component: './Auth/Login',
+      },
+      {
+        name: 'restore-password',
+        path: AUTH.RESTORE_PASSWORD,
+        component: './Auth/RestorePassword',
+      },
+      {
+        name: 'reset-password',
+        path: AUTH.RESET_PASSWORD,
+        component: './Auth/ResetPassword',
       },
     ],
   },
@@ -29,9 +39,17 @@ export default [
     component: './Profile',
   },
   {
+    path: ACADEMICS.ROOT,
+    name: 'Academics',
+    icon: 'book',
+    access: Accesses.CanAdmin,
+    component: './academics/AcademicsList',
+  },
+  {
     name: 'Todos',
     icon: 'user',
     path: '/todos',
+    access: Accesses.CanAdmin,
     component: './Todos',
   },
   {

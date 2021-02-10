@@ -13,6 +13,7 @@ const ChangeEmailModal: React.FC<IChangeEmailModalProps> = ({
   closeModal,
   onSubmit,
   onCancel,
+  loading,
 }) => {
   const [key] = useState(MODAL_KEYS.CHANGE_EMAIL);
   const [form] = Form.useForm();
@@ -34,6 +35,7 @@ const ChangeEmailModal: React.FC<IChangeEmailModalProps> = ({
       destroyOnClose
       onCancel={onCloseModal}
       closable={false}
+      confirmLoading={loading}
     >
       <ChangeEmailForm onSubmit={onSubmit} form={form} />
     </ModalWithFormInstance>

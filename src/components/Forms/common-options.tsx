@@ -1,8 +1,9 @@
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 
 import { ERROR_MESSAGES } from '@/constants';
+import { FormInstance } from 'antd/es/form';
 
-const { LOGIN, PASSWORD } = ERROR_MESSAGES;
+const { EMAIL, PASSWORD } = ERROR_MESSAGES;
 
 export const commonFormOptions = {
   email: {
@@ -14,11 +15,11 @@ export const commonFormOptions = {
     rules: [
       {
         required: true,
-        message: LOGIN.REQUIRED,
+        message: EMAIL.REQUIRED,
       },
       {
         pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-        message: LOGIN.REQUIRED,
+        message: EMAIL.INVALID,
       },
     ],
   },
@@ -54,6 +55,33 @@ export const commonFormOptions = {
       },
     ],
   },
+  confirmPassword: (passwordFieldName: string) => ({
+    props: {
+      size: 'large',
+      placeholder: 'Confirm password',
+      prefix: <LockOutlined className="input-prefix-icon" />,
+    },
+    dependencies: ['newPassword'],
+    rules: [
+      {
+        required: true,
+        message: ' ',
+      },
+      ({ getFieldValue }: FormInstance) => ({
+        validator: (_: any, value: string) => {
+          if (!value) {
+            return Promise.reject(PASSWORD.CONFIRM.REQUIRED);
+          }
+
+          if (value !== getFieldValue(passwordFieldName)) {
+            return Promise.reject(PASSWORD.CONFIRM.SHOULD_MATCH);
+          }
+
+          return Promise.resolve();
+        },
+      }),
+    ],
+  }),
   submit: {
     props: {
       type: 'primary',

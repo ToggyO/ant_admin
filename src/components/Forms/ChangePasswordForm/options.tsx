@@ -5,7 +5,7 @@ import { ERROR_MESSAGES } from '@/constants';
 
 import { commonFormOptions } from '../common-options';
 
-const { password } = commonFormOptions;
+const { password, confirmPassword } = commonFormOptions;
 const { PASSWORD } = ERROR_MESSAGES;
 
 const formOptions = {
@@ -43,33 +43,7 @@ const formOptions = {
       placeholder: 'New password',
     },
   },
-  confirmPassword: {
-    props: {
-      size: 'large',
-      placeholder: 'Confirm password',
-      prefix: <LockOutlined className="input-prefix-icon" />,
-    },
-    dependencies: ['newPassword'],
-    rules: [
-      {
-        required: true,
-        message: ' ',
-      },
-      // ({ getFieldValue }: FormInstance<any>) => ({
-      //   validator: (_: any, value: string) => {
-      //     if (!value) {
-      //       return Promise.reject(PASSWORD.CONFIRM.REQUIRED);
-      //     }
-      //
-      //     if (value !== getFieldValue('newPassword')) {
-      //       return Promise.reject(PASSWORD.CONFIRM.SHOULD_MATCH);
-      //     }
-      //
-      //     return Promise.resolve();
-      //   },
-      // }),
-    ],
-  },
+  confirmPassword: confirmPassword('newPassword'),
 };
 
 export default formOptions;

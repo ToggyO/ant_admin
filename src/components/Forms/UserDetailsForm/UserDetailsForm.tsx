@@ -23,7 +23,7 @@ import type { IUserDetailsFormProps } from './interfaces';
 
 import styles from './index.less';
 
-const UserDetailsForm: React.FC<IUserDetailsFormProps> = ({ onSubmit, userData, openModal }) => {
+const UserDetailsForm: React.FC<IUserDetailsFormProps> = ({ onSubmit, userData, openModal, loading }) => {
   const currentUser = useSelector<ConnectState, User>((state) => state.profile.user);
 
   const handleChangeEmail = useCallback((values: ChangeEmailFormValues) => {
@@ -102,8 +102,8 @@ const UserDetailsForm: React.FC<IUserDetailsFormProps> = ({ onSubmit, userData, 
           </Col>
         </Row>
       </StandardForm>
-      <ChangeEmailModal onSubmit={handleChangeEmail} />
-      <ChangePasswordModal onSubmit={handleChangePassword} />
+      <ChangeEmailModal onSubmit={handleChangeEmail} loading={loading} />
+      <ChangePasswordModal onSubmit={handleChangePassword} loading={loading} />
     </>
   );
 };

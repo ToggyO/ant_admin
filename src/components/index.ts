@@ -12,3 +12,4 @@ export * from './userHooks';
 export * from './SVGIcons';
 export * from './Forms';
 export * from './Modals';
+export * from './Layouts';

@@ -7,6 +7,10 @@ export const ERROR_MESSAGES = {
     REQUIRED: 'Login is required',
     INVALID_CREDENTIALS: "User doesn't exist or password is wrong!",
   },
+  EMAIL: {
+    REQUIRED: 'Email is required',
+    INVALID: 'Invalid email',
+  },
   PASSWORD: {
     COMMON: {
       REQUIRED: 'Password is required',

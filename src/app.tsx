@@ -13,12 +13,11 @@ import { ROUTES } from 'config/constants';
 import { RightContent, Footer } from 'components';
 import { HttpClientConfig } from 'services/config';
 
+import { AppLayout } from 'components';
 import { checkTokens } from 'services/auth';
 import { fetchCurrentUser } from 'services/user';
 
 import defaultSettings from '../config/defaultSettings';
-
-import AppLayout from './AppLayout';
 
 export const initialStateConfig = {
   loading: <PageLoading />,
@@ -27,14 +26,17 @@ export const initialStateConfig = {
 /**
  * Initial application state
  */
-// FIXME: нести роуты в конфиг
 export async function getInitialState(): Promise<AntProInitialState> {
   const fetchUserInfo = async () => {
     try {
       const { data } = await fetchCurrentUser();
       return data.user;
     } catch (error) {
-      history.push(ROUTES.AUTH.SIGN_IN);
+      const {
+        location: { pathname },
+      } = history;
+      const redirect = pathname.includes(ROUTES.AUTH.ROOT) ? pathname : ROUTES.AUTH.SIGN_IN;
+      history.push(redirect);
     }
     return undefined;
   };
@@ -60,10 +62,10 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => ({
   onPageChange: () => {
     const { location } = history;
     const isTokens = checkTokens();
-    if (isTokens && location.pathname === ROUTES.AUTH.SIGN_IN) {
+    if (isTokens && location.pathname.includes(ROUTES.AUTH.ROOT)) {
       history.push('/');
     }
-    if (!isTokens && location.pathname !== ROUTES.AUTH.SIGN_IN) {
+    if (!isTokens && !location.pathname.includes(ROUTES.AUTH.ROOT)) {
       history.push(ROUTES.AUTH.SIGN_IN);
     }
   },
