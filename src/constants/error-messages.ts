@@ -6,6 +6,7 @@ export const ERROR_MESSAGES = {
   LOGIN: {
     REQUIRED: 'Login is required',
     INVALID_CREDENTIALS: "User doesn't exist or password is wrong!",
+    ACCESS_DENIED: 'Access denied!',
   },
   EMAIL: {
     REQUIRED: 'Email is required',

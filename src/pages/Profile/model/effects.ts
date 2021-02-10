@@ -3,10 +3,13 @@
  */
 
 import { history } from 'umi';
+import { message } from 'antd';
 
+import { ANT_MESSAGE_KEYS, ERROR_MESSAGES } from '@/constants';
 import { fetchCurrentUser } from 'services/user';
 import { ROUTES } from 'config/constants';
 import { UserRoles } from 'enums/UserRoles';
+import { AUTH } from 'pages/Auth/model/constants';
 
 import { PROFILE } from './constants';
 import type { User } from './types';
@@ -21,7 +24,15 @@ export default {
 
       // FIXME: check
       if (user.role !== UserRoles.Admin) {
-        throw new Error('Permission denied');
+        yield put({
+          type: AUTH.getNamespace(AUTH.EFFECTS.SIGN_OUT),
+        });
+        message.error({
+          content: ERROR_MESSAGES.LOGIN.ACCESS_DENIED,
+          duration: 5,
+          key: ANT_MESSAGE_KEYS.ACCESS_DENIED,
+        });
+        return;
       }
 
       yield put({ type: PROFILE.ACTIONS.SAVE_USER_INFO, payload: user });

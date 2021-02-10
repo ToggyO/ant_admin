@@ -8,6 +8,7 @@ import { HelmetProvider, Helmet } from 'react-helmet-async';
 import { getPageTitle } from '@ant-design/pro-layout';
 
 import { AppLogo } from 'components';
+import { ROUTES } from 'config/constants';
 
 import { Footer } from '../../index';
 
@@ -19,9 +20,10 @@ const LoginLayout: React.FC<ILoginLayoutProps> = (props) => {
   const { children, location } = props;
 
   const createTitle = useCallback(() => {
-    const pathname = location.pathname.slice(2, location.pathname.length);
-    const firstSymbolToUpperCase = location.pathname[1].toUpperCase();
-    return `${firstSymbolToUpperCase}${pathname} - AcAudio`;
+    const routePrefixLength = ROUTES.AUTH.ROOT.length;
+    const pathname = location.pathname.slice(routePrefixLength + 2, location.pathname.length);
+    const firstSymbolToUpperCase = location.pathname[routePrefixLength + 1].toUpperCase();
+    return `${firstSymbolToUpperCase}${pathname.replace('-', ' ')} - AcAudio`;
   }, [location.pathname]);
 
   const title = getPageTitle({

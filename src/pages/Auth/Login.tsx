@@ -23,7 +23,7 @@ const AuthLogin: React.FC = () => {
     if (errorFromBackend.code && errorFromBackend.code === ResponseCodes.InvalidCredentials) {
       message.error({
         content: ERROR_MESSAGES.LOGIN.INVALID_CREDENTIALS,
-        duration: 1000,
+        duration: 15,
         key: ANT_MESSAGE_KEYS.LOGIN_ERROR,
       });
     }
