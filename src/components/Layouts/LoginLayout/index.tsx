@@ -2,7 +2,7 @@
  * Description: Components - LoginLayout
  */
 
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Link } from 'umi';
 import { HelmetProvider, Helmet } from 'react-helmet-async';
 import { getPageTitle } from '@ant-design/pro-layout';
@@ -17,11 +17,18 @@ import styles from './index.less';
 
 const LoginLayout: React.FC<ILoginLayoutProps> = (props) => {
   const { children, location } = props;
+
+  const createTitle = useCallback(() => {
+    const pathname = location.pathname.slice(2, location.pathname.length);
+    const firstSymbolToUpperCase = location.pathname[1].toUpperCase();
+    return `${firstSymbolToUpperCase}${pathname} - AcAudio`;
+  }, [location.pathname]);
+
   const title = getPageTitle({
+    title: createTitle(),
     pathname: location.pathname,
     // breadcrumb,
     // formatMessage,
-    ...props,
   });
 
   return (

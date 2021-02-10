@@ -12,4 +12,8 @@ export default defineConfig({
     babelPlugins: [],
     babelOptions: {},
   },
+  forkTSChecker: {
+    async: true,
+    typescript: true,
+  },
 });

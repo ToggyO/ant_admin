@@ -12,9 +12,7 @@ export const useBackendErrors = (errorsFromBackend = [], formInstance: FormInsta
   useEffect(() => {
     if (errorsFromBackend.length && formInstance) {
       // const transformedErrors = transformErrorToForm(errorsFromBackend, ERROR_CODES, formInstance);
-      // @ts-ignore
       const transformedErrors = [];
-      // @ts-ignore
       formInstance.setFields(transformedErrors);
     }
   }, [errorsFromBackend, formInstance]);

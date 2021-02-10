@@ -1,5 +1,5 @@
-export { ChangeEmailForm } from './ChangeEmailForm';
-export { CreateUserForm } from './CreateUserForm';
-export { default as UserDetailsForm } from './UserDetailsForm';
-export * from './UserDetailsForm/types';
-export * from './UserDetailsForm/interfaces';
+export * from './ChangeEmailForm';
+export * from './ChangePasswordForm';
+export * from './CreateUserForm';
+export * from './UserDetailsForm';
+export { commonFormOptions } from './common-options';

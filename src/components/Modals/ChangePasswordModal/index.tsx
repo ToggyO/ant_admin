@@ -1,25 +1,25 @@
 import React, { useCallback, useState } from 'react';
 import { Form } from 'antd';
 
-import { ChangeEmailForm, ModalWithFormInstance } from 'components';
 import { MODAL_KEYS } from '@/constants';
+import { ChangePasswordForm, ModalWithFormInstance } from 'components';
 
 import { withModalState } from '../../HOC';
 
-import type { IChangeEmailModalProps } from './interfaces';
+import type { IChangePasswordModalProps } from './interfaces';
 
-const ChangeEmailModal: React.FC<IChangeEmailModalProps> = ({
+const ChangePasswordModal: React.FC<IChangePasswordModalProps> = ({
   modalKeys,
   closeModal,
   onSubmit,
   onCancel,
 }) => {
-  const [key] = useState(MODAL_KEYS.CHANGE_EMAIL);
+  const [key] = useState(MODAL_KEYS.CHANGE_PASSWORD);
   const [form] = Form.useForm();
 
   const onCloseModal = useCallback(() => {
     if (closeModal) {
-      closeModal(MODAL_KEYS.CHANGE_EMAIL);
+      closeModal(MODAL_KEYS.CHANGE_PASSWORD);
     }
     if (onCancel) {
       onCancel();
@@ -28,16 +28,16 @@ const ChangeEmailModal: React.FC<IChangeEmailModalProps> = ({
 
   return (
     <ModalWithFormInstance
-      title="Change email"
+      title="Change password"
       visible={modalKeys && modalKeys.includes(key)}
       form={form}
       destroyOnClose
       onCancel={onCloseModal}
       closable={false}
     >
-      <ChangeEmailForm onSubmit={onSubmit} form={form} />
+      <ChangePasswordForm onSubmit={onSubmit} form={form} />
     </ModalWithFormInstance>
   );
 };
 
-export default withModalState<IChangeEmailModalProps>(ChangeEmailModal);
+export default withModalState<IChangePasswordModalProps>(ChangePasswordModal);

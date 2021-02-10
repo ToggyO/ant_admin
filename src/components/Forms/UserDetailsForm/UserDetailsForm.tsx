@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Row, Col, Avatar, Button, Divider } from 'antd';
 import { EditOutlined, FileImageTwoTone, LockTwoTone, MailTwoTone, UserOutlined } from '@ant-design/icons';
 import { useSelector } from 'dva';
 
 import { MODAL_KEYS } from '@/constants';
-import { ChangeEmailModal, withModal } from 'components';
+import {
+  ChangeEmailFormValues,
+  ChangeEmailModal,
+  ChangePasswordFormValues,
+  ChangePasswordModal,
+  withModal,
+} from 'components';
 import type { ConnectState } from 'models/connect';
 import type { User } from 'pages/Profile/model/types';
 import { UserRoles } from 'enums/UserRoles';
@@ -19,6 +25,15 @@ import styles from './index.less';
 
 const UserDetailsForm: React.FC<IUserDetailsFormProps> = ({ onSubmit, userData, openModal }) => {
   const currentUser = useSelector<ConnectState, User>((state) => state.profile.user);
+
+  const handleChangeEmail = useCallback((values: ChangeEmailFormValues) => {
+    console.log(values);
+  }, []);
+
+  const handleChangePassword = useCallback((values: ChangePasswordFormValues) => {
+    console.log(values);
+  }, []);
+
   return (
     <>
       <StandardForm onFinish={onSubmit} options={options} layout="vertical" initialValues={userData}>
@@ -61,7 +76,12 @@ const UserDetailsForm: React.FC<IUserDetailsFormProps> = ({ onSubmit, userData, 
               <Button size="large" type="default" htmlType="button">
                 Change avatar <FileImageTwoTone />
               </Button>
-              <Button size="large" type="default" htmlType="button">
+              <Button
+                size="large"
+                type="default"
+                htmlType="button"
+                onClick={() => openModal(MODAL_KEYS.CHANGE_PASSWORD)}
+              >
                 Change password <LockTwoTone />
               </Button>
             </Row>
@@ -82,8 +102,8 @@ const UserDetailsForm: React.FC<IUserDetailsFormProps> = ({ onSubmit, userData, 
           </Col>
         </Row>
       </StandardForm>
-      {/* @ts-ignore */}
-      <ChangeEmailModal />
+      <ChangeEmailModal onSubmit={handleChangeEmail} />
+      <ChangePasswordModal onSubmit={handleChangePassword} />
     </>
   );
 };

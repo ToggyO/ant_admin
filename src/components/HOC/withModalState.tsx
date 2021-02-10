@@ -5,9 +5,17 @@ import { withModal } from 'components';
 import type { ConnectState } from 'models/connect';
 import type { IModalState } from 'models/modal/interfaces';
 
-export function withModalState<T>(WrappedComponent: React.ComponentType<T>) {
+import type { WithModalProps } from './withModal';
+
+export interface WithModalStateProps extends WithModalProps {
+  modalKeys?: string[];
+}
+
+export function withModalState<T extends WithModalStateProps = any>(
+  WrappedComponent: React.ComponentType<T>,
+) {
   return withModal((props: T) => {
     const { modalKeys } = useSelector<ConnectState, IModalState>((state) => state.modal);
-    return <WrappedComponent modalKeys={modalKeys} {...props} />;
+    return <WrappedComponent {...props} modalKeys={modalKeys} />;
   });
 }

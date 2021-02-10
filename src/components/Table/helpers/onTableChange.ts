@@ -38,6 +38,7 @@ export const onTableChange = <RecordType>(
   } else {
     sorterResult = sorter;
   }
+
   // @ts-ignore
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { field, order } = sorterResult;
@@ -67,9 +68,7 @@ export const onTableChange = <RecordType>(
   // filters
   Object.keys(filters).forEach((key) => {
     if (Array.isArray(filters[key])) {
-      // @ts-ignore
       if (filters[key].length) {
-        // @ts-ignore
         params[key] = arraySum(filters[key]);
       } else {
         delete params[key];

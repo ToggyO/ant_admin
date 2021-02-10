@@ -47,10 +47,5 @@ export default defineConfig({
   define: {
     ...env,
   },
-  // FIXME:!!!!!!
-  // forkTSChecker: {
-  //   async: true,
-  //   typescript: true,
-  // },
   chainWebpack: webpackPlugin,
 });
