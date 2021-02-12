@@ -2,7 +2,7 @@
  * Description: Profile module DVA model reducers
  */
 
-import { CommonReducers } from 'models/common-reducers';
+import { CommonReducers } from 'models/common.reducers';
 
 import type { IProfileReducers, IProfileState } from './interfaces';
 import type { CurrentUser } from './types';

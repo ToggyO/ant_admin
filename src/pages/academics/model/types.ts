@@ -14,15 +14,12 @@ export type Academic = User & {
 
 export type AcademicTableItem = {
   id: number;
-  fullName: string;
+  name: string;
   email: string;
   trialStarted: boolean;
 };
 
 export type CreateAcademicDTO = {
   name: string;
-  surname: string;
   email: string;
-  // FIXME: (temporary) delete
-  password: string;
 };

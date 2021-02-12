@@ -3,7 +3,7 @@
  */
 
 import { createAntPagination } from 'utils/helpers';
-import { CommonReducers } from 'models/common-reducers';
+import { CommonReducers } from 'models/common.reducers';
 
 import type { IAcademicsReducers, IAcademicsState } from './interfaces';
 import type { Academic } from './types';

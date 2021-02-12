@@ -20,14 +20,14 @@ export const getColumns = (dispatch: Dispatch): ColumnsType<Academic> => [
   {
     key: 'name',
     title: 'Name',
-    dataIndex: 'fullName',
-    width: '15%',
+    dataIndex: 'name',
+    width: '10%',
   },
   {
     key: 'email',
     title: 'Email',
     dataIndex: 'email',
-    width: '15%',
+    width: '10%',
   },
   {
     key: 'trial',
@@ -43,7 +43,7 @@ export const getColumns = (dispatch: Dispatch): ColumnsType<Academic> => [
   {
     key: 'actions',
     title: 'Actions',
-    width: '5%',
+    width: '10%',
     render: (_, record) => (
       <div>
         <Link to={ROUTES.ACADEMICS.DETAILS(record.id)}>Details</Link>

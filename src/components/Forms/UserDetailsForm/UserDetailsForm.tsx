@@ -54,9 +54,8 @@ function UserDetailsForm<T extends User>({
           </Col>
         </Row>
         <Row justify="center">
-          <Col span={8}>
-            <FormItemWrapper type="text-input" name="name" label="First name" />
-            <FormItemWrapper type="text-input" name="surname" label="Last name" />
+          <Col sm={24} md={18} lg={16} xl={12} xxl={10}>
+            <FormItemWrapper type="text-input" name="name" label="Full name" />
             <FormItemWrapper type="text-input" name="email" label="Email" />
             <FormItemWrapper
               type="select"

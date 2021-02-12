@@ -11,11 +11,15 @@ import {
   useLoading,
   UserDetailsForm,
 } from 'components';
-import { getFullName } from 'utils/helpers';
 
 import { getBreadcrumbs } from './_components/breadcrumbs/details.breadcrumbs';
 import { academicDetailsSelector } from './model/selectors';
-import { getAcademicDetailsActionCreator, clearAcademicDetailsActionCreator } from './model/actions';
+import {
+  getAcademicDetailsActionCreator,
+  clearAcademicDetailsActionCreator,
+  clearAcademicsGlobalErrorActionCreator,
+  clearAcademicsValidationErrorsActionCreator,
+} from './model/actions';
 
 const AcademicDetails: React.FC = () => {
   const history = useHistory();
@@ -29,6 +33,8 @@ const AcademicDetails: React.FC = () => {
   }, [userId, dispatch]);
 
   useClearState(clearAcademicDetailsActionCreator);
+  useClearState(clearAcademicsGlobalErrorActionCreator);
+  useClearState(clearAcademicsValidationErrorsActionCreator);
 
   const handleEditUser = useCallback((values) => console.log(values), []);
 
@@ -38,7 +44,7 @@ const AcademicDetails: React.FC = () => {
         title="Academic profile details"
         onBack={() => history.goBack()}
         breadcrumb={{
-          routes: getBreadcrumbs(getFullName({ firstName: academic.name, lastName: academic.surname })),
+          routes: getBreadcrumbs(academic.name),
           itemRender: BreadcrumbItem,
         }}
       >

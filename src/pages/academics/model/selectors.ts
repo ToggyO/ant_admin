@@ -13,7 +13,7 @@ export const academicsListSelector = createSelector<ConnectState, Academic[], Ac
   (academics) =>
     academics.map((academic) => ({
       id: academic.id,
-      fullName: `${academic.name} ${academic.surname}`,
+      name: academic.name,
       email: academic.email,
       trialStarted: academic.trialStarted,
     })),

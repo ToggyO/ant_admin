@@ -30,7 +30,4 @@ export const ERROR_MESSAGES = {
   FIRST_NAME: {
     REQUIRED: 'First name is required',
   },
-  LAST_NAME: {
-    REQUIRED: 'Last name is required',
-  },
 } as const;

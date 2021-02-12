@@ -2,7 +2,7 @@
  * Description: Todos module DVA model reducers
  */
 
-import { CommonReducers } from 'models/common-reducers';
+import { CommonReducers } from 'models/common.reducers';
 
 import type { IAuthReducers, IAuthState } from './interfaces';
 import type { AuthDTO } from './types';

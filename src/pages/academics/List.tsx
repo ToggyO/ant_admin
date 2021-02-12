@@ -27,6 +27,8 @@ import {
   clearAcademicsListActionCreator,
   createAcademicActionCreator,
   getAcademicsListActionCreator,
+  clearAcademicsGlobalErrorActionCreator,
+  clearAcademicsValidationErrorsActionCreator,
 } from './model/actions';
 import {
   academicsListSelector,
@@ -51,6 +53,8 @@ const AcademicsList: React.FC<IAcademicsListProps> = ({ openModal }) => {
   }, [dispatch, queries]);
 
   useClearState(clearAcademicsListActionCreator);
+  useClearState(clearAcademicsGlobalErrorActionCreator);
+  useClearState(clearAcademicsValidationErrorsActionCreator);
 
   useEffect(() => {
     console.log(globalError);
@@ -69,9 +73,7 @@ const AcademicsList: React.FC<IAcademicsListProps> = ({ openModal }) => {
       const dto: API.ReloadList<CreateAcademicDTO, API.RequestParams> = {
         payload: {
           name: values.name,
-          surname: values.surname,
           email: values.email,
-          password: values.password,
         },
         params: { ...queries },
       };

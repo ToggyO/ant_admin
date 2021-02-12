@@ -43,3 +43,11 @@ export const removeAcademicActionCreator = (id: number): ActionPayload<number> =
   type: getNamespace(EFFECTS.REMOVE),
   payload: id,
 });
+
+export const clearAcademicsGlobalErrorActionCreator = (): Action => ({
+  type: getNamespace(ACTIONS.CLEAR_GLOBAL_ERROR),
+});
+
+export const clearAcademicsValidationErrorsActionCreator = (): Action => ({
+  type: getNamespace(ACTIONS.CLEAR_VALIDATION_ERRORS),
+});

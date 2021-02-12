@@ -7,7 +7,6 @@ import type { UserRoles } from 'enums/UserRoles';
 export type User = {
   id: number;
   name: string;
-  surname: string;
   email: string;
   role: UserRoles;
   subscription?: string;

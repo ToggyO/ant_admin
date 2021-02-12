@@ -7,7 +7,6 @@ declare namespace API {
   export type ApiPagination = Pagination & { total: number };
 
   export type Sort = {
-    // TODO: check
     sort: string;
   };
 

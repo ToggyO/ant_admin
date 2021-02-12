@@ -26,20 +26,19 @@ const CreateUserModal: React.FC<ICreateUserModalProps> = ({
     }
   }, [modalKeys, form, key]);
 
-  useEffect(() => {}, []);
-
   const onCloseModal = useCallback(() => {
     if (closeModal) {
       closeModal(MODAL_KEYS.CREATE_USER);
     }
     if (onCancel) {
+      form.resetFields();
       onCancel();
     }
-  }, [closeModal, onCancel]);
+  }, [closeModal, onCancel, form]);
 
   return (
     <ModalWithFormInstance
-      title="Create user"
+      title="Create academic"
       visible={modalKeys && modalKeys.includes(key)}
       form={form}
       destroyOnClose

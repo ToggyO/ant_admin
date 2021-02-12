@@ -5,7 +5,7 @@
 import type { Effect, Reducer } from 'umi';
 
 import type { IBaseDvaModelState } from 'models/connect';
-import type { ICommonReducers } from 'models/common-reducers';
+import type { ICommonReducers } from 'models/common.reducers';
 
 import type { CurrentUser } from './types';
 

@@ -2,7 +2,7 @@
  * Description: Todos module model reducers
  */
 
-import { CommonReducers } from 'models/common-reducers';
+import { CommonReducers } from 'models/common.reducers';
 
 import type { ITodosReducers, ITodosState } from './interfaces';
 

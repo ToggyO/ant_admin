@@ -4,6 +4,7 @@
 
 import { MODAL_KEYS } from '@/constants';
 import { MODAL } from 'models/modal/constants';
+import { commonEffects } from 'models/common.effects';
 import { UserRoles } from 'enums/UserRoles';
 
 import type { IAcademicsEffects } from './interfaces';
@@ -12,14 +13,6 @@ import { getAcademicsList, getAcademicDetails, createAcademic } from './service'
 import type { Academic } from './types';
 
 const { ACTIONS, EFFECTS } = ACADEMICS;
-
-// @ts-ignore
-function* putErrors(error, put) {
-  yield put({ type: ACTIONS.PUT_GLOBAL_ERROR, payload: error });
-  if (error.errors) {
-    yield put({ type: ACTIONS.PUT_VALIDATION_ERRORS, payload: error.errors });
-  }
-}
 
 export default {
   *getList({ payload }, { call, put }) {
@@ -34,7 +27,7 @@ export default {
         },
       });
     } catch (error) {
-      yield putErrors(error, put);
+      yield commonEffects.putErrors(error, put);
     }
   },
 
@@ -47,7 +40,7 @@ export default {
         payload: response.data.user,
       });
     } catch (error) {
-      yield putErrors(error, put);
+      yield commonEffects.putErrors(error, put);
     }
   },
 
@@ -67,7 +60,7 @@ export default {
         payload: MODAL_KEYS.CREATE_USER,
       });
     } catch (error) {
-      yield putErrors(error, put);
+      yield commonEffects.putErrors(error, put);
     }
   },
 

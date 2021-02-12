@@ -2,11 +2,10 @@ import { UserRoles } from 'enums/UserRoles';
 
 import { commonFormOptions } from '../common-options';
 
-const { name, surname, email } = commonFormOptions;
+const { name, email } = commonFormOptions;
 
 const formOptions = {
   name,
-  surname,
   email,
   role: {
     props: {

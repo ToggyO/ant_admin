@@ -2,7 +2,7 @@
  * Description: API Token helpers
  */
 
-import { stringify } from 'querystring';
+// import { stringify } from 'querystring';
 
 import { history } from 'umi';
 
@@ -31,16 +31,35 @@ export function checkTokens(): boolean {
  * Log out and save the current url
  */
 export const signOutRedirect = () => {
-  const { query } = history.location;
-  // @ts-ignore
-  const { redirect } = query;
   // Note: There may be security issues, please note
-  if (window.location.pathname !== ROUTES.AUTH.SIGN_IN && !redirect) {
-    history.replace({
-      pathname: ROUTES.AUTH.SIGN_IN,
-      search: stringify({
-        redirect: window.location.href,
-      }),
-    });
+  if (window.location.pathname !== ROUTES.AUTH.SIGN_IN) {
+    history.replace(ROUTES.AUTH.SIGN_IN);
   }
 };
+// export const signOutRedirect = () => {
+//   const { query } = history.location;
+//   // @ts-ignore
+//   let { redirect } = query;
+//   // Note: There may be security issues, please note
+//   if (window.location.pathname !== ROUTES.AUTH.SIGN_IN && !redirect) {
+//     history.replace({
+//       pathname: ROUTES.AUTH.SIGN_IN,
+//       search: stringify({ redirect: window.location.href }),
+//     });
+//   }
+// };
+// export const signOutRedirect = () => {
+//   const { query } = history.location;
+//   // @ts-ignore
+//   let { redirect } = query;
+//   if (!redirect) {
+//     redirect = stringify({
+//       redirect: window.location.href,
+//     });
+//   }
+//   // Note: There may be security issues, please note
+//   if (window.location.pathname !== ROUTES.AUTH.SIGN_IN) {
+//     window.location.href = `${ROUTES.AUTH.SIGN_IN}?${redirect}`
+//   // window.location.reload();
+//   }
+// };

@@ -5,7 +5,7 @@
 import type { Effect, Reducer, Subscription } from 'umi';
 
 import type { IBaseDvaModelState } from '@/models/connect';
-import type { ICommonReducers } from 'models/common-reducers';
+import type { ICommonReducers } from 'models/common.reducers';
 
 import type { Todo } from './types';
 
