@@ -18,7 +18,7 @@ const Model: IAuthModel = {
       accessToken: getFromLocalState<string>(ACCESS_TOKEN),
       refreshToken: getFromLocalState<string>(REFRESH_TOKEN),
     },
-    loginError: {} as API.ErrorResponse,
+    globalError: {} as API.ErrorResponse,
     validationErrors: [],
   },
   effects,

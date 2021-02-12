@@ -61,6 +61,8 @@ export class HttpResponseInterceptors {
               resolve(
                 umiRequest(response.url, {
                   ...options,
+                  prefix: '',
+                  params: {},
                   headers: { Authorization: `${accessToken}` },
                 }),
               );

@@ -12,6 +12,8 @@ export const PROFILE = {
   ACTIONS: {
     SAVE_USER_INFO: 'saveUserInfo',
     CLEAR_USER_INFO: 'clearUserInfo',
+    PUT_GLOBAL_ERROR: 'putGlobalError',
+    CLEAR_GLOBAL_ERROR: 'clearGlobalError',
     PUT_VALIDATION_ERRORS: 'putValidationErrors',
     CLEAR_VALIDATION_ERRORS: 'clearValidationErrors',
   },

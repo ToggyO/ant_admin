@@ -5,4 +5,5 @@
 export const ANT_MESSAGE_KEYS = {
   LOGIN_ERROR: 'login-error',
   ACCESS_DENIED: 'access-denied',
+  USER_EXISTS: 'user-exists',
 } as const;

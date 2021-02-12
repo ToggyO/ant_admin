@@ -8,7 +8,7 @@ import type { TablePaginationConfig } from 'antd/lib/table';
 import type { Key, SorterResult } from 'antd/lib/table/interface';
 
 import { DefaultPaginationValues } from '@/enums/DefaultTableQueryParams';
-import { arraySum } from '@/utils/helpers';
+// import { arraySum } from '@/utils/helpers';
 
 import type { ITableParams } from '../interfaces';
 
@@ -68,8 +68,9 @@ export const onTableChange = <RecordType>(
   // filters
   Object.keys(filters).forEach((key) => {
     if (Array.isArray(filters[key])) {
+      // @ts-ignore
       if (filters[key].length) {
-        params[key] = arraySum(filters[key]);
+        // @ts-ignore
       } else {
         delete params[key];
       }

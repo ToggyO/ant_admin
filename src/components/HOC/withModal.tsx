@@ -3,10 +3,7 @@ import { useDispatch } from 'dva';
 
 import { closeModalActionCreator, openModalActionCreator } from 'models/modal/actions';
 
-export interface WithModalProps {
-  openModal?: (key: string) => Record<string, any>;
-  closeModal?: (key: string) => Record<string, any>;
-}
+import type { WithModalProps } from './interfaces';
 
 export function withModal<T extends WithModalProps = any>(WrappedComponent: React.ComponentType<T>) {
   return (props: T) => {

@@ -9,7 +9,7 @@ const { Text } = Typography;
 
 export const Subscription: React.FC<ISubscriptionProps> = ({ userData, ...rest }) => (
   <Space size={30} className={styles.subscription}>
-    <Switch {...rest} checked={!!userData.subscribtion} />
-    <Text>{userData?.subscribtion || 'No active subscription'}</Text>
+    <Switch {...rest} checked={!!userData.subscription} />
+    <Text>{userData?.subscription || 'No active subscription'}</Text>
   </Space>
 );

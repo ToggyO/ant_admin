@@ -4,20 +4,23 @@
 
 import type { Effect, Reducer } from 'umi';
 
+import type { IBaseDvaModelState } from 'models/connect';
+import type { AntPagination } from 'utils/helpers';
 import type { ICommonReducers } from 'models/common-reducers';
 
 import type { Academic } from './types';
 
-export interface IAcademicsState {
+export interface IAcademicsState extends IBaseDvaModelState {
   list: Academic[];
+  pagination: AntPagination;
   details: Academic;
-  validationErrors: any[];
 }
 
 export interface IAcademicsEffects {
   getList: Effect;
   getDetails: Effect;
   editDetails: Effect;
+  create: Effect;
   remove: Effect;
 }
 

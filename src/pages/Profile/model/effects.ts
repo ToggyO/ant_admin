@@ -22,7 +22,6 @@ export default {
       const response: API.SuccessResponse<{ user: User }> = yield call(fetchCurrentUser);
       const { user } = response.data;
 
-      // FIXME: check
       if (user.role !== UserRoles.Admin) {
         yield put({
           type: AUTH.getNamespace(AUTH.EFFECTS.SIGN_OUT),

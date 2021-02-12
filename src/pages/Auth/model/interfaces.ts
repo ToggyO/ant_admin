@@ -4,14 +4,13 @@
 
 import type { Effect, Reducer } from 'umi';
 
+import type { IBaseDvaModelState } from 'models/connect';
 import type { ICommonReducers } from 'models/common-reducers';
 
 import type { AuthDTO } from './types';
 
-export interface IAuthState {
+export interface IAuthState extends IBaseDvaModelState {
   authInfo: AuthDTO;
-  loginError: API.ErrorResponse;
-  validationErrors: any[];
 }
 
 export interface IAuthEffects {

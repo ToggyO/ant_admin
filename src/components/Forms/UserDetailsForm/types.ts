@@ -7,5 +7,5 @@ export type UserDetailsFormValues = {
   surname: string;
   email: string;
   avatar: string;
-  subscribtion: string;
+  subscription: string;
 };

@@ -1,42 +1,13 @@
-import React from 'react';
-import { IdcardTwoTone, MailTwoTone } from '@ant-design/icons';
-
 import { UserRoles } from 'enums/UserRoles';
 
+import { commonFormOptions } from '../common-options';
+
+const { name, surname, email } = commonFormOptions;
+
 const formOptions = {
-  name: {
-    props: {
-      size: 'large',
-      placeholder: 'Enter name',
-      suffix: <IdcardTwoTone />,
-    },
-    rules: [
-      {
-        required: true,
-        message: 'First name is required',
-      },
-    ],
-  },
-  surname: {
-    props: {
-      size: 'large',
-      placeholder: 'Enter surname',
-      suffix: <IdcardTwoTone />,
-    },
-    rules: [
-      {
-        required: true,
-        message: 'Surname is required',
-      },
-    ],
-  },
-  email: {
-    props: {
-      size: 'large',
-      disabled: true,
-      suffix: <MailTwoTone />,
-    },
-  },
+  name,
+  surname,
+  email,
   role: {
     props: {
       size: 'large',

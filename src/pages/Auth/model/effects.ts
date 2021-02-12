@@ -7,8 +7,9 @@ import { PROFILE } from 'pages/Profile/model/constants';
 import { getRedirectUrl } from 'utils/utils';
 import { clearTokens } from 'services/auth';
 
-import { signIn, signOut } from '../service';
 import type { AuthCredentialsDTO } from '../types';
+
+import { signIn, signOut } from './service';
 
 import { AUTH } from './constants';
 import type { IAuthEffects } from './interfaces';

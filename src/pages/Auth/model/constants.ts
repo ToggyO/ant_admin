@@ -15,6 +15,8 @@ export const AUTH = {
     CLEAR_AUTH_INFO: 'clearAuthInfo',
     SET_LOGIN_ERROR: 'setLoginError',
     CLEAR_LOGIN_ERROR: 'clearLoginError',
+    PUT_GLOBAL_ERROR: 'putGlobalError',
+    CLEAR_GLOBAL_ERROR: 'clearGlobalError',
     PUT_VALIDATION_ERRORS: 'putValidationErrors',
     CLEAR_VALIDATION_ERRORS: 'clearValidationErrors',
   },

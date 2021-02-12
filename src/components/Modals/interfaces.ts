@@ -1,4 +1,4 @@
-import type { WithModalStateProps } from '../HOC/withModalState';
+import type { WithModalStateProps } from '../HOC';
 
 export interface ICommonModalFormProps extends WithModalStateProps {
   onCancel?: FunctionType;

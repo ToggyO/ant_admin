@@ -5,11 +5,7 @@ import { withModal } from 'components';
 import type { ConnectState } from 'models/connect';
 import type { IModalState } from 'models/modal/interfaces';
 
-import type { WithModalProps } from './withModal';
-
-export interface WithModalStateProps extends WithModalProps {
-  modalKeys?: string[];
-}
+import type { WithModalStateProps } from './interfaces';
 
 export function withModalState<T extends WithModalStateProps = any>(
   WrappedComponent: React.ComponentType<T>,

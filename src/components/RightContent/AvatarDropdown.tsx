@@ -7,7 +7,7 @@ import { Avatar, Menu, Modal, Spin } from 'antd';
 import { AUTH } from 'pages/Auth/model/constants';
 
 import type { ConnectState } from 'models/connect';
-import type { User } from 'pages/Profile/model/types';
+import type { CurrentUser } from 'pages/Profile/model/types';
 
 import HeaderDropdown from '../HeaderDropdown';
 
@@ -20,7 +20,7 @@ export type GlobalHeaderRightProps = {
 
 const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu = true, dispatch }) => {
   const { initialState, setInitialState } = useModel('@@initialState');
-  const user = useSelector<ConnectState, User>((state) => state.profile.user);
+  const user = useSelector<ConnectState, CurrentUser>((state) => state.profile.user);
 
   const onMenuClick = useCallback(
     (event: {
@@ -70,7 +70,7 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu = true, dispatc
       {menu && (
         <Menu.Item key="settings">
           <SettingOutlined />
-          个人设置
+          Settings
         </Menu.Item>
       )}
       {menu && <Menu.Divider />}

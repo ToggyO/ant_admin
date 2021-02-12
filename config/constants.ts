@@ -14,5 +14,7 @@ export const ROUTES = {
   },
   ACADEMICS: {
     ROOT: '/academics',
+    DETAILS: (id: string | number) => `/academics/${id}`,
+    CREATE: '/academics/create',
   },
 };

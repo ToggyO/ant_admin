@@ -3,25 +3,19 @@ import { useHistory } from 'umi';
 import { useSelector } from 'dva';
 import { PageHeader } from 'antd';
 
-import { Loader, UserDetailsForm } from 'components';
+import { BreadcrumbItem, Loader, useLoading, UserDetailsForm } from 'components';
 import type { UserDetailsFormValues } from 'components';
-import type { ConnectState, ILoading } from 'models/connect';
-import { breadcrumbsConfig } from 'config/breadcrumbs.config';
+import type { ConnectState } from 'models/connect';
 
-import type { User } from './model/types';
+import breadcrumbsConfig from './_components/breadcrumbs/profile.breadcrumbs';
+import type { CurrentUser } from './model/types';
 import type { IProfileProps } from './interfaces';
+import { currentUserSelector } from './model/selectors';
 
-console.log(breadcrumbsConfig);
 const Profile: React.FC<IProfileProps> = () => {
   const history = useHistory();
-  const user = useSelector<ConnectState, User>((state) => state.profile.user);
-  let {
-    models: { profile: loading },
-  } = useSelector<ConnectState, ILoading>((state) => state.loading);
-
-  if (typeof loading === 'undefined') {
-    loading = false;
-  }
+  const loading = useLoading('profile');
+  const user = useSelector<ConnectState, CurrentUser>(currentUserSelector);
 
   const onSubmit = useCallback((values: UserDetailsFormValues) => {
     console.log(values);
@@ -29,7 +23,11 @@ const Profile: React.FC<IProfileProps> = () => {
 
   return (
     <Loader loading={loading}>
-      <PageHeader title="Profile" onBack={() => history.goBack()} breadcrumb={{ routes: breadcrumbsConfig }}>
+      <PageHeader
+        title="Profile"
+        onBack={() => history.goBack()}
+        breadcrumb={{ routes: breadcrumbsConfig, itemRender: BreadcrumbItem }}
+      >
         <UserDetailsForm onSubmit={onSubmit} userData={user} loading={loading} />
       </PageHeader>
     </Loader>

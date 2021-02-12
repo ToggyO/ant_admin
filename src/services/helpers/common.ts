@@ -9,8 +9,8 @@ import { DefaultPaginationValues } from 'enums/DefaultTableQueryParams';
  * @param {{ page: string | number, size: string | number}} queries - parameters
  * @returns {{ page: string | number, pageSize: string | number}}
  */
-export const createPaginationQuery = (queries: API.Pagination): API.Pagination => ({
+export const createPaginationQuery = (queries: API.RequestParams): API.RequestParams => ({
   ...queries,
-  page: parseInt(queries.page.toString(), 10) || DefaultPaginationValues.Page,
-  pageSize: parseInt(queries.pageSize.toString(), 10) || DefaultPaginationValues.PageSize,
+  page: queries.page || DefaultPaginationValues.Page,
+  pageSize: queries.pageSize || DefaultPaginationValues.PageSize,
 });

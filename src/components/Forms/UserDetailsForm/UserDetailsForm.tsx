@@ -1,6 +1,6 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, PropsWithChildren } from 'react';
 import { Row, Col, Avatar, Button, Divider } from 'antd';
-import { EditOutlined, FileImageTwoTone, LockTwoTone, MailTwoTone, UserOutlined } from '@ant-design/icons';
+import { SaveOutlined, FileImageTwoTone, LockTwoTone, MailTwoTone, UserOutlined } from '@ant-design/icons';
 import { useSelector } from 'dva';
 
 import { MODAL_KEYS } from '@/constants';
@@ -12,7 +12,7 @@ import {
   withModal,
 } from 'components';
 import type { ConnectState } from 'models/connect';
-import type { User } from 'pages/Profile/model/types';
+import type { CurrentUser, User } from 'pages/Profile/model/types';
 import { UserRoles } from 'enums/UserRoles';
 
 import { FormItemWrapper, StandardForm } from '../../FormComponents';
@@ -23,8 +23,13 @@ import type { IUserDetailsFormProps } from './interfaces';
 
 import styles from './index.less';
 
-const UserDetailsForm: React.FC<IUserDetailsFormProps> = ({ onSubmit, userData, openModal, loading }) => {
-  const currentUser = useSelector<ConnectState, User>((state) => state.profile.user);
+function UserDetailsForm<T extends User>({
+  onSubmit,
+  userData,
+  openModal,
+  loading,
+}: PropsWithChildren<IUserDetailsFormProps<T>>): JSX.Element {
+  const currentUser = useSelector<ConnectState, CurrentUser>((state) => state.profile.user);
 
   const handleChangeEmail = useCallback((values: ChangeEmailFormValues) => {
     console.log(values);
@@ -36,7 +41,13 @@ const UserDetailsForm: React.FC<IUserDetailsFormProps> = ({ onSubmit, userData, 
 
   return (
     <>
-      <StandardForm onFinish={onSubmit} options={options} layout="vertical" initialValues={userData}>
+      <StandardForm
+        onFinish={onSubmit}
+        options={options}
+        layout="vertical"
+        initialValues={userData}
+        asyncInitValues={userData}
+      >
         <Row justify="center">
           <Col className={styles.avatar_container}>
             <Avatar size={128} icon={<UserOutlined />} />
@@ -45,7 +56,7 @@ const UserDetailsForm: React.FC<IUserDetailsFormProps> = ({ onSubmit, userData, 
         <Row justify="center">
           <Col span={8}>
             <FormItemWrapper type="text-input" name="name" label="First name" />
-            <FormItemWrapper type="text-input" name="surname" label="Surname" />
+            <FormItemWrapper type="text-input" name="surname" label="Last name" />
             <FormItemWrapper type="text-input" name="email" label="Email" />
             <FormItemWrapper
               type="select"
@@ -69,7 +80,7 @@ const UserDetailsForm: React.FC<IUserDetailsFormProps> = ({ onSubmit, userData, 
                 size="large"
                 type="default"
                 htmlType="button"
-                onClick={() => openModal(MODAL_KEYS.CHANGE_EMAIL)}
+                onClick={() => openModal && openModal(MODAL_KEYS.CHANGE_EMAIL)}
               >
                 Change email <MailTwoTone />
               </Button>
@@ -80,7 +91,7 @@ const UserDetailsForm: React.FC<IUserDetailsFormProps> = ({ onSubmit, userData, 
                 size="large"
                 type="default"
                 htmlType="button"
-                onClick={() => openModal(MODAL_KEYS.CHANGE_PASSWORD)}
+                onClick={() => openModal && openModal(MODAL_KEYS.CHANGE_PASSWORD)}
               >
                 Change password <LockTwoTone />
               </Button>
@@ -94,7 +105,7 @@ const UserDetailsForm: React.FC<IUserDetailsFormProps> = ({ onSubmit, userData, 
                 name="submit"
                 component={(props) => (
                   <Button {...props}>
-                    Save <EditOutlined />
+                    Save <SaveOutlined />
                   </Button>
                 )}
               />
@@ -106,6 +117,6 @@ const UserDetailsForm: React.FC<IUserDetailsFormProps> = ({ onSubmit, userData, 
       <ChangePasswordModal onSubmit={handleChangePassword} loading={loading} />
     </>
   );
-};
+}
 
 export default withModal(UserDetailsForm);

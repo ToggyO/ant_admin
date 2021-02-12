@@ -6,8 +6,9 @@ import { request } from 'umi';
 
 import { API_ENDPOINTS } from '@/constants';
 
-import type { AuthCredentialsDTO } from './types';
-import type { AuthDTO } from './model/types';
+import type { AuthCredentialsDTO } from '../types';
+
+import type { AuthDTO } from './types';
 
 const { AUTH } = API_ENDPOINTS;
 

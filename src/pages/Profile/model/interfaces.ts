@@ -4,13 +4,13 @@
 
 import type { Effect, Reducer } from 'umi';
 
+import type { IBaseDvaModelState } from 'models/connect';
 import type { ICommonReducers } from 'models/common-reducers';
 
-import type { User } from './types';
+import type { CurrentUser } from './types';
 
-export interface IProfileState {
-  user: User;
-  validationErrors: any[];
+export interface IProfileState extends IBaseDvaModelState {
+  user: CurrentUser;
 }
 
 export interface IProfileEffects {

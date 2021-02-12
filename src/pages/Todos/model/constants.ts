@@ -12,6 +12,8 @@ export const TODOS = {
   ACTIONS: {
     SAVE_TODOS: 'saveTodos',
     CLEAR_TODOS: 'clearTodos',
+    PUT_GLOBAL_ERROR: 'putGlobalError',
+    CLEAR_GLOBAL_ERROR: 'clearGlobalError',
     PUT_VALIDATION_ERRORS: 'putValidationErrors',
     CLEAR_VALIDATION_ERRORS: 'clearValidationErrors',
   },

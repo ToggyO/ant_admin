@@ -30,11 +30,11 @@ export default {
   },
 
   setLoginError(state, { payload }) {
-    return { ...state, loginError: payload };
+    return { ...state, globalError: payload };
   },
 
   clearLoginError(state) {
-    return { ...state, loginError: {} as API.ErrorResponse };
+    return { ...state, globalError: {} as API.ErrorResponse };
   },
 
   ...new CommonReducers<IAuthState>(),

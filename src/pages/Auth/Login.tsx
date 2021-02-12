@@ -4,20 +4,21 @@ import { useSelector } from 'umi';
 import { message } from 'antd';
 
 import { ERROR_MESSAGES, ANT_MESSAGE_KEYS } from '@/constants';
-import { useClearErrors } from 'components';
-import type { ConnectState, ILoading } from 'models/connect';
+import { useClearState, useLoading } from 'components';
+import type { ConnectState } from 'models/connect';
 import { ResponseCodes } from 'enums/ResponseCodes';
 
 import { LoginForm } from './_components/LoginForm';
 import type { LoginFormState } from './types';
 import { clearLoginError, signInActionCreator } from './model/actions';
+import { loginErrorSelector } from './model/selectors';
 
 import styles from './index.less';
 
 const AuthLogin: React.FC = () => {
-  const { models } = useSelector<ConnectState, ILoading>((state) => state.loading);
-  const errorFromBackend = useSelector<ConnectState, API.ErrorResponse>((state) => state.auth.loginError);
+  const loading = useLoading('auth');
   const dispatch = useDispatch();
+  const errorFromBackend = useSelector<ConnectState, API.ErrorResponse>(loginErrorSelector);
 
   useEffect(() => {
     if (errorFromBackend.code && errorFromBackend.code === ResponseCodes.InvalidCredentials) {
@@ -32,7 +33,7 @@ const AuthLogin: React.FC = () => {
     };
   }, [errorFromBackend.code, dispatch]);
 
-  useClearErrors(clearLoginError);
+  useClearState(clearLoginError);
 
   const onSubmit = useCallback(
     (values: LoginFormState) => {
@@ -44,7 +45,7 @@ const AuthLogin: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <LoginForm onFinish={onSubmit} loading={models.auth} />
+      <LoginForm onFinish={onSubmit} loading={loading} />
     </div>
   );
 };

@@ -1,16 +1,16 @@
-import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import { LockOutlined, MailTwoTone, IdcardOutlined } from '@ant-design/icons';
 
 import { ERROR_MESSAGES } from '@/constants';
 import { FormInstance } from 'antd/es/form';
 
-const { EMAIL, PASSWORD } = ERROR_MESSAGES;
+const { EMAIL, PASSWORD, FIRST_NAME, LAST_NAME } = ERROR_MESSAGES;
 
 export const commonFormOptions = {
   email: {
     props: {
       size: 'large',
       placeholder: 'Email',
-      prefix: <UserOutlined className="input-prefix-icon" />,
+      prefix: <MailTwoTone className="input-prefix-icon" />,
     },
     rules: [
       {
@@ -82,6 +82,32 @@ export const commonFormOptions = {
       }),
     ],
   }),
+  name: {
+    props: {
+      size: 'large',
+      placeholder: 'First name',
+      prefix: <IdcardOutlined className="input-prefix-icon" />,
+    },
+    rules: [
+      {
+        required: true,
+        message: FIRST_NAME.REQUIRED,
+      },
+    ],
+  },
+  surname: {
+    props: {
+      size: 'large',
+      placeholder: 'Last name',
+      prefix: <IdcardOutlined className="input-prefix-icon" />,
+    },
+    rules: [
+      {
+        required: true,
+        message: LAST_NAME.REQUIRED,
+      },
+    ],
+  },
   submit: {
     props: {
       type: 'primary',

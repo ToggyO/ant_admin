@@ -9,6 +9,7 @@ export const ACADEMICS = {
     GET_LIST: 'getList',
     GET_DETAILS: 'getDetails',
     EDIT_DETAILS: 'editDetails',
+    CREATE: 'create',
     REMOVE: 'remove',
   },
 
@@ -17,6 +18,8 @@ export const ACADEMICS = {
     SAVE_DETAILS: 'saveDetails',
     CLEAR_LIST: 'clearList',
     CLEAR_DETAILS: 'clearDetails',
+    PUT_GLOBAL_ERROR: 'putGlobalError',
+    CLEAR_GLOBAL_ERROR: 'clearGlobalError',
     PUT_VALIDATION_ERRORS: 'putValidationErrors',
     CLEAR_VALIDATION_ERRORS: 'clearValidationErrors',
   },

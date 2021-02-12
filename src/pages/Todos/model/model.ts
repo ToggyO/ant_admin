@@ -13,6 +13,7 @@ const Model: ITodosModelType = {
   namespace: TODOS.NAMESPACE,
   state: {
     todos: [],
+    globalError: {} as API.ErrorResponse,
     validationErrors: [],
   },
   effects,

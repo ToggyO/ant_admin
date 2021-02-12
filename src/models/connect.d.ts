@@ -46,8 +46,16 @@ export interface Route extends MenuDataItem {
 
 export interface ActionPayload<T, R extends string = string> extends Action<R> {
   payload: T;
+  params?: Record<string, any>;
 }
 
 export type ActionCreator<T = any, R extends string = string> = (
   ...args: any[]
 ) => ActionPayload<T, R> | Action<R>;
+
+export interface IApiErrors {
+  globalError: API.ErrorResponse;
+  validationErrors: API.ValidationApiError[];
+}
+
+export interface IBaseDvaModelState extends IApiErrors {}

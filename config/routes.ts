@@ -43,7 +43,17 @@ export default [
     name: 'Academics',
     icon: 'book',
     access: Accesses.CanAdmin,
-    component: './academics/AcademicsList',
+    component: './academics/List',
+  },
+  {
+    path: ACADEMICS.DETAILS(':id'),
+    access: Accesses.CanAdmin,
+    component: './academics/Details',
+  },
+  {
+    path: ACADEMICS.CREATE,
+    access: Accesses.CanAdmin,
+    component: './academics/Create',
   },
   {
     name: 'Todos',

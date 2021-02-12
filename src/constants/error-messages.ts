@@ -27,4 +27,10 @@ export const ERROR_MESSAGES = {
       SHOULD_MATCH: 'Passwords do not match',
     },
   },
+  FIRST_NAME: {
+    REQUIRED: 'First name is required',
+  },
+  LAST_NAME: {
+    REQUIRED: 'Last name is required',
+  },
 } as const;
