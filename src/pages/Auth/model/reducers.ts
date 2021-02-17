@@ -33,7 +33,7 @@ export default {
     return { ...state, globalError: payload };
   },
 
-  clearLoginError(state) {
+  clearGlobalLoginError(state) {
     return { ...state, globalError: {} as API.ErrorResponse };
   },
 

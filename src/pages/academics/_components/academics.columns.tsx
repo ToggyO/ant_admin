@@ -1,11 +1,12 @@
 import React from 'react';
-import { Dispatch, Link } from 'umi';
+import { Dispatch, Link, history } from 'umi';
 import { Button, Tag, Modal } from 'antd';
 import type { ColumnsType } from 'antd/lib/table';
-import { CheckCircleOutlined, MinusCircleOutlined } from '@ant-design/icons';
+import { CheckCircleOutlined, MinusCircleOutlined, SearchOutlined } from '@ant-design/icons';
 
 import { REMOVE_TEXT } from '@/constants';
 import { ROUTES } from 'config/constants';
+import { addFilterToTableColumn, SearchFilterForm } from 'components';
 
 import type { Academic } from '../model/types';
 import { removeAcademicActionCreator } from '../model/actions';
@@ -22,6 +23,7 @@ export const getColumns = (dispatch: Dispatch): ColumnsType<Academic> => [
     title: 'Name',
     dataIndex: 'name',
     width: '10%',
+    ...addFilterToTableColumn(SearchFilterForm, history.location, 'name', SearchOutlined),
   },
   {
     key: 'email',

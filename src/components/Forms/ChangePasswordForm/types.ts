@@ -1,4 +1,3 @@
 export type ChangePasswordFormValues = {
-  oldPassword: string;
-  newPassword: string;
+  password: string;
 };

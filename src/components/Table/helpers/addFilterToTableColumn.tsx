@@ -2,22 +2,29 @@
  * Description: Add a filter to a specific table column
  */
 
+import type { History, Location } from 'history';
+
 import React from 'react';
 import { parse } from 'qs';
 import type { FilterDropdownProps } from 'antd/lib/table/interface';
+import type { ColumnType } from 'antd/lib/table';
+import { FilterFilled } from '@ant-design/icons';
 
-export const addFilterToTableColumn = (Component: typeof React.Component, location: Location, columnName: string) => {
-    const queries = parse(location.search, { ignoreQueryPrefix: true });
-    return {
-        filterDropdown: (props: FilterDropdownProps) => <Component query={queries[columnName]} {...props} />,
-        // TODO: возможные реализации
-        // filterIcon: (filtered) => (
-        //         <FilterFilled type="search" style={{ fontSize: '17px', color: filtered ? '#1890ff' : undefined }}/>
-        // );
-        // onFilterDropdownVisibleChange: (visible) => {
-        //     if (visible) {
-        //         setTimeout(() => console.log(visible));
-        //     }
-        // },
-    };
-};
+import type { IExtendedFilterFormProps } from './interfaces';
+
+export function addFilterToTableColumn<T>(
+  Component: React.ComponentType<IExtendedFilterFormProps>,
+  location: Location<History.LocationState>,
+  columnName: string,
+  FilterIcon?: React.ComponentType,
+): ColumnType<T> {
+  const queries = parse(location.search, { ignoreQueryPrefix: true });
+  return {
+    filterDropdown: (props: FilterDropdownProps) => (
+      <Component columnName={columnName} query={queries[columnName] as string} {...props} />
+    ),
+    filterIcon: () => (FilterIcon ? <FilterIcon /> : <FilterFilled />),
+    // @ts-ignore
+    filteredValue: queries[columnName],
+  };
+}

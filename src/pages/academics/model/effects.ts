@@ -9,7 +9,7 @@ import { UserRoles } from 'enums/UserRoles';
 
 import type { IAcademicsEffects } from './interfaces';
 import { ACADEMICS } from './constants';
-import { getAcademicsList, getAcademicDetails, createAcademic } from './service';
+import { getAcademicsListRequest, getAcademicDetailsRequest, createAcademicRequest } from './service';
 import type { Academic } from './types';
 
 const { ACTIONS, EFFECTS } = ACADEMICS;
@@ -18,7 +18,7 @@ export default {
   *getList({ payload }, { call, put }) {
     const params = payload as API.RequestParams;
     try {
-      const response: API.SuccessResponse<API.List<Academic>> = yield call(getAcademicsList, params);
+      const response: API.SuccessResponse<API.List<Academic>> = yield call(getAcademicsListRequest, params);
       yield put({
         type: ACTIONS.SAVE_LIST,
         payload: {
@@ -34,7 +34,7 @@ export default {
   *getDetails({ payload }, { call, put }) {
     const id = payload as number;
     try {
-      const response: API.SuccessResponse<{ user: Academic }> = yield call(getAcademicDetails, id);
+      const response: API.SuccessResponse<{ user: Academic }> = yield call(getAcademicDetailsRequest, id);
       yield put({
         type: ACTIONS.SAVE_DETAILS,
         payload: response.data.user,
@@ -49,7 +49,7 @@ export default {
 
   *create({ payload, params }, { call, put }) {
     try {
-      yield call(createAcademic, payload);
+      yield call(createAcademicRequest, payload);
       yield put({
         type: EFFECTS.GET_LIST,
         payload: { ...params, role: UserRoles.Academic },

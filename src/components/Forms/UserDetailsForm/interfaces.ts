@@ -7,4 +7,6 @@ export interface IUserDetailsFormProps<U extends User> extends WithModalProps {
   onSubmit: (values: UserDetailsFormValues) => void;
   userData: U;
   loading: boolean;
+  onClearGlobalErrors?: () => void;
+  onClearValidationErrors?: () => void;
 }

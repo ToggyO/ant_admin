@@ -3,17 +3,22 @@
  */
 
 import { history } from 'umi';
-import { message } from 'antd';
 
-import { ANT_MESSAGE_KEYS, ERROR_MESSAGES } from '@/constants';
+import { MODAL_KEYS } from '@/constants';
+import { commonEffects } from 'models/common.effects';
 import { fetchCurrentUser } from 'services/user';
 import { ROUTES } from 'config/constants';
 import { UserRoles } from 'enums/UserRoles';
 import { AUTH } from 'pages/Auth/model/constants';
+import { MODAL } from 'models/modal/constants';
+import { AntMessages } from 'utils/helpers';
+
+import type { ChangePasswordDTO } from '../types';
 
 import { PROFILE } from './constants';
 import type { User } from './types';
 import type { IProfileEffects } from './interfaces';
+import { changePasswordRequest } from './service';
 
 export default {
   *fetchCurrent({ payload = {} }, { call, put }) {
@@ -26,11 +31,7 @@ export default {
         yield put({
           type: AUTH.getNamespace(AUTH.EFFECTS.SIGN_OUT),
         });
-        message.error({
-          content: ERROR_MESSAGES.LOGIN.ACCESS_DENIED,
-          duration: 5,
-          key: ANT_MESSAGE_KEYS.ACCESS_DENIED,
-        });
+        AntMessages.accessDenied();
         return;
       }
 
@@ -42,6 +43,24 @@ export default {
       // FIXME: check
       // yield put({ type: PROFILE.ACTIONS.PUT_VALIDATION_ERRORS });
       yield history.push(ROUTES.AUTH.SIGN_IN);
+    }
+  },
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  *changeEmail({ payload }, { call, put }) {},
+
+  *changePassword({ payload }, { call, put }) {
+    try {
+      const data = payload as ChangePasswordDTO;
+      yield call(changePasswordRequest, data);
+      yield put({
+        type: MODAL.getNamespace(MODAL.ACTIONS.CLOSE_MODAL),
+        payload: MODAL_KEYS.CHANGE_PASSWORD,
+      });
+      AntMessages.changePasswordSuccess();
+    } catch (error) {
+      AntMessages.changePasswordError();
+      yield commonEffects.putErrors(error, put);
     }
   },
 } as IProfileEffects;

@@ -11,3 +11,12 @@ export type AuthCredentialsDTO = {
 export type LoginFormState = AuthCredentialsDTO & {
   submit: unknown;
 };
+
+export type RestorePasswordDTO = {
+  email: string;
+};
+
+export type ResetPasswordDTO = {
+  password: string;
+  pinCode: string;
+};

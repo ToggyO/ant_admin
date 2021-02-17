@@ -8,6 +8,8 @@ export const AUTH = {
   EFFECTS: {
     SIGN_IN: 'signIn',
     SIGN_OUT: 'signOut',
+    RESTORE_PASSWORD: 'restorePassword',
+    RESET_PASSWORD: 'resetPassword',
   },
 
   ACTIONS: {

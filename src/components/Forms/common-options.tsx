@@ -1,7 +1,7 @@
 import { LockOutlined, MailTwoTone, IdcardOutlined } from '@ant-design/icons';
 
 import { ERROR_MESSAGES } from '@/constants';
-import { FormInstance } from 'antd/es/form';
+import { FormInstance, RuleObject } from 'antd/es/form';
 
 const { EMAIL, PASSWORD, FIRST_NAME } = ERROR_MESSAGES;
 
@@ -12,6 +12,7 @@ export const commonFormOptions = {
       placeholder: 'Email',
       prefix: <MailTwoTone className="input-prefix-icon" />,
     },
+    hasFeedback: true,
     rules: [
       {
         required: true,
@@ -30,6 +31,7 @@ export const commonFormOptions = {
       maxLength: 30,
       prefix: <LockOutlined className="input-prefix-icon" />,
     },
+    hasFeedback: true,
     rules: [
       {
         required: true,
@@ -61,6 +63,7 @@ export const commonFormOptions = {
       placeholder: 'Confirm password',
       prefix: <LockOutlined className="input-prefix-icon" />,
     },
+    hasFeedback: true,
     dependencies: ['newPassword'],
     rules: [
       {
@@ -82,12 +85,40 @@ export const commonFormOptions = {
       }),
     ],
   }),
+  oldPassword: {
+    props: {
+      size: 'large',
+      placeholder: 'Old password',
+      prefix: <LockOutlined className="input-prefix-icon" />,
+    },
+    dependencies: ['newPassword'],
+    rules: [
+      {
+        required: true,
+        message: ' ',
+      },
+      ({ getFieldValue }: FormInstance): RuleObject => ({
+        validator: (_: any, value: string) => {
+          if (!value) {
+            return Promise.reject(PASSWORD.OLD.REQUIRED);
+          }
+
+          if (value === getFieldValue('newPassword')) {
+            return Promise.reject(PASSWORD.OLD.SHOULD_MATCH);
+          }
+
+          return Promise.resolve();
+        },
+      }),
+    ],
+  },
   name: {
     props: {
       size: 'large',
       placeholder: 'First name',
       prefix: <IdcardOutlined className="input-prefix-icon" />,
     },
+    hasFeedback: true,
     rules: [
       {
         required: true,

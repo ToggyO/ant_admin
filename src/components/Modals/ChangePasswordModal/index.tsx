@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form } from 'antd';
 
 import { MODAL_KEYS } from '@/constants';
@@ -10,22 +10,19 @@ import type { IChangePasswordModalProps } from './interfaces';
 
 const ChangePasswordModal: React.FC<IChangePasswordModalProps> = ({
   modalKeys,
-  closeModal,
   onSubmit,
   onCancel,
+  afterClose,
   loading,
 }) => {
   const [key] = useState(MODAL_KEYS.CHANGE_PASSWORD);
   const [form] = Form.useForm();
 
-  const onCloseModal = useCallback(() => {
-    if (closeModal) {
-      closeModal(MODAL_KEYS.CHANGE_PASSWORD);
+  useEffect(() => {
+    if (modalKeys && !modalKeys.includes(key)) {
+      form.resetFields();
     }
-    if (onCancel) {
-      onCancel();
-    }
-  }, [closeModal, onCancel]);
+  }, [modalKeys, key, form]);
 
   return (
     <ModalWithFormInstance
@@ -33,9 +30,10 @@ const ChangePasswordModal: React.FC<IChangePasswordModalProps> = ({
       visible={modalKeys && modalKeys.includes(key)}
       form={form}
       destroyOnClose
-      onCancel={onCloseModal}
+      onCancel={onCancel}
       closable={false}
       confirmLoading={loading}
+      afterClose={afterClose}
     >
       <ChangePasswordForm onSubmit={onSubmit} form={form} />
     </ModalWithFormInstance>

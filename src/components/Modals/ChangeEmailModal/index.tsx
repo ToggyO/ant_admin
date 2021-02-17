@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form } from 'antd';
 
 import { ChangeEmailForm, ModalWithFormInstance } from 'components';
@@ -10,22 +10,19 @@ import type { IChangeEmailModalProps } from './interfaces';
 
 const ChangeEmailModal: React.FC<IChangeEmailModalProps> = ({
   modalKeys,
-  closeModal,
   onSubmit,
   onCancel,
+  afterClose,
   loading,
 }) => {
   const [key] = useState(MODAL_KEYS.CHANGE_EMAIL);
   const [form] = Form.useForm();
 
-  const onCloseModal = useCallback(() => {
-    if (closeModal) {
-      closeModal(MODAL_KEYS.CHANGE_EMAIL);
+  useEffect(() => {
+    if (modalKeys && !modalKeys.includes(key)) {
+      form.resetFields();
     }
-    if (onCancel) {
-      onCancel();
-    }
-  }, [closeModal, onCancel]);
+  }, [modalKeys, key, form]);
 
   return (
     <ModalWithFormInstance
@@ -33,9 +30,10 @@ const ChangeEmailModal: React.FC<IChangeEmailModalProps> = ({
       visible={modalKeys && modalKeys.includes(key)}
       form={form}
       destroyOnClose
-      onCancel={onCloseModal}
+      onCancel={onCancel}
       closable={false}
       confirmLoading={loading}
+      afterClose={afterClose}
     >
       <ChangeEmailForm onSubmit={onSubmit} form={form} />
     </ModalWithFormInstance>

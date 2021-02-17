@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { useHistory } from 'umi';
+import { useDispatch, useHistory } from 'umi';
 import { useSelector } from 'dva';
 import { PageHeader } from 'antd';
 
@@ -11,15 +11,21 @@ import breadcrumbsConfig from './_components/breadcrumbs/profile.breadcrumbs';
 import type { CurrentUser } from './model/types';
 import type { IProfileProps } from './interfaces';
 import { currentUserSelector } from './model/selectors';
+import { clearProfileGlobalErrorActionCreator } from './model/actions';
 
 const Profile: React.FC<IProfileProps> = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
   const loading = useLoading('profile');
   const user = useSelector<ConnectState, CurrentUser>(currentUserSelector);
 
   const onSubmit = useCallback((values: UserDetailsFormValues) => {
     console.log(values);
   }, []);
+
+  const handlerClearValidationErrors = useCallback(() => dispatch(clearProfileGlobalErrorActionCreator()), [
+    dispatch,
+  ]);
 
   return (
     <Loader loading={loading}>
@@ -28,7 +34,12 @@ const Profile: React.FC<IProfileProps> = () => {
         onBack={() => history.goBack()}
         breadcrumb={{ routes: breadcrumbsConfig, itemRender: BreadcrumbItem }}
       >
-        <UserDetailsForm onSubmit={onSubmit} userData={user} loading={loading} />
+        <UserDetailsForm
+          onSubmit={onSubmit}
+          userData={user}
+          loading={loading}
+          onClearValidationErrors={handlerClearValidationErrors}
+        />
       </PageHeader>
     </Loader>
   );

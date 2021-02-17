@@ -15,10 +15,11 @@ export const ResetPasswordForm: React.FC<IResetPasswordFormProps> = ({ onSubmit,
   // @ts-ignore
   <StandardForm onFinish={onSubmit} options={options} layout="vertical">
     <Row className={styles.text} justify="center">
-      <Text>Enter your new password and click &quot;Reset&quot;</Text>
+      <Text>Enter PIN code from email, your new password and click &quot;Reset&quot;</Text>
     </Row>
-    <FormItemWrapper type="password-input" name="password" />
-    <FormItemWrapper type="password-input" name="confirmPassword" />
+    <FormItemWrapper type="text-input" name="pinCode" label="Pin code" />
+    <FormItemWrapper type="password-input" name="password" label="New password" />
+    <FormItemWrapper type="password-input" name="confirmPassword" label="Confirm password" />
     <FormItemWrapper
       type="custom-component"
       name="submit"

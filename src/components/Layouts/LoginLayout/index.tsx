@@ -22,7 +22,8 @@ const LoginLayout: React.FC<ILoginLayoutProps> = (props) => {
   const createTitle = useCallback(() => {
     const routePrefixLength = ROUTES.AUTH.ROOT.length;
     const pathname = location.pathname.slice(routePrefixLength + 2, location.pathname.length);
-    const firstSymbolToUpperCase = location.pathname[routePrefixLength + 1].toUpperCase();
+    const firstSymbol = location.pathname[routePrefixLength + 1];
+    const firstSymbolToUpperCase = firstSymbol ? firstSymbol.toUpperCase() : '';
     return `${firstSymbolToUpperCase}${pathname.replace('-', ' ')} - AcAudio`;
   }, [location.pathname]);
 

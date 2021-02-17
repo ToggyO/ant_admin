@@ -19,12 +19,12 @@ import type { ITableParams } from '../interfaces';
  * @param {History} history
  * @returns {Array<object>} newColumns - array of objects with updated sortOrder field parameters
  */
-export const onTableChange = <RecordType>(
+export function onTableChange<RecordType>(
   paginationParams: TablePaginationConfig,
   filters: Record<string, (Key | boolean)[] | null>,
   sorter: SorterResult<RecordType> | SorterResult<RecordType>[],
   history: History,
-) => {
+): void {
   console.log('Various parameters', paginationParams, filters, sorter);
   const { location } = history;
 
@@ -68,9 +68,9 @@ export const onTableChange = <RecordType>(
   // filters
   Object.keys(filters).forEach((key) => {
     if (Array.isArray(filters[key])) {
-      // @ts-ignore
-      if (filters[key].length) {
-        // @ts-ignore
+      if (filters && filters[key]!.length) {
+        const [value] = filters[key] as string[];
+        params[key] = value;
       } else {
         delete params[key];
       }
@@ -83,6 +83,6 @@ export const onTableChange = <RecordType>(
   const queriesString = stringify(params, { addQueryPrefix: true });
   history.push(`${location.pathname}${queriesString}`);
   window.scrollTo(0, 0);
-};
+}
 
 export default onTableChange;

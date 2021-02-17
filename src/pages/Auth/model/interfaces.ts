@@ -16,13 +16,15 @@ export interface IAuthState extends IBaseDvaModelState {
 export interface IAuthEffects {
   signIn: Effect;
   signOut: Effect;
+  restorePassword: Effect;
+  resetPassword: Effect;
 }
 
 export interface IAuthReducers extends ICommonReducers<IAuthState> {
   saveAuthInfo: Reducer<IAuthState>;
   clearAuthInfo: Reducer<IAuthState>;
   setLoginError: Reducer<IAuthState>;
-  clearLoginError: Reducer<IAuthState>;
+  clearGlobalLoginError: Reducer<IAuthState>;
 }
 
 export interface IAuthModel {

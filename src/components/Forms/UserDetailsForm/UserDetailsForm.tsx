@@ -1,4 +1,5 @@
 import React, { useCallback, PropsWithChildren } from 'react';
+import { useDispatch } from 'umi';
 import { Row, Col, Avatar, Button, Divider } from 'antd';
 import { SaveOutlined, FileImageTwoTone, LockTwoTone, MailTwoTone, UserOutlined } from '@ant-design/icons';
 import { useSelector } from 'dva';
@@ -12,6 +13,7 @@ import {
   withModal,
 } from 'components';
 import type { ConnectState } from 'models/connect';
+import { changePasswordActionCreator } from 'pages/Profile/model/actions';
 import type { CurrentUser, User } from 'pages/Profile/model/types';
 import { UserRoles } from 'enums/UserRoles';
 
@@ -27,18 +29,30 @@ function UserDetailsForm<T extends User>({
   onSubmit,
   userData,
   openModal,
+  closeModal,
   loading,
+  onClearValidationErrors,
 }: PropsWithChildren<IUserDetailsFormProps<T>>): JSX.Element {
+  const dispatch = useDispatch();
   const currentUser = useSelector<ConnectState, CurrentUser>((state) => state.profile.user);
 
-  const handleChangeEmail = useCallback((values: ChangeEmailFormValues) => {
-    console.log(values);
-  }, []);
+  const handleChangeEmail = useCallback((values: ChangeEmailFormValues) => console.log(values), []);
 
-  const handleChangePassword = useCallback((values: ChangePasswordFormValues) => {
-    console.log(values);
-  }, []);
+  const handleChangePassword = useCallback(
+    (values: ChangePasswordFormValues) => {
+      dispatch(changePasswordActionCreator(values));
+    },
+    [dispatch],
+  );
 
+  const handleChangeEmailModalClose = useCallback(() => closeModal && closeModal(MODAL_KEYS.CHANGE_EMAIL), [
+    closeModal,
+  ]);
+
+  const handleChangePasswordModalClose = useCallback(
+    () => closeModal && closeModal(MODAL_KEYS.CHANGE_PASSWORD),
+    [closeModal],
+  );
   return (
     <>
       <StandardForm
@@ -112,8 +126,18 @@ function UserDetailsForm<T extends User>({
           </Col>
         </Row>
       </StandardForm>
-      <ChangeEmailModal onSubmit={handleChangeEmail} loading={loading} />
-      <ChangePasswordModal onSubmit={handleChangePassword} loading={loading} />
+      <ChangeEmailModal
+        onSubmit={handleChangeEmail}
+        onCancel={handleChangeEmailModalClose}
+        afterClose={onClearValidationErrors}
+        loading={loading}
+      />
+      <ChangePasswordModal
+        onSubmit={handleChangePassword}
+        onCancel={handleChangePasswordModalClose}
+        afterClose={onClearValidationErrors}
+        loading={loading}
+      />
     </>
   );
 }

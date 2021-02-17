@@ -10,9 +10,12 @@ export const API_ENDPOINTS = {
     SIGN_IN: '/sign.in',
     SING_OUT: '/sign.out',
     REFRESH_TOKEN: '/refresh-tokens',
+    RESTORE_PASSWORD: '/password.recovery',
+    RESET_PASSWORD: '/password.confirm',
   },
   PROFILE: {
     ME: '/self',
+    CHANGE_PASSWORD: '/password.change',
   },
   USERS: {
     LIST: '/users.list',

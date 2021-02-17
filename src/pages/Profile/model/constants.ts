@@ -7,6 +7,8 @@ export const PROFILE = {
 
   EFFECTS: {
     FETCH_CURRENT: 'fetchCurrent',
+    CHANGE_EMAIL: 'changeEmail',
+    CHANGE_PASSWORD: 'changePassword',
   },
 
   ACTIONS: {
