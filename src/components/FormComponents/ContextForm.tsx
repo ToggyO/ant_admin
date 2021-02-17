@@ -14,7 +14,7 @@ export const StandardFormContext = React.createContext<IStandardFormContextType>
   options: {},
 });
 
-export const StandardForm: React.FC<IStandardFormProps> = ({
+export const StandardForm: React.FC<IStandardFormProps<API.ValidationApiError>> = ({
   children,
   onFinish,
   onFinishFailed,

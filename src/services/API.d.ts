@@ -43,4 +43,12 @@ declare namespace API {
     message: string;
     errors?: ValidationApiError[];
   }
+
+  export interface FormFieldData {
+    name: NamePath;
+    value: StoreValue;
+    touched: boolean;
+    validating: boolean;
+    errors: string[];
+  }
 }

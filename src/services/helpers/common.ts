@@ -2,6 +2,8 @@
  * Description: Service module helper functions
  */
 
+import type { FormInstance } from 'antd/lib/form';
+
 import { DefaultPaginationValues } from 'enums/DefaultTableQueryParams';
 
 /**
@@ -14,3 +16,31 @@ export const createPaginationQuery = (queries: API.RequestParams): API.RequestPa
   page: queries.page || DefaultPaginationValues.Page,
   pageSize: queries.pageSize || DefaultPaginationValues.PageSize,
 });
+
+/**
+ * Function, that transforms errors from backend to  to simple object format
+ * that is necessary to AntDesign Form
+ * @param {Array<API.ValidationApiError>} errors - error info, comes from backend
+ * @param {FormInstance} formInstance - method of form instance
+ * @returns {API.FormFieldData[]}
+ * - array of objects of transformed errors from backend
+ */
+export function transformErrorToForm<T extends API.ValidationApiError>(
+  errors: T[],
+  { getFieldValue, isFieldTouched, isFieldValidating }: FormInstance,
+): API.FormFieldData[] {
+  return errors.reduce((acc, error) => {
+    const value = getFieldValue(error.field);
+    const touched = isFieldTouched(error.field);
+    const validating = isFieldValidating(error.field);
+    const errorObj = {
+      name: error.field,
+      value,
+      touched,
+      validating,
+      errors: [error.message],
+    };
+    acc.push(errorObj);
+    return acc;
+  }, [] as API.FormFieldData[]);
+}

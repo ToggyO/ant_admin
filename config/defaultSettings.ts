@@ -1,4 +1,5 @@
 import { Settings as LayoutSettings } from '@ant-design/pro-layout';
+import { APP_NAME } from './constants';
 
 const Settings: LayoutSettings & {
   pwa?: boolean;
@@ -12,7 +13,7 @@ const Settings: LayoutSettings & {
   fixedHeader: false,
   fixSiderbar: true,
   colorWeak: false,
-  title: 'AcAudio',
+  title: APP_NAME,
   pwa: false,
   logo: 'logo.svg',
   // logo: 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg',

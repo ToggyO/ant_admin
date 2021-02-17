@@ -39,9 +39,13 @@ export const createAcademicActionCreator = (
   params: dto.params,
 });
 
-export const removeAcademicActionCreator = (id: number): ActionPayload<number> => ({
+export const removeAcademicActionCreator = (
+  id: number,
+  params: API.RequestParams,
+): ActionPayload<number> => ({
   type: getNamespace(EFFECTS.REMOVE),
   payload: id,
+  params,
 });
 
 export const clearAcademicsGlobalErrorActionCreator = (): Action => ({

@@ -5,13 +5,14 @@ import type { ColumnsType } from 'antd/lib/table';
 import { CheckCircleOutlined, MinusCircleOutlined, SearchOutlined } from '@ant-design/icons';
 
 import { REMOVE_TEXT } from '@/constants';
-import { ROUTES } from 'config/constants';
 import { addFilterToTableColumn, SearchFilterForm } from 'components';
+import { ROUTES } from 'config/constants';
+import { UserRoles } from 'enums/UserRoles';
 
 import type { Academic } from '../model/types';
 import { removeAcademicActionCreator } from '../model/actions';
 
-export const getColumns = (dispatch: Dispatch): ColumnsType<Academic> => [
+export const getColumns = (dispatch: Dispatch, queries: API.RequestParams): ColumnsType<Academic> => [
   {
     key: 'id',
     title: 'User Id',
@@ -58,16 +59,8 @@ export const getColumns = (dispatch: Dispatch): ColumnsType<Academic> => [
               title: REMOVE_TEXT.TITLE(record.name),
               content: REMOVE_TEXT.CONTENT,
               okText: REMOVE_TEXT.OK_TEXT,
-              onOk: () => dispatch(removeAcademicActionCreator(record.id)),
-              // dispatch({
-              //   type: 'equipment/deleteEquipment',
-              //   payload: record.id,
-              //   params: {
-              //     page: definePageNumber(equipmentList, queries, history),
-              //     page: queries.pageSize,
-              //     pageSize: queries.pageSize,
-              //   },
-              // }
+              onOk: () =>
+                dispatch(removeAcademicActionCreator(record.id, { ...queries, role: UserRoles.Academic })),
             })
           }
         >

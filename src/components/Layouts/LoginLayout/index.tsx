@@ -8,7 +8,7 @@ import { HelmetProvider, Helmet } from 'react-helmet-async';
 import { getPageTitle } from '@ant-design/pro-layout';
 
 import { AppLogo } from 'components';
-import { ROUTES } from 'config/constants';
+import { APP_NAME, ROUTES } from 'config/constants';
 
 import { Footer } from '../../index';
 
@@ -24,7 +24,7 @@ const LoginLayout: React.FC<ILoginLayoutProps> = (props) => {
     const pathname = location.pathname.slice(routePrefixLength + 2, location.pathname.length);
     const firstSymbol = location.pathname[routePrefixLength + 1];
     const firstSymbolToUpperCase = firstSymbol ? firstSymbol.toUpperCase() : '';
-    return `${firstSymbolToUpperCase}${pathname.replace('-', ' ')} - AcAudio`;
+    return `${firstSymbolToUpperCase}${pathname.replace('-', ' ')} - ${APP_NAME}`;
   }, [location.pathname]);
 
   const title = getPageTitle({
@@ -49,7 +49,7 @@ const LoginLayout: React.FC<ILoginLayoutProps> = (props) => {
                 <AppLogo className={styles.logo} />
               </Link>
             </div>
-            <div className={styles.desc}>Welcome to AcAudio!</div>
+            <div className={styles.desc}>Welcome to {APP_NAME}!</div>
           </div>
           <div className={styles.children}>{children}</div>
         </div>

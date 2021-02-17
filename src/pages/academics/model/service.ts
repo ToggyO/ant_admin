@@ -33,3 +33,10 @@ export async function createAcademicRequest(
     data: dto,
   });
 }
+
+export async function removeAcademicRequest(id: number) {
+  return request<API.BaseResponse>(USERS.REMOVE, {
+    method: 'POST',
+    data: { targetId: id },
+  });
+}

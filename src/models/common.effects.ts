@@ -11,9 +11,9 @@ export interface ICommonEffects {
 export const commonEffects = {
   *putErrors(error, put) {
     const { data } = error;
-    yield put({ type: 'putGlobalError', payload: data });
     if (data.errors) {
-      yield put({ type: 'putValidationErrors', payload: data.errors });
+      return yield put({ type: 'putValidationErrors', payload: data.errors });
     }
+    return yield put({ type: 'putGlobalError', payload: data });
   },
 } as ICommonEffects;

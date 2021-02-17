@@ -34,6 +34,7 @@ import {
   academicsListSelector,
   academicsPaginationSelector,
   academicGlobalErrorSelector,
+  academicValidationErrorsSelector,
 } from './model/selectors';
 import type { IAcademicsListProps } from './interfaces';
 
@@ -45,6 +46,9 @@ const AcademicsList: React.FC<IAcademicsListProps> = ({ openModal }) => {
   const academics = useSelector<ConnectState, AcademicTableItem[]>(academicsListSelector);
   const pagination = useSelector<ConnectState, AntPagination>(academicsPaginationSelector);
   const globalError = useSelector<ConnectState, API.ErrorResponse>(academicGlobalErrorSelector);
+  const validationErrors = useSelector<ConnectState, API.ValidationApiError[]>(
+    academicValidationErrorsSelector,
+  );
 
   useEffect(() => {
     if (!isObjectEmpty(queries)) {
@@ -57,11 +61,9 @@ const AcademicsList: React.FC<IAcademicsListProps> = ({ openModal }) => {
   useClearState(clearAcademicsValidationErrorsActionCreator);
 
   useEffect(() => {
-    console.log(globalError);
     if (!isObjectEmpty(globalError)) {
-      console.log('in message');
       message.error({
-        content: globalError.message,
+        content: globalError.message || globalError.code,
         duration: 5,
         key: ANT_MESSAGE_KEYS.USER_EXISTS,
       });
@@ -96,7 +98,7 @@ const AcademicsList: React.FC<IAcademicsListProps> = ({ openModal }) => {
       <PageHeader title="Academics" breadcrumb={{ routes: breadcrumbsConfig, itemRender: BreadcrumbItem }}>
         <StandardTable
           loading={loading}
-          columns={getColumns(dispatch)}
+          columns={getColumns(dispatch, queries)}
           dataSource={academics}
           rowKey={(record) => record.id}
           pagination={pagination}
@@ -106,7 +108,7 @@ const AcademicsList: React.FC<IAcademicsListProps> = ({ openModal }) => {
           extraContent={renderCreateButton()}
         />
       </PageHeader>
-      <CreateUserModal onSubmit={handlerCreateUser} loading={loading} />
+      <CreateUserModal onSubmit={handlerCreateUser} loading={loading} errorsFromBackend={validationErrors} />
     </>
   );
 };

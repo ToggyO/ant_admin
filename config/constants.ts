@@ -2,6 +2,8 @@
  * Descriptions: Routes constants
  */
 
+export const APP_NAME = 'AccAudio';
+
 export const ROUTES = {
   AUTH: {
     ROOT: '/auth',

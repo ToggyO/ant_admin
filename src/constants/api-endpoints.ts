@@ -22,6 +22,6 @@ export const API_ENDPOINTS = {
     DETAILS: '/users.details',
     CREATE: '/users.create',
     UPDATE: '/users.update',
-    DELETE: '/users.delete',
+    REMOVE: '/users.delete',
   },
 } as const;

@@ -31,13 +31,11 @@ export class CommonReducers<T extends IApiErrors> implements ICommonReducers<T> 
       globalError: {},
     } as T);
 
-  public putValidationErrors: Reducer<T> = (state, { payload }): T => {
-    const { validationErrors = [] } = payload;
-    return {
+  public putValidationErrors: Reducer<T> = (state, { payload }): T =>
+    ({
       ...state,
-      validationErrors,
-    } as T;
-  };
+      validationErrors: payload,
+    } as T);
 
   public clearValidationErrors: Reducer<T> = (state): T =>
     ({

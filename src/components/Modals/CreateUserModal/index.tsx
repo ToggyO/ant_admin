@@ -16,6 +16,7 @@ const CreateUserModal: React.FC<ICreateUserModalProps> = ({
   onSubmit,
   onCancel,
   loading,
+  errorsFromBackend,
 }) => {
   const [key] = useState(MODAL_KEYS.CREATE_USER);
   const [form] = Form.useForm();
@@ -51,7 +52,7 @@ const CreateUserModal: React.FC<ICreateUserModalProps> = ({
         </div>
       }
     >
-      <CreateUserForm onSubmit={onSubmit} form={form} />
+      <CreateUserForm onSubmit={onSubmit} form={form} errorsFromBackend={errorsFromBackend} />
     </ModalWithFormInstance>
   );
 };

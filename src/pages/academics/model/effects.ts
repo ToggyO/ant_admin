@@ -6,10 +6,16 @@ import { MODAL_KEYS } from '@/constants';
 import { MODAL } from 'models/modal/constants';
 import { commonEffects } from 'models/common.effects';
 import { UserRoles } from 'enums/UserRoles';
+import { DefaultPaginationValues } from 'enums/DefaultTableQueryParams';
 
 import type { IAcademicsEffects } from './interfaces';
 import { ACADEMICS } from './constants';
-import { getAcademicsListRequest, getAcademicDetailsRequest, createAcademicRequest } from './service';
+import {
+  getAcademicsListRequest,
+  getAcademicDetailsRequest,
+  createAcademicRequest,
+  removeAcademicRequest,
+} from './service';
 import type { Academic } from './types';
 
 const { ACTIONS, EFFECTS } = ACADEMICS;
@@ -18,7 +24,13 @@ export default {
   *getList({ payload }, { call, put }) {
     const params = payload as API.RequestParams;
     try {
-      const response: API.SuccessResponse<API.List<Academic>> = yield call(getAcademicsListRequest, params);
+      let response: API.SuccessResponse<API.List<Academic>> = yield call(getAcademicsListRequest, params);
+      // FIXME: rename
+      const cond1 = !response.data.items.length;
+      const cond2 = params.pageSize > DefaultPaginationValues.Page;
+      if (cond1 && cond2) {
+        response = yield call(getAcademicsListRequest, { ...params, page: params.page - 1 });
+      }
       yield put({
         type: ACTIONS.SAVE_LIST,
         payload: {
@@ -65,5 +77,16 @@ export default {
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  *remove({ payload }, { call, put }) {},
+  *remove({ payload, params }, { call, put }) {
+    const id = payload as number;
+    try {
+      yield call(removeAcademicRequest, id);
+      yield put({
+        type: EFFECTS.GET_LIST,
+        payload: params,
+      });
+    } catch (error) {
+      yield commonEffects.putErrors(error, put);
+    }
+  },
 } as IAcademicsEffects;

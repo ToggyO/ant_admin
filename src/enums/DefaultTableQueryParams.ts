@@ -4,5 +4,6 @@
 
 export enum DefaultPaginationValues {
   Page = 1,
-  PageSize = 10,
+  // FIXME: 10
+  PageSize = 3,
 }

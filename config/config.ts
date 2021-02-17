@@ -6,6 +6,7 @@ import proxy from './proxy';
 import routes from './routes';
 import { env } from './env';
 import { webpackPlugin } from './plugin.config';
+import { APP_NAME } from './constants';
 
 const { REACT_APP_ENV } = process.env;
 
@@ -16,7 +17,7 @@ export default defineConfig({
     hmr: true,
   },
   layout: {
-    name: 'AcAudio',
+    name: APP_NAME,
     // Set to true, if you need localization
     locale: false,
     siderWidth: 208,

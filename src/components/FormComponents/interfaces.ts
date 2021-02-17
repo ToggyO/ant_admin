@@ -12,12 +12,12 @@ export interface IStandardFormContextType {
   options: FieldsOptions | Record<string, any>;
 }
 
-export interface IStandardFormProps extends Omit<FormProps, 'onFinish'> {
+export interface IStandardFormProps<T> extends Omit<FormProps, 'onFinish'> {
   onFinish: (values: any) => void;
   options: FunctionType | Record<string, FieldsOptions>;
   outerFormInstance?: FormInstance;
   asyncInitValues?: Record<string, any>;
-  errorsFromBackend?: [];
+  errorsFromBackend?: T[];
 }
 
 export interface IFormItemWrapperProps {
