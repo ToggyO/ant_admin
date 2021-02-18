@@ -10,6 +10,7 @@ import {
   useIdFromPath,
   useLoading,
   UserDetailsForm,
+  UserDetailsFormValues,
 } from 'components';
 
 import { getBreadcrumbs } from './_components/breadcrumbs/details.breadcrumbs';
@@ -19,6 +20,7 @@ import {
   clearAcademicDetailsActionCreator,
   clearAcademicsGlobalErrorActionCreator,
   clearAcademicsValidationErrorsActionCreator,
+  editAcademicActionCreator,
 } from './model/actions';
 
 const AcademicDetails: React.FC = () => {
@@ -36,7 +38,13 @@ const AcademicDetails: React.FC = () => {
   useClearState(clearAcademicsGlobalErrorActionCreator);
   useClearState(clearAcademicsValidationErrorsActionCreator);
 
-  const handleEditUser = useCallback((values) => console.log(values), []);
+  const handleEditUser = useCallback(
+    (values: UserDetailsFormValues) => {
+      const { name, file } = values;
+      dispatch(editAcademicActionCreator({ targetId: userId, name, file }));
+    },
+    [dispatch, userId],
+  );
 
   return (
     <Loader loading={loading}>

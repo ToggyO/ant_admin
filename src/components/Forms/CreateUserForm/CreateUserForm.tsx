@@ -10,7 +10,7 @@ export const CreateUserForm: React.FC<ICreateUserFormProps> = ({ onSubmit, form,
   <StandardForm
     onFinish={onSubmit}
     options={options}
-    outerFormInstance={form}
+    externalFormInstance={form}
     layout="vertical"
     errorsFromBackend={errorsFromBackend}
   >

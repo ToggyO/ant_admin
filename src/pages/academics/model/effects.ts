@@ -7,6 +7,8 @@ import { MODAL } from 'models/modal/constants';
 import { commonEffects } from 'models/common.effects';
 import { UserRoles } from 'enums/UserRoles';
 import { DefaultPaginationValues } from 'enums/DefaultTableQueryParams';
+import { AntMessages, createFormDataDto } from 'utils/helpers';
+import { editUserRequest } from 'services/user';
 
 import type { IAcademicsEffects } from './interfaces';
 import { ACADEMICS } from './constants';
@@ -16,7 +18,7 @@ import {
   createAcademicRequest,
   removeAcademicRequest,
 } from './service';
-import type { Academic } from './types';
+import type { Academic, EditAcademicDTO } from './types';
 
 const { ACTIONS, EFFECTS } = ACADEMICS;
 
@@ -29,7 +31,9 @@ export default {
       const cond1 = !response.data.items.length;
       const cond2 = params.pageSize > DefaultPaginationValues.Page;
       if (cond1 && cond2) {
+        // debugger
         response = yield call(getAcademicsListRequest, { ...params, page: params.page - 1 });
+        // debugger
       }
       yield put({
         type: ACTIONS.SAVE_LIST,
@@ -56,8 +60,19 @@ export default {
     }
   },
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  *editDetails({ payload }, { call, put }) {},
+  *editDetails({ payload }, { call, put }) {
+    const data = createFormDataDto(payload as EditAcademicDTO);
+    try {
+      yield call(editUserRequest, data);
+      yield put({
+        type: EFFECTS.GET_DETAILS,
+        payload: payload.targetId,
+      });
+      AntMessages.editUserDetailsSuccess();
+    } catch (error) {
+      yield commonEffects.putErrors(error, put);
+    }
+  },
 
   *create({ payload, params }, { call, put }) {
     try {
@@ -76,7 +91,6 @@ export default {
     }
   },
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   *remove({ payload, params }, { call, put }) {
     const id = payload as number;
     try {

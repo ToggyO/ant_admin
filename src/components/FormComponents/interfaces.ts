@@ -15,7 +15,7 @@ export interface IStandardFormContextType {
 export interface IStandardFormProps<T> extends Omit<FormProps, 'onFinish'> {
   onFinish: (values: any) => void;
   options: FunctionType | Record<string, FieldsOptions>;
-  outerFormInstance?: FormInstance;
+  externalFormInstance?: FormInstance;
   asyncInitValues?: Record<string, any>;
   errorsFromBackend?: T[];
 }

@@ -38,3 +38,21 @@ export function createAntPagination(apiPagination: API.ApiPagination): AntPagina
     total: apiPagination.total,
   };
 }
+
+/**
+ * Create instance of FormData from simple object
+ */
+export function createFormDataDto<T extends Record<string, any>>(dto: T): FormData {
+  const fd = new FormData();
+  Object.entries(dto).forEach(([key, val]): void => {
+    if (!val) {
+      return;
+    }
+    if (val instanceof File) {
+      fd.append(key, val, val.name);
+    } else {
+      fd.append(key, val);
+    }
+  });
+  return fd;
+}

@@ -46,4 +46,20 @@ export class AntMessages {
       key: ANT_MESSAGE_KEYS.CHANGE_PASSWORD.ERROR,
     });
   }
+
+  public static async editUserDetailsSuccess(duration: number = 5): Promise<void> {
+    await message.success({
+      duration,
+      content: ANT_MESSAGE_CONTENT.EDIT_USER_PROFILE.SUCCESS,
+      key: ANT_MESSAGE_KEYS.EDIT_USER_PROFILE.SUCCESS,
+    });
+  }
+
+  public static async profileChangesInfo(duration: number = 5): Promise<void> {
+    await message.info({
+      duration,
+      content: ANT_MESSAGE_CONTENT.EDIT_USER_PROFILE.INFO,
+      key: ANT_MESSAGE_KEYS.EDIT_USER_PROFILE.INFO,
+    });
+  }
 }

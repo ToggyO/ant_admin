@@ -8,6 +8,7 @@ import { AUTH } from 'pages/Auth/model/constants';
 
 import type { ConnectState } from 'models/connect';
 import type { CurrentUser } from 'pages/Profile/model/types';
+import { currentUserSelector } from 'services/selectors';
 
 import HeaderDropdown from '../HeaderDropdown';
 
@@ -20,7 +21,7 @@ export type GlobalHeaderRightProps = {
 
 const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu = true, dispatch }) => {
   const { initialState, setInitialState } = useModel('@@initialState');
-  const user = useSelector<ConnectState, CurrentUser>((state) => state.profile.user);
+  const user = useSelector<ConnectState, CurrentUser>(currentUserSelector);
 
   const onMenuClick = useCallback(
     (event: {

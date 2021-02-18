@@ -34,7 +34,7 @@ export const FormItemWrapper: React.FC<IFormItemWrapperProps> = ({
 
   const {
     props: componentProps = {},
-    formItemStyle: fomItemStyleFromOptions = {},
+    formItemStyle: formItemStyleFromOptions = {},
     ...restItemProps
   }: FieldsOptions = getOptions[name] || {};
   const { selectoptions } = componentProps as any;
@@ -95,7 +95,7 @@ export const FormItemWrapper: React.FC<IFormItemWrapperProps> = ({
   return (
     <Form.Item
       name={name}
-      style={formItemStyle || fomItemStyleFromOptions}
+      style={formItemStyle || formItemStyleFromOptions}
       {...restFormItemProps}
       {...restItemProps}
     >

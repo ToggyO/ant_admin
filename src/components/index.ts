@@ -2,6 +2,8 @@ export { AnimationWrapper } from './AnimationWrapper';
 export { BreadcrumbItem } from './Breadcrumbs';
 export { withModal, withModalState, WithModalProps, WithModalStateProps } from './HOC';
 export { default as Footer } from './Footer';
+export { ImageUploader } from './ImageUploader';
+export { ImageContainer } from './ImageContainer';
 export { ModalWithFormInstance } from './ModalWithFormInstance';
 export { StandardForm, StandardFormContext, FormItemWrapper } from './FormComponents';
 export { default as HeaderDropdown } from './HeaderDropdown';

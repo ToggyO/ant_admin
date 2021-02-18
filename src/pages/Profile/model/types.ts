@@ -10,8 +10,7 @@ export type User = {
   email: string;
   role: UserRoles;
   subscription?: string;
+  avatar: string | null;
 };
 
-export type CurrentUser = User & {
-  avatar: string;
-};
+export type CurrentUser = User;

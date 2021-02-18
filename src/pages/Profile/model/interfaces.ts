@@ -15,6 +15,7 @@ export interface IProfileState extends IBaseDvaModelState {
 
 export interface IProfileEffects {
   fetchCurrent: Effect;
+  changeAvatar: Effect;
   changeEmail: Effect;
   changePassword: Effect;
 }

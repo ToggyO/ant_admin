@@ -1,0 +1,3 @@
+/**
+ * Description: Academics module types
+ */

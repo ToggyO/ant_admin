@@ -23,3 +23,12 @@ export type CreateAcademicDTO = {
   name: string;
   email: string;
 };
+
+export type EditAcademicDTO = {
+  targetId: number;
+  name: string;
+  file?: any;
+  files?: any[];
+  // FIXME: check
+  email?: string;
+};

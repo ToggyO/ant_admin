@@ -7,7 +7,7 @@ import type { Action } from 'umi';
 import type { ActionPayload } from 'models/connect';
 
 import { ACADEMICS } from './constants';
-import type { CreateAcademicDTO } from './types';
+import type { CreateAcademicDTO, EditAcademicDTO } from './types';
 
 const { getNamespace, EFFECTS, ACTIONS } = ACADEMICS;
 
@@ -37,6 +37,11 @@ export const createAcademicActionCreator = (
   type: getNamespace(EFFECTS.CREATE),
   payload: dto.payload,
   params: dto.params,
+});
+
+export const editAcademicActionCreator = (dto: EditAcademicDTO): ActionPayload<EditAcademicDTO> => ({
+  type: getNamespace(EFFECTS.EDIT_DETAILS),
+  payload: dto,
 });
 
 export const removeAcademicActionCreator = (

@@ -1,8 +1,9 @@
-import React, { useCallback, PropsWithChildren } from 'react';
+import React, { PropsWithChildren, useCallback } from 'react';
 import { useDispatch } from 'umi';
-import { Row, Col, Avatar, Button, Divider } from 'antd';
-import { SaveOutlined, FileImageTwoTone, LockTwoTone, MailTwoTone, UserOutlined } from '@ant-design/icons';
 import { useSelector } from 'dva';
+import { Button, Col, Divider, Row } from 'antd';
+import { useForm } from 'antd/lib/form/Form';
+import { FileImageTwoTone, LockTwoTone, MailTwoTone, SaveOutlined } from '@ant-design/icons';
 
 import { MODAL_KEYS } from '@/constants';
 import {
@@ -10,17 +11,23 @@ import {
   ChangeEmailModal,
   ChangePasswordFormValues,
   ChangePasswordModal,
+  UserDetailsFormValues,
+  ImageUploader,
   withModal,
+  ImageContainer,
 } from 'components';
-import type { ConnectState } from 'models/connect';
 import { changePasswordActionCreator } from 'pages/Profile/model/actions';
-import type { CurrentUser, User } from 'pages/Profile/model/types';
 import { UserRoles } from 'enums/UserRoles';
+import { AntMessages } from 'utils/helpers';
+import type { CurrentUser, User } from 'pages/Profile/model/types';
+import type { ConnectState } from 'models/connect';
+import type { IAntUploadedFiles } from 'services/interfaces';
 
 import { FormItemWrapper, StandardForm } from '../../FormComponents';
 
 import options from './options';
 import { Subscription } from './_components/Subscription';
+import { RoleRenderer } from './_components/RoleRenderer';
 import type { IUserDetailsFormProps } from './interfaces';
 
 import styles from './index.less';
@@ -33,6 +40,7 @@ function UserDetailsForm<T extends User>({
   loading,
   onClearValidationErrors,
 }: PropsWithChildren<IUserDetailsFormProps<T>>): JSX.Element {
+  const [form] = useForm<UserDetailsFormValues>();
   const dispatch = useDispatch();
   const currentUser = useSelector<ConnectState, CurrentUser>((state) => state.profile.user);
 
@@ -53,38 +61,83 @@ function UserDetailsForm<T extends User>({
     () => closeModal && closeModal(MODAL_KEYS.CHANGE_PASSWORD),
     [closeModal],
   );
+
+  const normalizeFile = useCallback((e: IAntUploadedFiles) => {
+    if (Array.isArray(e)) {
+      return e;
+    }
+    AntMessages.profileChangesInfo();
+    return e && e.file.originFileObj;
+  }, []);
+
+  const isAllowToEditing = userData.email === currentUser.email && currentUser.role === UserRoles.Admin;
+
   return (
     <>
       <StandardForm
+        externalFormInstance={form}
         onFinish={onSubmit}
         options={options}
         layout="vertical"
         initialValues={userData}
         asyncInitValues={userData}
       >
-        <Row justify="center">
-          <Col className={styles.avatar_container}>
-            <Avatar size={128} icon={<UserOutlined />} />
+        <Row justify="center" className={styles.image_container}>
+          <Col>
+            <ImageContainer src={userData.avatar} />
+          </Col>
+          <Col>
+            <FormItemWrapper
+              type="custom-component"
+              name="file"
+              valuePropName="file"
+              getValueFromEvent={normalizeFile}
+              formItemStyle={{ marginBottom: 12, marginTop: 12 }}
+              component={(props) => (
+                <ImageUploader externalFormInstance={form} {...props}>
+                  <Button size="large" type="default" htmlType="button">
+                    Change avatar <FileImageTwoTone />
+                  </Button>
+                </ImageUploader>
+              )}
+            />
           </Col>
         </Row>
+
         <Row justify="center">
           <Col sm={24} md={18} lg={16} xl={12} xxl={10}>
-            <FormItemWrapper type="text-input" name="name" label="Full name" />
-            <FormItemWrapper type="text-input" name="email" label="Email" />
             <FormItemWrapper
-              type="select"
-              name="role"
-              label="Role"
+              type="text-input"
+              name="name"
+              label="Full name"
               propsToChild={{
-                disabled: userData.email === currentUser.email && currentUser.role === UserRoles.Admin,
+                disabled: isAllowToEditing,
               }}
             />
             <FormItemWrapper
-              type="custom-component"
-              name="subscription"
-              label="Subscription"
-              component={(props) => <Subscription userData={userData} {...props} />}
+              type="text-input"
+              name="email"
+              label="Email"
+              propsToChild={{
+                disabled: true,
+              }}
             />
+
+            <FormItemWrapper
+              type="custom-component"
+              name="role"
+              label="Role"
+              component={(props) => <RoleRenderer role={userData.role} {...props} />}
+            />
+
+            {!isAllowToEditing && (
+              <FormItemWrapper
+                type="custom-component"
+                name="subscription"
+                label="Subscription"
+                component={(props) => <Subscription userData={userData} {...props} />}
+              />
+            )}
 
             <Divider />
 
@@ -96,9 +149,6 @@ function UserDetailsForm<T extends User>({
                 onClick={() => openModal && openModal(MODAL_KEYS.CHANGE_EMAIL)}
               >
                 Change email <MailTwoTone />
-              </Button>
-              <Button size="large" type="default" htmlType="button">
-                Change avatar <FileImageTwoTone />
               </Button>
               <Button
                 size="large"

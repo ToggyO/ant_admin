@@ -19,9 +19,10 @@ export class HttpRequestInterceptors {
 
   public setHeaders(url: string, options: RequestOptionsInit) {
     const accessToken = getFromLocalState(ACCESS_TOKEN);
+
     const headers: HeadersWithAuthHeader = {
       Accept: 'application/json',
-      'Content-Type': 'application/json',
+      // 'Content-Type': 'application/json',
     };
 
     const requestHeaders = options.headers as HeadersWithAuthHeader;
@@ -32,8 +33,8 @@ export class HttpRequestInterceptors {
     }
 
     options.headers = {
-      ...requestHeaders,
       ...headers,
+      ...requestHeaders,
     };
 
     return {

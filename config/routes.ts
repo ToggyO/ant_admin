@@ -51,11 +51,6 @@ export default [
     component: './academics/Details',
   },
   {
-    path: ACADEMICS.CREATE,
-    access: Accesses.CanAdmin,
-    component: './academics/Create',
-  },
-  {
     name: 'Todos',
     icon: 'user',
     path: '/todos',

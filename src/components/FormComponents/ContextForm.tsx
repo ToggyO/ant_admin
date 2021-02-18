@@ -19,12 +19,12 @@ export const StandardForm: React.FC<IStandardFormProps<API.ValidationApiError>> 
   onFinish,
   onFinishFailed,
   options,
-  outerFormInstance,
+  externalFormInstance,
   asyncInitValues,
   errorsFromBackend,
   ...rest
 }) => {
-  const [form] = Form.useForm(outerFormInstance);
+  const [form] = Form.useForm(externalFormInstance);
   const contextValue = { form, options };
 
   useEffect(() => {

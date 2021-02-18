@@ -36,6 +36,7 @@ export default {
   clearDetails(state) {
     return {
       ...state,
+      details: {} as Academic,
     };
   },
 

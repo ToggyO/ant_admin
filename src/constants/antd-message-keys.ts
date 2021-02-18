@@ -13,4 +13,8 @@ export const ANT_MESSAGE_KEYS = {
     SUCCESS: 'change-password-success',
     ERROR: 'change-password-error',
   },
+  EDIT_USER_PROFILE: {
+    SUCCESS: 'edit-user-profile-success',
+    INFO: 'profile-changes-info',
+  },
 } as const;

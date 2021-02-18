@@ -44,3 +44,15 @@ export function transformErrorToForm<T extends API.ValidationApiError>(
     return acc;
   }, [] as API.FormFieldData[]);
 }
+
+/**
+ * Function, that creates full image url from base pai store path and resource url
+ * @param {string} resourceUrl - url to image resource
+ * @returns {string}
+ */
+export const getImageUrl = (resourceUrl: string): string | null => {
+  if (!resourceUrl) {
+    return null;
+  }
+  return `${BASE_API_STORAGE_URL}/${resourceUrl}?${new Date().getTime()}`;
+};
