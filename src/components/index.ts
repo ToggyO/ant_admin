@@ -10,7 +10,7 @@ export { default as HeaderDropdown } from './HeaderDropdown';
 export { default as HeaderSearch } from './HeaderSearch';
 export { Loader, ProLoader } from './Loading';
 export { default as RightContent } from './RightContent';
-export { StandardTable, addFilterToTableColumn, addSortToTableColumns, onTableChange } from './Table';
+export * from './Table';
 export * from './Forms';
 export * from './Layouts';
 export * from './Modals';

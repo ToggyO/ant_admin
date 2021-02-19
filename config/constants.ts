@@ -19,4 +19,9 @@ export const ROUTES = {
     DETAILS: (id: string | number) => `/academics/${id}`,
     CREATE: '/academics/create',
   },
+  LEARNERS: {
+    ROOT: '/learners',
+    DETAILS: (id: string | number) => `/learners/${id}`,
+    CREATE: '/learners/create',
+  },
 };

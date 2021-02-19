@@ -1,7 +1,7 @@
 ﻿import { Accesses } from './accesses.enum';
 import { ROUTES } from './constants';
 
-const { AUTH, PROFILE, ACADEMICS } = ROUTES;
+const { AUTH, PROFILE, ACADEMICS, LEARNERS } = ROUTES;
 
 export default [
   {
@@ -49,6 +49,18 @@ export default [
     path: ACADEMICS.DETAILS(':id'),
     access: Accesses.CanAdmin,
     component: './academics/Details',
+  },
+  {
+    path: LEARNERS.ROOT,
+    name: 'Learners',
+    icon: 'team',
+    access: Accesses.CanAdmin,
+    component: './learners/List',
+  },
+  {
+    path: LEARNERS.DETAILS(':id'),
+    access: Accesses.CanAdmin,
+    component: './learners/Details',
   },
   {
     name: 'Todos',

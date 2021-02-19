@@ -10,6 +10,7 @@ import type { ITodosState } from 'pages/Todos/model/interfaces';
 import type { IAuthState } from 'pages/Auth/model/interfaces';
 import type { IProfileState } from 'pages/Profile/model/interfaces';
 import type { IAcademicsState } from 'pages/academics/model/interfaces';
+import { ILearnersState } from 'pages/learners/model/interfaces';
 
 import { DefaultSettings as SettingModelState } from '../../config/defaultSettings';
 
@@ -23,6 +24,7 @@ export type LoadingModels = {
   auth: boolean | undefined;
   profile: boolean | undefined;
   academics: boolean | undefined;
+  learners: boolean | undefined;
 };
 
 export interface ILoading {
@@ -38,6 +40,7 @@ export interface ConnectState {
   auth: IAuthState;
   profile: IProfileState;
   academics: IAcademicsState;
+  learners: ILearnersState;
 }
 
 export interface Route extends MenuDataItem {

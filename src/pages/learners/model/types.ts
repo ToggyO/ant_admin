@@ -1,30 +1,22 @@
 /**
- * Description: Academics module DVA model types
+ * Description: Learners module DVA model types
  */
 
 import type { User } from 'pages/Profile/model/types';
 
-export type Academic = User & {
+export type Learner = User & {
   trialStarted: boolean;
-  about?: string;
   university?: string;
-  // FIXME:
-  paper?: any[];
 };
 
-export type AcademicTableItem = {
+export type LearnerTableItem = {
   id: number;
   name: string;
   email: string;
   trialStarted: boolean;
 };
 
-export type CreateAcademicDTO = {
-  name: string;
-  email: string;
-};
-
-export type EditAcademicDTO = {
+export type EditLearnerDTO = {
   targetId: number;
   name: string;
   file?: any;

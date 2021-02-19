@@ -9,8 +9,9 @@ export type User = {
   name: string;
   email: string;
   role: UserRoles;
-  subscription?: string;
   avatar: string | null;
+  // FIXME: Check type
+  subscription?: string;
 };
 
 export type CurrentUser = User;

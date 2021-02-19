@@ -2,6 +2,8 @@
  * Description: Common application helper functions
  */
 
+import { DefaultPaginationValues } from 'enums/DefaultTableQueryParams';
+
 /**
  * Function for pushing elements of an array consisting of numeric values
  */
@@ -32,10 +34,15 @@ export const getFullName = ({ firstName = '', lastName = '' }: GetFullName): str
 export type AntPagination = { current: number; pageSize: number; total: number };
 
 export function createAntPagination(apiPagination: API.ApiPagination): AntPagination {
+  const { page, pageSize, total } = apiPagination;
+  const resultPage = page ? parseInt(apiPagination.page.toString(), 10) : DefaultPaginationValues.Page;
+  const resultPageSize = pageSize
+    ? parseInt(apiPagination.pageSize.toString(), 10)
+    : DefaultPaginationValues.PageSize;
   return {
-    current: apiPagination.page,
-    pageSize: apiPagination.pageSize,
-    total: apiPagination.total,
+    current: resultPage,
+    pageSize: resultPageSize,
+    total,
   };
 }
 

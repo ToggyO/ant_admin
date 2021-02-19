@@ -3,6 +3,7 @@
  */
 
 import { createSelector } from 'reselect';
+
 import type { ConnectState } from 'models/connect';
 import type { AntPagination } from 'utils/helpers';
 import { getImageUrl } from 'services/helpers';

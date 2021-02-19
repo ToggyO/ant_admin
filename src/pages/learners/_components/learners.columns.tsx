@@ -6,12 +6,12 @@ import { CheckCircleOutlined, MinusCircleOutlined, SearchOutlined } from '@ant-d
 
 import { addFilterToTableColumn, SearchFilterForm, TableActions } from 'components';
 
-import type { Academic } from '../model/types';
-import { removeAcademicActionCreator } from '../model/actions';
+import { removeLearnerActionCreator } from '../model/actions';
+import type { Learner } from '../model/types';
 
-import { academicsActionsMenu } from './academics.actions';
+import { learnersActionsMenu } from './learners.actions';
 
-export const getColumns = (dispatch: Dispatch, queries: API.RequestParams): ColumnsType<Academic> => [
+export const getColumns = (dispatch: Dispatch, queries: API.RequestParams): ColumnsType<Learner> => [
   {
     key: 'id',
     title: 'User Id',
@@ -47,7 +47,7 @@ export const getColumns = (dispatch: Dispatch, queries: API.RequestParams): Colu
     title: 'Actions',
     width: '1%',
     render: (_, record) => (
-      <TableActions overlay={academicsActionsMenu(dispatch, record, queries, removeAcademicActionCreator)} />
+      <TableActions overlay={learnersActionsMenu(dispatch, record, queries, removeLearnerActionCreator)} />
     ),
   },
 ];

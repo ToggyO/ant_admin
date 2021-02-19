@@ -130,7 +130,7 @@ function UserDetailsForm<T extends User>({
               component={(props) => <RoleRenderer role={userData.role} {...props} />}
             />
 
-            {!isAllowToEditing && (
+            {!isAllowToEditing && userData.role === UserRoles.Learner && (
               <FormItemWrapper
                 type="custom-component"
                 name="subscription"
