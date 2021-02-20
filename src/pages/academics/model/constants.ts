@@ -10,7 +10,7 @@ export const ACADEMICS = {
     GET_DETAILS: 'getDetails',
     EDIT_DETAILS: 'editDetails',
     CREATE: 'create',
-    REMOVE: 'remove',
+    BLOCK: 'block',
   },
 
   ACTIONS: {

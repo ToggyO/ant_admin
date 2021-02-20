@@ -63,7 +63,7 @@ export const FormItemWrapper: React.FC<IFormItemWrapperProps> = ({
         return (
           <Select {...componentProps} {...propsToChild}>
             {dataSource.map((data: SelectOptions) => (
-              <Select.Option value={data.key} key={data.key}>
+              <Select.Option value={data.value} key={data.value}>
                 {data.label}
               </Select.Option>
             ))}

@@ -7,7 +7,7 @@ import type { IImageUploaderComponentProps } from './interfaces';
 import styles from './index.less';
 import 'antd/es/slider/style';
 
-export function ImageUploader<T extends { file: File | null; [key: string]: any }>({
+export function ImageUploader<T extends Record<string, any>>({
   children,
   externalFormInstance,
   listType = 'picture',

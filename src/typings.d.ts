@@ -32,6 +32,7 @@ declare type FunctionType = (...args: any[]) => any;
 
 declare type AntProInitialState = {
   currentUser?: User;
+  countries?: Country[];
   settings?: LayoutSettings;
 };
 

@@ -49,7 +49,7 @@ const AcademicsList: React.FC<IAcademicsListProps> = ({ openModal }) => {
   const validationErrors = useSelector<ConnectState, API.ValidationApiError[]>(
     academicValidationErrorsSelector,
   );
-
+  console.log(academics);
   useEffect(() => {
     if (!isObjectEmpty(queries)) {
       dispatch(getAcademicsListActionCreator({ ...queries, role: UserRoles.Academic }));
@@ -73,10 +73,7 @@ const AcademicsList: React.FC<IAcademicsListProps> = ({ openModal }) => {
   const handlerCreateUser = useCallback(
     (values: CreateUserFormValues) => {
       const dto: API.ReloadList<CreateAcademicDTO, API.RequestParams> = {
-        payload: {
-          name: values.name,
-          email: values.email,
-        },
+        payload: values,
         params: { ...queries },
       };
       dispatch(createAcademicActionCreator(dto));

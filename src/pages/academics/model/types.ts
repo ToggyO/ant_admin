@@ -5,9 +5,7 @@
 import type { User } from 'pages/Profile/model/types';
 
 export type Academic = User & {
-  trialStarted: boolean;
   about?: string;
-  university?: string;
   // FIXME:
   paper?: any[];
 };
@@ -16,7 +14,9 @@ export type AcademicTableItem = {
   id: number;
   name: string;
   email: string;
-  trialStarted: boolean;
+  country: string;
+  university: string;
+  deleted: boolean;
 };
 
 export type CreateAcademicDTO = {
@@ -27,7 +27,6 @@ export type CreateAcademicDTO = {
 export type EditAcademicDTO = {
   targetId: number;
   name: string;
-  file?: any;
-  // FIXME: check
-  email?: string;
+  university: string;
+  about: string;
 };

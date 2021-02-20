@@ -4,11 +4,11 @@ import { useModel, connect, useSelector } from 'umi';
 import { BackTop, Button } from 'antd';
 import { VerticalAlignTopOutlined } from '@ant-design/icons';
 
-import type { ConnectState } from 'models/connect';
 import { PROFILE } from 'pages/Profile/model/constants';
-import type { User } from 'pages/Profile/model/types';
-
 import { isObjectEmpty } from 'utils/utils';
+import { GLOBAL } from 'models/global/constants';
+import type { User } from 'pages/Profile/model/types';
+import type { ConnectState } from 'models/connect';
 
 import styles from './index.less';
 
@@ -35,6 +35,15 @@ const AppLayout: React.FC<IAppLayoutProps> = memo(({ children, dispatch }) => {
       });
     }
   }, [dispatch, initialState?.currentUser, user]);
+
+  useEffect(() => {
+    if (dispatch) {
+      dispatch({
+        type: GLOBAL.getNamespace(GLOBAL.ACTIONS.SAVE_COUNTRIES_LIST),
+        payload: initialState?.countries,
+      });
+    }
+  }, [dispatch, initialState?.countries]);
 
   return (
     <div className="app-layout">

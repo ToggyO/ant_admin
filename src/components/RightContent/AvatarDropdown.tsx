@@ -8,7 +8,7 @@ import { AUTH } from 'pages/Auth/model/constants';
 
 import type { ConnectState } from 'models/connect';
 import type { CurrentUser } from 'pages/Profile/model/types';
-import { currentUserSelector } from 'services/selectors';
+import { currentUserSelector } from 'services/user/selectors';
 
 import HeaderDropdown from '../HeaderDropdown';
 

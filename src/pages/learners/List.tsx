@@ -20,13 +20,14 @@ import {
   getLearnersListActionCreator,
 } from './model/actions';
 import type { ILearnersListProps } from './interfaces';
+import type { LearnerTableItem } from './model/types';
 
 const LearnersList: React.FC<ILearnersListProps> = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const queries = useQuery();
   const loading = useLoading('learners');
-  const learners = useSelector<ConnectState, AcademicTableItem[]>(learnersListSelector);
+  const learners = useSelector<ConnectState, LearnerTableItem[]>(learnersListSelector);
   const pagination = useSelector<ConnectState, AntPagination>(learnersPaginationSelector);
 
   useEffect(() => {

@@ -1,13 +1,15 @@
 import React from 'react';
 import { Dispatch, history } from 'umi';
-import { Tag } from 'antd';
+import { Badge } from 'antd';
 import type { ColumnsType } from 'antd/lib/table';
-import { CheckCircleOutlined, MinusCircleOutlined, SearchOutlined } from '@ant-design/icons';
+import { SearchOutlined } from '@ant-design/icons';
 
 import { addFilterToTableColumn, SearchFilterForm, TableActions } from 'components';
+import { UserStatuses } from 'enums/UserStatuses';
+import { BadgeStatuses } from 'enums/antd.enums';
 
 import type { Academic } from '../model/types';
-import { removeAcademicActionCreator } from '../model/actions';
+import { blockAcademicActionCreator } from '../model/actions';
 
 import { academicsActionsMenu } from './academics.actions';
 
@@ -32,14 +34,26 @@ export const getColumns = (dispatch: Dispatch, queries: API.RequestParams): Colu
     width: '10%',
   },
   {
-    key: 'trial',
-    title: 'Trial started',
-    dataIndex: 'trialStarted',
+    key: 'country',
+    title: 'Country',
+    dataIndex: 'country',
     width: '10%',
+  },
+  {
+    key: 'university',
+    title: 'University',
+    dataIndex: 'university',
+    width: '10%',
+  },
+  {
+    key: 'deleted',
+    title: 'Status',
+    dataIndex: 'deleted',
+    width: '1%',
     render: (value: boolean) => {
-      const icon = value ? <CheckCircleOutlined /> : <MinusCircleOutlined />;
-      const text = value ? 'Started' : 'No trial';
-      return <Tag icon={icon}>{text}</Tag>;
+      const status = value ? BadgeStatuses.Error : BadgeStatuses.Processing;
+      const text = value ? UserStatuses.Blocked : UserStatuses.Active;
+      return <Badge status={status} text={text} />;
     },
   },
   {
@@ -47,7 +61,7 @@ export const getColumns = (dispatch: Dispatch, queries: API.RequestParams): Colu
     title: 'Actions',
     width: '1%',
     render: (_, record) => (
-      <TableActions overlay={academicsActionsMenu(dispatch, record, queries, removeAcademicActionCreator)} />
+      <TableActions overlay={academicsActionsMenu(dispatch, record, queries, blockAcademicActionCreator)} />
     ),
   },
 ];

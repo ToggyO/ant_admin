@@ -1,7 +1,7 @@
 import { commonFormOptions } from '../common-options';
 
-const { name, email } = commonFormOptions;
+const { name, email, about, university } = commonFormOptions;
 
-const formOptions = { name, email };
+const formOptions = { name, email, about, university };
 
 export default formOptions;

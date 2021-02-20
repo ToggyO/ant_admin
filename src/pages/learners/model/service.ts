@@ -22,7 +22,7 @@ export async function getLearnerDetailsRequest(id: number) {
 }
 
 export async function removeLearnerRequest(id: number) {
-  return request<API.BaseResponse>(USERS.REMOVE, {
+  return request<API.BaseResponse>(USERS.BLOCK, {
     method: 'POST',
     data: { targetId: id },
   });

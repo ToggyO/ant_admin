@@ -40,8 +40,8 @@ const LearnerDetails: React.FC = () => {
 
   const handleEditUser = useCallback(
     (values: UserDetailsFormValues) => {
-      const { name, file } = values;
-      dispatch(editLearnerActionCreator({ targetId: userId, name, file }));
+      const { name } = values;
+      dispatch(editLearnerActionCreator({ targetId: userId, name }));
     },
     [dispatch, userId],
   );

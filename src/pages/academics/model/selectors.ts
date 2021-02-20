@@ -17,7 +17,9 @@ export const academicsListSelector = createSelector<ConnectState, Academic[], Ac
       id: academic.id,
       name: academic.name,
       email: academic.email,
-      trialStarted: academic.trialStarted,
+      country: academic.country,
+      university: academic.university,
+      deleted: academic.deleted,
     })),
 );
 

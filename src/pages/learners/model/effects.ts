@@ -5,7 +5,7 @@
 import { DefaultPaginationValues } from 'enums/DefaultTableQueryParams';
 import { commonEffects } from 'models/common.effects';
 import { AntMessages, createFormDataDto } from 'utils/helpers';
-import { editUserRequest } from 'services/user';
+import { editUserRequest } from 'services/user/service';
 
 import { LEARNERS } from './constants';
 import type { ILearnersEffects } from './interfaces';

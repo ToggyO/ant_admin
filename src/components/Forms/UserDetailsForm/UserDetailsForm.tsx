@@ -15,6 +15,7 @@ import {
   ImageUploader,
   withModal,
   ImageContainer,
+  SelectOptions,
 } from 'components';
 import { changePasswordActionCreator } from 'pages/Profile/model/actions';
 import { UserRoles } from 'enums/UserRoles';
@@ -22,6 +23,8 @@ import { AntMessages } from 'utils/helpers';
 import type { CurrentUser, User } from 'pages/Profile/model/types';
 import type { ConnectState } from 'models/connect';
 import type { IAntUploadedFiles } from 'services/interfaces';
+import { currentUserSelector } from 'services/user/selectors';
+import { countriesListSelector } from 'models/global/selectors';
 
 import { FormItemWrapper, StandardForm } from '../../FormComponents';
 
@@ -42,7 +45,8 @@ function UserDetailsForm<T extends User>({
 }: PropsWithChildren<IUserDetailsFormProps<T>>): JSX.Element {
   const [form] = useForm<UserDetailsFormValues>();
   const dispatch = useDispatch();
-  const currentUser = useSelector<ConnectState, CurrentUser>((state) => state.profile.user);
+  const currentUser = useSelector<ConnectState, CurrentUser>(currentUserSelector);
+  const countries = useSelector<ConnectState, SelectOptions[]>(countriesListSelector);
 
   const handleChangeEmail = useCallback((values: ChangeEmailFormValues) => console.log(values), []);
 
@@ -161,6 +165,12 @@ function UserDetailsForm<T extends User>({
             </Row>
 
             <Divider />
+
+            <FormItemWrapper type="async-load-select" name="country" label="Country" dataSource={countries} />
+
+            <FormItemWrapper type="text-input" name="university" label="University" />
+
+            <FormItemWrapper type="text-area" name="about" label="About" />
 
             <Row justify="center">
               <FormItemWrapper

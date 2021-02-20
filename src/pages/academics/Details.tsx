@@ -20,7 +20,6 @@ import {
   clearAcademicDetailsActionCreator,
   clearAcademicsGlobalErrorActionCreator,
   clearAcademicsValidationErrorsActionCreator,
-  editAcademicActionCreator,
 } from './model/actions';
 
 const AcademicDetails: React.FC = () => {
@@ -40,10 +39,17 @@ const AcademicDetails: React.FC = () => {
 
   const handleEditUser = useCallback(
     (values: UserDetailsFormValues) => {
-      const { name, file } = values;
-      dispatch(editAcademicActionCreator({ targetId: userId, name, file }));
+      // const { name, university, about } = values;
+      console.log(values);
+      // dispatch(editAcademicActionCreator({
+      //   name,
+      //   targetId: userId,
+      //   university: university as string,
+      //   about: about as string,
+      // }));
     },
-    [dispatch, userId],
+    [],
+    // [dispatch, userId],
   );
 
   return (

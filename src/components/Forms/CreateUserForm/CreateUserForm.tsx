@@ -16,5 +16,7 @@ export const CreateUserForm: React.FC<ICreateUserFormProps> = ({ onSubmit, form,
   >
     <FormItemWrapper type="text-input" name="name" label="Full name" />
     <FormItemWrapper type="text-input" name="email" label="Email" />
+    <FormItemWrapper type="text-input" name="university" label="University" />
+    <FormItemWrapper type="text-area" name="about" label="About" />
   </StandardForm>
 );

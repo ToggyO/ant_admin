@@ -1,9 +1,9 @@
 import React from 'react';
 import { Dispatch, Link } from 'umi';
 import { Menu, Modal } from 'antd';
-import { DeleteOutlined, FileSearchOutlined } from '@ant-design/icons';
+import { FileSearchOutlined, UserAddOutlined, UserDeleteOutlined } from '@ant-design/icons';
 
-import { REMOVE_TEXT } from '@/constants';
+import { BLOCK_TEXT } from '@/constants';
 import { ROUTES } from 'config/constants';
 import { UserRoles } from 'enums/UserRoles';
 import type { ActionCreator } from 'models/connect';
@@ -14,7 +14,7 @@ export const academicsActionsMenu = (
   dispatch: Dispatch,
   record: Academic,
   queries: API.RequestParams,
-  removeActionCreator: ActionCreator<{ id: number; params: API.RequestParams }>,
+  blockActionCreator: ActionCreator<{ id: number; params: API.RequestParams }>,
 ) => (
   <Menu>
     <Menu.Item key="details">
@@ -23,17 +23,18 @@ export const academicsActionsMenu = (
       </Link>
     </Menu.Item>
     <Menu.Item
-      key="delete"
+      key="block"
       onClick={() =>
         Modal.confirm({
-          title: REMOVE_TEXT.TITLE(record.name),
-          content: REMOVE_TEXT.CONTENT,
-          okText: REMOVE_TEXT.OK_TEXT,
-          onOk: () => dispatch(removeActionCreator(record.id, { ...queries, role: UserRoles.Academic })),
+          title: BLOCK_TEXT.TITLE(record.name),
+          content: BLOCK_TEXT.CONTENT,
+          okText: BLOCK_TEXT.OK_TEXT,
+          onOk: () => dispatch(blockActionCreator(record.id, { ...queries, role: UserRoles.Academic })),
         })
       }
     >
-      <DeleteOutlined /> Delete
+      {record.deleted ? <UserAddOutlined /> : <UserDeleteOutlined />}
+      {record.deleted ? 'Unblock' : 'Block'}
     </Menu.Item>
   </Menu>
 );

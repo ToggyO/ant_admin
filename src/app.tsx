@@ -15,7 +15,8 @@ import { HttpClientConfig } from 'services/config';
 
 import { AppLayout } from 'components';
 import { checkTokens } from 'services/auth';
-import { fetchCurrentUser } from 'services/user';
+import { fetchCurrentUser } from 'services/user/service';
+import { getCountriesList } from 'models/global/service';
 
 import defaultSettings from '../config/defaultSettings';
 
@@ -42,8 +43,10 @@ export async function getInitialState(): Promise<AntProInitialState> {
   };
   if (history.location.pathname !== ROUTES.AUTH.SIGN_IN) {
     const currentUser = await fetchUserInfo();
+    const countries = await getCountriesList();
     return {
       currentUser,
+      countries: countries.data.items || [],
       settings: defaultSettings,
     };
   }

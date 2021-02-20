@@ -8,7 +8,7 @@ import {
   UsergroupDeleteOutlined,
 } from '@ant-design/icons';
 
-import { REMOVE_TEXT } from '@/constants';
+import { BLOCK_TEXT } from '@/constants';
 import { ROUTES } from 'config/constants';
 import { UserRoles } from 'enums/UserRoles';
 import type { ActionCreator } from 'models/connect';
@@ -34,9 +34,9 @@ export const learnersActionsMenu = (
       key="delete"
       onClick={() =>
         Modal.confirm({
-          title: REMOVE_TEXT.TITLE(record.name),
-          content: REMOVE_TEXT.CONTENT,
-          okText: REMOVE_TEXT.OK_TEXT,
+          title: BLOCK_TEXT.TITLE(record.name),
+          content: BLOCK_TEXT.CONTENT,
+          okText: BLOCK_TEXT.OK_TEXT,
           onOk: () => dispatch(removeActionCreator(record.id, { ...queries, role: UserRoles.Learner })),
         })
       }

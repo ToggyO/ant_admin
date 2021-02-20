@@ -44,11 +44,8 @@ export const editAcademicActionCreator = (dto: EditAcademicDTO): ActionPayload<E
   payload: dto,
 });
 
-export const removeAcademicActionCreator = (
-  id: number,
-  params: API.RequestParams,
-): ActionPayload<number> => ({
-  type: getNamespace(EFFECTS.REMOVE),
+export const blockAcademicActionCreator = (id: number, params: API.RequestParams): ActionPayload<number> => ({
+  type: getNamespace(EFFECTS.BLOCK),
   payload: id,
   params,
 });

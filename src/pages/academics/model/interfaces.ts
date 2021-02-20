@@ -21,7 +21,7 @@ export interface IAcademicsEffects {
   getDetails: Effect;
   editDetails: Effect;
   create: Effect;
-  remove: Effect;
+  block: Effect;
 }
 
 export interface IAcademicsReducers extends ICommonReducers<IAcademicsState> {

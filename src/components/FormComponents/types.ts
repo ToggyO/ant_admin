@@ -2,9 +2,9 @@
  * Description: Form components types
  */
 
-import type { CSSProperties } from "react";
+import type { CSSProperties } from 'react';
 
-import type { FormItemProps } from "antd/lib/form";
+import type { FormItemProps } from 'antd/lib/form';
 
 export interface FieldsOptions extends Omit<FormItemProps, 'children'> {
   props?: Record<string, any>;
@@ -12,7 +12,6 @@ export interface FieldsOptions extends Omit<FormItemProps, 'children'> {
 }
 
 export type SelectOptions = {
-  key: number | string;
+  value: number | string;
   label: number | string;
 };
-

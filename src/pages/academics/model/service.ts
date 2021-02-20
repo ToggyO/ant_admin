@@ -34,8 +34,8 @@ export async function createAcademicRequest(
   });
 }
 
-export async function removeAcademicRequest(id: number) {
-  return request<API.BaseResponse>(USERS.REMOVE, {
+export async function blockAcademicRequest(id: number) {
+  return request<API.BaseResponse>(USERS.BLOCK, {
     method: 'POST',
     data: { targetId: id },
   });

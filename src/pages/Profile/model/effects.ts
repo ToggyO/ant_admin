@@ -6,7 +6,7 @@ import { history } from 'umi';
 
 import { MODAL_KEYS } from '@/constants';
 import { commonEffects } from 'models/common.effects';
-import { editUserRequest, fetchCurrentUser } from 'services/user';
+import { editUserRequest, fetchCurrentUser } from 'services/user/service';
 import { ROUTES } from 'config/constants';
 import { UserRoles } from 'enums/UserRoles';
 import { AUTH } from 'pages/Auth/model/constants';

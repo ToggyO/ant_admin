@@ -30,4 +30,13 @@ export const ERROR_MESSAGES = {
   FIRST_NAME: {
     REQUIRED: 'First name is required',
   },
+  UNIVERSITY: {
+    REQUIRED: 'University is required',
+  },
+  ABOUT: {
+    REQUIRED: 'Self information is required',
+  },
+  COUNTRY: {
+    REQUIRED: 'Country is required',
+  },
 } as const;

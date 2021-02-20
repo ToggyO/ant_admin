@@ -10,7 +10,8 @@ import type { ITodosState } from 'pages/Todos/model/interfaces';
 import type { IAuthState } from 'pages/Auth/model/interfaces';
 import type { IProfileState } from 'pages/Profile/model/interfaces';
 import type { IAcademicsState } from 'pages/academics/model/interfaces';
-import { ILearnersState } from 'pages/learners/model/interfaces';
+import type { ILearnersState } from 'pages/learners/model/interfaces';
+import type { IGlobalState } from 'models/global/interfaces';
 
 import { DefaultSettings as SettingModelState } from '../../config/defaultSettings';
 
@@ -19,6 +20,7 @@ export { GlobalModelState, SettingModelState };
 export type LoadingEffects = Record<string, boolean | undefined>;
 
 export type LoadingModels = {
+  global: boolean | undefined;
   modal: boolean | undefined;
   todos: boolean | undefined;
   auth: boolean | undefined;
@@ -35,6 +37,7 @@ export interface ILoading {
 
 export interface ConnectState {
   loading: ILoading;
+  global: IGlobalState;
   modal: IModalState;
   todos: ITodosState;
   auth: IAuthState;

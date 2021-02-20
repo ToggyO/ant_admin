@@ -1,4 +1,4 @@
-import { LockOutlined, MailTwoTone, IdcardOutlined } from '@ant-design/icons';
+import { LockOutlined, MailTwoTone, IdcardOutlined, BankTwoTone } from '@ant-design/icons';
 
 import { ERROR_MESSAGES } from '@/constants';
 import { FormInstance, RuleObject } from 'antd/es/form';
@@ -123,6 +123,37 @@ export const commonFormOptions = {
       {
         required: true,
         message: FIRST_NAME.REQUIRED,
+      },
+    ],
+  },
+  university: {
+    props: {
+      size: 'large',
+      placeholder: 'University',
+      prefix: <BankTwoTone className="input-prefix-icon" />,
+    },
+    hasFeedback: true,
+    rules: [
+      {
+        required: true,
+        message: ERROR_MESSAGES.UNIVERSITY.REQUIRED,
+      },
+    ],
+  },
+  about: {
+    props: {
+      placeholder: 'About',
+      maxLength: 500,
+      style: {
+        height: 56,
+        resize: 'none',
+        fontSize: 16,
+      },
+    },
+    rules: [
+      {
+        required: true,
+        message: ERROR_MESSAGES.ABOUT.REQUIRED,
       },
     ],
   },
