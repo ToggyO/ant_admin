@@ -35,7 +35,7 @@ import type { IUserDetailsFormProps } from './interfaces';
 
 import styles from './index.less';
 
-function UserDetailsForm<T extends User>({
+function UserDetailsForm<T extends Omit<User, 'country'> & { country: number }>({
   onSubmit,
   userData,
   openModal,
@@ -166,11 +166,18 @@ function UserDetailsForm<T extends User>({
 
             <Divider />
 
-            <FormItemWrapper type="async-load-select" name="country" label="Country" dataSource={countries} />
-
-            <FormItemWrapper type="text-input" name="university" label="University" />
-
-            <FormItemWrapper type="text-area" name="about" label="About" />
+            {userData.role !== UserRoles.Admin && (
+              <>
+                <FormItemWrapper
+                  type="async-load-select"
+                  name="country"
+                  label="Country"
+                  dataSource={countries}
+                />
+                <FormItemWrapper type="text-input" name="university" label="University" />
+                <FormItemWrapper type="text-area" name="about" label="About" />
+              </>
+            )}
 
             <Row justify="center">
               <FormItemWrapper

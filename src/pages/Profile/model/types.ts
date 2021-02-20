@@ -20,4 +20,4 @@ export type User = {
   subscription?: string;
 };
 
-export type CurrentUser = User;
+export type CurrentUser = Omit<User, 'country'> & { country: number };

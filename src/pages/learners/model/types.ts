@@ -16,6 +16,8 @@ export type LearnerTableItem = {
   trialStarted: boolean;
 };
 
+export type LearnerDetails = Omit<User, 'country'> & { country: number };
+
 export type EditLearnerDTO = {
   targetId: number;
   name: string;

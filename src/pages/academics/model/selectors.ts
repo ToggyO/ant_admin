@@ -4,10 +4,11 @@
 
 import { createSelector } from 'reselect';
 
+import { getImageUrl } from 'services/helpers';
 import type { ConnectState } from 'models/connect';
 import type { AntPagination } from 'utils/helpers';
-import { getImageUrl } from 'services/helpers';
 
+import type { AcademicDetails } from './types';
 import type { Academic, AcademicTableItem } from './types';
 
 export const academicsListSelector = createSelector<ConnectState, Academic[], AcademicTableItem[]>(
@@ -25,10 +26,11 @@ export const academicsListSelector = createSelector<ConnectState, Academic[], Ac
 
 export const academicsPaginationSelector = (state: ConnectState): AntPagination => state.academics.pagination;
 
-export const academicDetailsSelector = createSelector<ConnectState, Academic, Academic>(
+export const academicDetailsSelector = createSelector<ConnectState, Academic, AcademicDetails>(
   (state) => state.academics.details,
   (details) => ({
     ...details,
+    country: details.country?.id,
     avatar: getImageUrl(details.avatar as string),
   }),
 );

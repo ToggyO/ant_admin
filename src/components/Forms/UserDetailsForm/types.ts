@@ -1,6 +1,6 @@
 export type UserDetailsFormValues = {
   name: string;
-  email: string;
+  country: number;
   university?: string;
   about?: string;
 };

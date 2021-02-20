@@ -3,6 +3,7 @@
  */
 
 import type { User } from 'pages/Profile/model/types';
+import type { Country } from 'models/global/types';
 
 export type Academic = User & {
   about?: string;
@@ -14,9 +15,13 @@ export type AcademicTableItem = {
   id: number;
   name: string;
   email: string;
-  country: string;
+  country: Country;
   university: string;
   deleted: boolean;
+};
+
+export type AcademicDetails = Omit<Academic, 'country'> & {
+  country: number;
 };
 
 export type CreateAcademicDTO = {
@@ -27,6 +32,7 @@ export type CreateAcademicDTO = {
 export type EditAcademicDTO = {
   targetId: number;
   name: string;
+  countryId: number;
   university: string;
   about: string;
 };

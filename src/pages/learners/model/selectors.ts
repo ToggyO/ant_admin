@@ -6,7 +6,7 @@ import { createSelector } from 'reselect';
 
 import { getImageUrl } from 'services/helpers';
 import type { ConnectState } from 'models/connect';
-import type { Learner, LearnerTableItem } from 'pages/learners/model/types';
+import type { Learner, LearnerTableItem, LearnerDetails } from 'pages/learners/model/types';
 import type { AntPagination } from 'utils/helpers';
 
 export const learnersListSelector = createSelector<ConnectState, Learner[], LearnerTableItem[]>(
@@ -22,10 +22,11 @@ export const learnersListSelector = createSelector<ConnectState, Learner[], Lear
 
 export const learnersPaginationSelector = (state: ConnectState): AntPagination => state.learners.pagination;
 
-export const learnerDetailsSelector = createSelector<ConnectState, Learner, Learner>(
+export const learnerDetailsSelector = createSelector<ConnectState, Learner, LearnerDetails>(
   (state) => state.learners.details,
   (details) => ({
     ...details,
+    country: details.country?.id,
     avatar: getImageUrl(details.avatar as string),
   }),
 );

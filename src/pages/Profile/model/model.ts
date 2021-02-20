@@ -7,12 +7,12 @@ import reducers from './reducers';
 
 import { PROFILE } from './constants';
 import type { IProfileModel } from './interfaces';
-import type { CurrentUser } from './types';
+import type { User } from './types';
 
 const Model: IProfileModel = {
   namespace: PROFILE.NAMESPACE,
   state: {
-    user: {} as CurrentUser,
+    user: {} as User,
     globalError: {} as API.ErrorResponse,
     validationErrors: [],
   },

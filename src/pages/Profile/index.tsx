@@ -17,7 +17,9 @@ const Profile: React.FC<IProfileProps> = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const loading = useLoading('profile');
-  const user = useSelector<ConnectState, CurrentUser>(currentUserSelector);
+  const user = useSelector<ConnectState, Omit<CurrentUser, 'country'> & { country: number }>(
+    currentUserSelector,
+  );
 
   const onSubmit = useCallback((values: UserDetailsFormValues) => {
     // const { file } = values;

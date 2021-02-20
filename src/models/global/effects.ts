@@ -2,8 +2,12 @@
  * Description: Global module DVA model effects
  */
 
+import { AntMessages, createFormDataDto } from 'utils/helpers';
 import { getCountriesList } from 'models/global/service';
+import { PROFILE } from 'pages/Profile/model/constants';
+import { uploadAvatarRequest } from 'services/user/service';
 import type { Country } from 'models/global/types';
+import type { UploadAvatarDTO } from 'services/user/types';
 
 import { commonEffects } from '../common.effects';
 
@@ -25,8 +29,16 @@ export default {
     }
   },
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  *changeAvatar({ payload }, { call, put }) {},
+  *changeAvatar({ payload }, { call, put }) {
+    const data = createFormDataDto<UploadAvatarDTO>(payload);
+    try {
+      yield call(uploadAvatarRequest, data);
+      yield put({ type: PROFILE.getNamespace(PROFILE.EFFECTS.FETCH_CURRENT) });
+      AntMessages.editUserDetailsSuccess();
+    } catch (error) {
+      yield commonEffects.putErrors(error, put);
+    }
+  },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   *changeEmail({ payload }, { call, put }) {},

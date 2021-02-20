@@ -6,10 +6,10 @@ import { SmileTwoTone, HeartTwoTone } from '@ant-design/icons';
 import { BreadcrumbItem } from 'components';
 import { APP_NAME } from 'config/constants';
 import type { ConnectState } from 'models/connect';
-import type { CurrentUser } from 'pages/Profile/model/types';
+import type { User } from 'pages/Profile/model/types';
 
 const AdminPage: React.FC = () => {
-  const user = useSelector<ConnectState, CurrentUser>((state) => state.profile.user);
+  const user = useSelector<ConnectState, User>((state) => state.profile.user);
   return (
     <PageHeader breadcrumb={{ routes: [{ path: '/', breadcrumbName: 'Home' }], itemRender: BreadcrumbItem }}>
       <Alert

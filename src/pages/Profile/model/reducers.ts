@@ -5,7 +5,7 @@
 import { CommonReducers } from 'models/common.reducers';
 
 import type { IProfileReducers, IProfileState } from './interfaces';
-import type { CurrentUser } from './types';
+import type { User } from './types';
 
 export default {
   saveUserInfo(state, { payload }) {
@@ -18,7 +18,7 @@ export default {
   clearUserInfo(state) {
     return {
       ...state,
-      user: {} as CurrentUser,
+      user: {} as User,
     };
   },
 

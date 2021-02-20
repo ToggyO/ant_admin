@@ -1,6 +1,6 @@
 import type { User } from 'pages/Profile/model/types';
 
 export interface ISubscriptionProps {
-  userData: User;
+  userData: Omit<User, 'country'> & { country: number };
   [key: string]: unknown;
 }

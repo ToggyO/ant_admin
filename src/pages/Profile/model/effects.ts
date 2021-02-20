@@ -6,14 +6,14 @@ import { history } from 'umi';
 
 import { MODAL_KEYS } from '@/constants';
 import { commonEffects } from 'models/common.effects';
-import { editUserRequest, fetchCurrentUser } from 'services/user/service';
+import { fetchCurrentUser } from 'services/user/service';
 import { ROUTES } from 'config/constants';
 import { UserRoles } from 'enums/UserRoles';
 import { AUTH } from 'pages/Auth/model/constants';
 import { MODAL } from 'models/modal/constants';
-import { AntMessages, createFormDataDto } from 'utils/helpers';
+import { AntMessages } from 'utils/helpers';
 
-import type { ChangeCurrentUserAvatarDTO, ChangePasswordDTO } from '../types';
+import type { ChangePasswordDTO } from '../types';
 
 import { PROFILE } from './constants';
 import type { User } from './types';
@@ -43,17 +43,6 @@ export default {
       // FIXME: check
       // yield put({ type: PROFILE.ACTIONS.PUT_VALIDATION_ERRORS });
       yield history.push(ROUTES.AUTH.SIGN_IN);
-    }
-  },
-
-  *changeAvatar({ payload }, { call, put }) {
-    const data = createFormDataDto<ChangeCurrentUserAvatarDTO>(payload);
-    try {
-      yield call(editUserRequest, data);
-      yield put({ type: PROFILE.EFFECTS.FETCH_CURRENT });
-      AntMessages.editUserDetailsSuccess();
-    } catch (error) {
-      yield commonEffects.putErrors(error, put);
     }
   },
 
