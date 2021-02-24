@@ -2,7 +2,7 @@ export { AnimationWrapper } from './AnimationWrapper';
 export { BreadcrumbItem } from './Breadcrumbs';
 export { withModal, withModalState, WithModalProps, WithModalStateProps } from './HOC';
 export { default as Footer } from './Footer';
-export { ImageUploader } from './ImageUploader';
+export { AvatarUploader } from './AvatarUploader';
 export { ImageContainer } from './ImageContainer';
 export { ModalWithFormInstance } from './ModalWithFormInstance';
 export { default as HeaderDropdown } from './HeaderDropdown';

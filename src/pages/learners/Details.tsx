@@ -56,7 +56,7 @@ const LearnerDetails: React.FC = () => {
           itemRender: BreadcrumbItem,
         }}
       >
-        <UserDetailsForm onSubmit={handleEditUser} userData={learner} loading={loading} />
+        <UserDetailsForm onSubmit={handleEditUser} userData={learner} loading={loading} targetId={userId} />
       </PageHeader>
     </Loader>
   );

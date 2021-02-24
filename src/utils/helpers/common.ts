@@ -63,3 +63,38 @@ export function createFormDataDto<T extends Record<string, any>>(dto: T): FormDa
   });
   return fd;
 }
+
+/**
+ * Transform file size from bytes to readable units
+ */
+export type HumanFileSizeConfig = {
+  si?: boolean;
+  dp?: number;
+  withUnits?: boolean;
+};
+
+export function humanFileSize(bytes: number, config: HumanFileSizeConfig = {}) {
+  const { si = false, dp = 1, withUnits = true } = config;
+  const thresh = si ? 1000 : 1024;
+
+  if (Math.abs(bytes) < thresh) {
+    return `${bytes} B`;
+  }
+
+  const units = ['kb', 'MB', 'gb', 'tb', 'pb', 'eb', 'zb', 'yb'];
+  let u = -1;
+  const r = 10 ** dp;
+
+  do {
+    bytes /= thresh;
+    ++u;
+  } while (Math.round(Math.abs(bytes) * r) / r >= thresh && u < units.length - 1);
+
+  let result = bytes.toFixed(dp);
+
+  if (withUnits) {
+    result += ` ${units[u]}`;
+  }
+
+  return result;
+}

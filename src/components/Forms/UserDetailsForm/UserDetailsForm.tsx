@@ -12,25 +12,25 @@ import {
   ChangePasswordFormValues,
   ChangePasswordModal,
   UserDetailsFormValues,
-  ImageUploader,
+  AvatarUploader,
   withModal,
   ImageContainer,
   SelectOptions,
 } from 'components';
 import { changePasswordActionCreator } from 'pages/Profile/model/actions';
 import { UserRoles } from 'enums/UserRoles';
-import { AntMessages } from 'utils/helpers';
 import type { CurrentUser, User } from 'pages/Profile/model/types';
 import type { ConnectState } from 'models/connect';
-import type { IAntUploadedFiles } from 'services/interfaces';
 import { currentUserSelector } from 'services/user/selectors';
 import { countriesListSelector } from 'models/global/selectors';
+import { changeAvatarActionCreator } from 'models/global/actions';
 
 import { FormItemWrapper, StandardForm } from '../../FormComponents';
 
 import options from './options';
 import { Subscription } from './_components/Subscription';
 import { RoleRenderer } from './_components/RoleRenderer';
+import { validateAvatarFile } from './_components/validate-file';
 import type { IUserDetailsFormProps } from './interfaces';
 
 import styles from './index.less';
@@ -41,6 +41,8 @@ function UserDetailsForm<T extends Omit<User, 'country'> & { country: number }>(
   openModal,
   closeModal,
   loading,
+  targetId,
+  entityType,
   onClearValidationErrors,
 }: PropsWithChildren<IUserDetailsFormProps<T>>): JSX.Element {
   const [form] = useForm<UserDetailsFormValues>();
@@ -66,14 +68,6 @@ function UserDetailsForm<T extends Omit<User, 'country'> & { country: number }>(
     [closeModal],
   );
 
-  const normalizeFile = useCallback((e: IAntUploadedFiles) => {
-    if (Array.isArray(e)) {
-      return e;
-    }
-    AntMessages.profileChangesInfo();
-    return e && e.file.originFileObj;
-  }, []);
-
   const isAllowToEditing = userData.email === currentUser.email && currentUser.role === UserRoles.Admin;
 
   return (
@@ -88,23 +82,18 @@ function UserDetailsForm<T extends Omit<User, 'country'> & { country: number }>(
       >
         <Row justify="center" className={styles.image_container}>
           <Col>
-            <ImageContainer src={userData.avatar} />
+            <ImageContainer src={userData.avatar} globalLoading={loading} />
           </Col>
           <Col>
-            <FormItemWrapper
-              type="custom-component"
-              name="file"
-              valuePropName="file"
-              getValueFromEvent={normalizeFile}
-              formItemStyle={{ marginBottom: 12, marginTop: 12 }}
-              component={(props) => (
-                <ImageUploader externalFormInstance={form} {...props}>
-                  <Button size="large" type="default" htmlType="button">
-                    Change avatar <FileImageTwoTone />
-                  </Button>
-                </ImageUploader>
-              )}
-            />
+            <AvatarUploader
+              validateFileFunc={validateAvatarFile}
+              uploadActionCreator={changeAvatarActionCreator}
+              extraPayload={{ targetId, entityType }}
+            >
+              <Button size="large" type="default" htmlType="button">
+                Change avatar <FileImageTwoTone />
+              </Button>
+            </AvatarUploader>
           </Col>
         </Row>
 
@@ -179,17 +168,19 @@ function UserDetailsForm<T extends Omit<User, 'country'> & { country: number }>(
               </>
             )}
 
-            <Row justify="center">
-              <FormItemWrapper
-                type="custom-component"
-                name="submit"
-                component={(props) => (
-                  <Button {...props}>
-                    Save <SaveOutlined />
-                  </Button>
-                )}
-              />
-            </Row>
+            {currentUser.role !== UserRoles.Admin && (
+              <Row justify="center">
+                <FormItemWrapper
+                  type="custom-component"
+                  name="submit"
+                  component={(props) => (
+                    <Button {...props}>
+                      Save <SaveOutlined />
+                    </Button>
+                  )}
+                />
+              </Row>
+            )}
           </Col>
         </Row>
       </StandardForm>

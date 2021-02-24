@@ -12,20 +12,22 @@ import {
   UserDetailsForm,
   UserDetailsFormValues,
 } from 'components';
+import { EntityTypes } from 'enums/EntityTypes';
 
 import { getBreadcrumbs } from './_components/breadcrumbs/details.breadcrumbs';
 import { academicDetailsSelector } from './model/selectors';
 import {
-  getAcademicDetailsActionCreator,
   clearAcademicDetailsActionCreator,
   clearAcademicsGlobalErrorActionCreator,
   clearAcademicsValidationErrorsActionCreator,
   editAcademicActionCreator,
+  getAcademicDetailsActionCreator,
 } from './model/actions';
 
 const AcademicDetails: React.FC = () => {
   const history = useHistory();
   const dispatch = useDispatch();
+  const globalLoading = useLoading('global');
   const loading = useLoading('academics');
   const academic = useSelector(academicDetailsSelector);
   const userId = useIdFromPath(history.location.pathname);
@@ -55,7 +57,7 @@ const AcademicDetails: React.FC = () => {
   );
 
   return (
-    <Loader loading={loading}>
+    <Loader loading={loading || globalLoading}>
       <PageHeader
         title="Academic profile details"
         onBack={() => history.goBack()}
@@ -64,7 +66,13 @@ const AcademicDetails: React.FC = () => {
           itemRender: BreadcrumbItem,
         }}
       >
-        <UserDetailsForm onSubmit={handleEditUser} userData={academic} loading={loading} />
+        <UserDetailsForm
+          onSubmit={handleEditUser}
+          userData={academic}
+          loading={loading}
+          targetId={userId}
+          entityType={EntityTypes.Academic}
+        />
       </PageHeader>
     </Loader>
   );

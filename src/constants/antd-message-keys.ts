@@ -3,6 +3,7 @@
  */
 
 export const ANT_MESSAGE_KEYS = {
+  INTERNAL_ERROR: 'internal-error',
   LOGIN_ERROR: 'login-error',
   ACCESS_DENIED: 'access-denied',
   USER_EXISTS: 'user-exists',
@@ -16,5 +17,8 @@ export const ANT_MESSAGE_KEYS = {
   EDIT_USER_PROFILE: {
     SUCCESS: 'edit-user-profile-success',
     INFO: 'profile-changes-info',
+  },
+  FILE: {
+    INVALID: 'invalid-file',
   },
 } as const;

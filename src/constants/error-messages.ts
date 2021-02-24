@@ -3,6 +3,7 @@
  */
 
 export const ERROR_MESSAGES = {
+  INTERNAL_ERROR: 'Something went wrong =( Please, try again later!',
   LOGIN: {
     REQUIRED: 'Login is required',
     INVALID_CREDENTIALS: "User doesn't exist or password is wrong!",
