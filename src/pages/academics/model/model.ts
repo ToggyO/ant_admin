@@ -13,6 +13,7 @@ import type { Academic } from './types';
 const Model: IAcademicsModel = {
   namespace: ACADEMICS.NAMESPACE,
   state: {
+    papers: [],
     list: [],
     pagination: {} as AntPagination,
     details: {} as Academic,

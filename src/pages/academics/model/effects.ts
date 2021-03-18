@@ -14,12 +14,15 @@ import { ACADEMICS } from './constants';
 import {
   getAcademicsListRequest,
   getAcademicDetailsRequest,
+  getAcademicsPaperRequest,
   createAcademicRequest,
   blockAcademicRequest,
 } from './service';
 import type { Academic, EditAcademicDTO } from './types';
 
 const { ACTIONS, EFFECTS } = ACADEMICS;
+
+// const getAcademicsPaperRequest = (id: string | number): string | number => id;
 
 export default {
   // ...commonEffects,
@@ -47,6 +50,21 @@ export default {
       yield put({
         type: ACTIONS.SAVE_DETAILS,
         payload: response.data.user,
+      });
+    } catch (error) {
+      yield commonEffects.putErrors(error, put);
+    }
+  },
+
+  *getPapers({ payload }, { call, put }) {
+    try {
+      const id = payload as number;
+      // api method
+      const response: API.SuccessResponse<any> = yield call(getAcademicsPaperRequest, id);
+      console.log('res: ', response);
+      yield put({
+        type: ACTIONS.SAVE_PAPERS,
+        payload: [],
       });
     } catch (error) {
       yield commonEffects.putErrors(error, put);

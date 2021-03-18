@@ -8,6 +8,7 @@ export { ModalWithFormInstance } from './ModalWithFormInstance';
 export { default as HeaderDropdown } from './HeaderDropdown';
 export { default as HeaderSearch } from './HeaderSearch';
 export { Loader, ProLoader } from './Loading';
+export { default as PapersList } from './PapersList';
 export { default as RightContent } from './RightContent';
 export * from './Table';
 export * from './Forms';

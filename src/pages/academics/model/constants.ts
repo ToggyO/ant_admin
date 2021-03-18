@@ -8,6 +8,7 @@ export const ACADEMICS = {
   EFFECTS: {
     GET_LIST: 'getList',
     GET_DETAILS: 'getDetails',
+    GET_PAPERS: 'getPapers',
     EDIT_DETAILS: 'editDetails',
     CREATE: 'create',
     BLOCK: 'block',
@@ -16,6 +17,7 @@ export const ACADEMICS = {
   ACTIONS: {
     SAVE_LIST: 'saveList',
     SAVE_DETAILS: 'saveDetails',
+    SAVE_PAPERS: 'savePapers',
     CLEAR_LIST: 'clearList',
     CLEAR_DETAILS: 'clearDetails',
     PUT_GLOBAL_ERROR: 'putGlobalError',

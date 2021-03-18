@@ -27,6 +27,11 @@ export const getAcademicDetailsActionCreator = (id: number): ActionPayload<numbe
   payload: id,
 });
 
+export const getAcademicPapersActionCreator = (id: number | string): ActionPayload<number | string> => ({
+  type: getNamespace(EFFECTS.GET_PAPERS),
+  payload: id,
+});
+
 export const clearAcademicDetailsActionCreator = (): Action => ({
   type: getNamespace(ACTIONS.CLEAR_DETAILS),
 });

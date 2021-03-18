@@ -24,6 +24,14 @@ export async function getAcademicDetailsRequest(
     data: { targetId: id },
   });
 }
+// check api endpoint and method
+export async function getAcademicsPaperRequest(id: number): Promise<API.SuccessResponse<any>> {
+  return request<API.SuccessResponse<any>>(USERS.DETAILS, {
+    method: 'GET',
+    params: { id },
+    // data: { targetId: id },
+  });
+}
 
 export async function createAcademicRequest(
   dto: CreateAcademicDTO,

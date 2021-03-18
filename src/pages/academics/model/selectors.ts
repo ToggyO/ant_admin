@@ -40,3 +40,8 @@ export const academicGlobalErrorSelector = (state: ConnectState): API.ErrorRespo
 
 export const academicValidationErrorsSelector = (state: ConnectState): API.ValidationApiError[] =>
   state.academics.validationErrors;
+
+export const academicPapersSelector = createSelector<ConnectState, any, any>(
+  (state) => state.academics.papers,
+  (papers) => papers,
+);

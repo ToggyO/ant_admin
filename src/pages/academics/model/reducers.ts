@@ -18,6 +18,14 @@ export default {
     };
   },
 
+  savePapers(state, { payload }) {
+    const papers = payload;
+    return {
+      ...state,
+      papers,
+    };
+  },
+
   saveDetails(state, { payload }) {
     const details = payload as Academic;
     return {

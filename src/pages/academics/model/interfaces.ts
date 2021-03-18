@@ -11,6 +11,7 @@ import type { ICommonReducers } from 'models/common.reducers';
 import type { Academic } from './types';
 
 export interface IAcademicsState extends IBaseDvaModelState {
+  papers: any[];
   list: Academic[];
   pagination: AntPagination;
   details: Academic;
@@ -19,6 +20,7 @@ export interface IAcademicsState extends IBaseDvaModelState {
 export interface IAcademicsEffects {
   getList: Effect;
   getDetails: Effect;
+  getPapers: Effect;
   editDetails: Effect;
   create: Effect;
   block: Effect;
@@ -26,6 +28,7 @@ export interface IAcademicsEffects {
 
 export interface IAcademicsReducers extends ICommonReducers<IAcademicsState> {
   saveList: Reducer<IAcademicsState>;
+  savePapers: Reducer<any>;
   saveDetails: Reducer<IAcademicsState>;
   clearList: Reducer<IAcademicsState>;
   clearDetails: Reducer<IAcademicsState>;

@@ -1,4 +1,5 @@
-import React, { PropsWithChildren, useCallback } from 'react';
+import React, { useCallback } from 'react';
+import type { PropsWithChildren } from 'react';
 import { useDispatch } from 'umi';
 import { useSelector } from 'dva';
 import { Button, Col, Divider, Row } from 'antd';
@@ -6,24 +7,21 @@ import { useForm } from 'antd/lib/form/Form';
 import { FileImageTwoTone, LockTwoTone, MailTwoTone, SaveOutlined } from '@ant-design/icons';
 
 import { MODAL_KEYS } from '@/constants';
-import {
+import type {
   ChangeEmailFormValues,
-  ChangeEmailModal,
   ChangePasswordFormValues,
-  ChangePasswordModal,
   UserDetailsFormValues,
-  AvatarUploader,
-  withModal,
-  ImageContainer,
   SelectOptions,
 } from 'components';
+import { ChangeEmailModal, ChangePasswordModal, AvatarUploader, withModal, ImageContainer } from 'components';
 import { changePasswordActionCreator } from 'pages/Profile/model/actions';
 import { UserRoles } from 'enums/UserRoles';
 import type { CurrentUser, User } from 'pages/Profile/model/types';
 import type { ConnectState } from 'models/connect';
 import { currentUserSelector } from 'services/user/selectors';
 import { countriesListSelector } from 'models/global/selectors';
-import { changeAvatarActionCreator } from 'models/global/actions';
+import { validationErrorsSelector } from 'models/common.selectors';
+import { changeAvatarActionCreator, changeEmailActionCreator } from 'models/global/actions';
 
 import { FormItemWrapper, StandardForm } from '../../FormComponents';
 
@@ -49,8 +47,14 @@ function UserDetailsForm<T extends Omit<User, 'country'> & { country: number }>(
   const dispatch = useDispatch();
   const currentUser = useSelector<ConnectState, CurrentUser>(currentUserSelector);
   const countries = useSelector<ConnectState, SelectOptions[]>(countriesListSelector);
+  const validationErrors = useSelector<ConnectState, any>(validationErrorsSelector);
 
-  const handleChangeEmail = useCallback((values: ChangeEmailFormValues) => console.log(values), []);
+  const handleChangeEmail = useCallback(
+    (values: ChangeEmailFormValues) => {
+      dispatch(changeEmailActionCreator({ ...values }));
+    },
+    [dispatch],
+  );
 
   const handleChangePassword = useCallback(
     (values: ChangePasswordFormValues) => {
@@ -188,6 +192,7 @@ function UserDetailsForm<T extends Omit<User, 'country'> & { country: number }>(
         onSubmit={handleChangeEmail}
         onCancel={handleChangeEmailModalClose}
         afterClose={onClearValidationErrors}
+        validationErrors={validationErrors}
         loading={loading}
       />
       <ChangePasswordModal
