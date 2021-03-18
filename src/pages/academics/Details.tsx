@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
 import { useHistory, useSelector } from 'umi';
 import { useDispatch } from 'dva';
-import { PageHeader } from 'antd';
+import { PageHeader, Tabs } from 'antd';
 
 import {
   BreadcrumbItem,
@@ -10,8 +10,11 @@ import {
   useIdFromPath,
   useLoading,
   UserDetailsForm,
-  UserDetailsFormValues,
+  PapersList,
 } from 'components';
+
+import type { UserDetailsFormValues } from 'components';
+
 import { EntityTypes } from 'enums/EntityTypes';
 
 import { getBreadcrumbs } from './_components/breadcrumbs/details.breadcrumbs';
@@ -23,6 +26,8 @@ import {
   editAcademicActionCreator,
   getAcademicDetailsActionCreator,
 } from './model/actions';
+
+const { TabPane } = Tabs;
 
 const AcademicDetails: React.FC = () => {
   const history = useHistory();
@@ -66,13 +71,20 @@ const AcademicDetails: React.FC = () => {
           itemRender: BreadcrumbItem,
         }}
       >
-        <UserDetailsForm
-          onSubmit={handleEditUser}
-          userData={academic}
-          loading={loading}
-          targetId={userId}
-          entityType={EntityTypes.Academic}
-        />
+        <Tabs defaultActiveKey="1">
+          <TabPane tab="Profile" key="1">
+            <UserDetailsForm
+              onSubmit={handleEditUser}
+              userData={academic}
+              loading={loading}
+              targetId={userId}
+              entityType={EntityTypes.Academic}
+            />
+          </TabPane>
+          <TabPane tab="Papers" key="2">
+            <PapersList userId={userId} />
+          </TabPane>
+        </Tabs>
       </PageHeader>
     </Loader>
   );
