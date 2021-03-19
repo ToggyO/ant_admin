@@ -8,7 +8,7 @@ import type { AnyAction } from 'redux';
 import { AntMessages, createFormDataDto } from 'utils/helpers';
 import { getCountriesList } from 'models/global/service';
 import { PROFILE } from 'pages/Profile/model/constants';
-import { uploadAvatarRequest } from 'services/user/service';
+import { uploadAvatarRequest, changeEmailRequest } from 'services/user/service';
 import { EntityTypes } from 'enums/EntityTypes';
 import { ACADEMICS } from 'pages/academics/model/constants';
 import { LEARNERS } from 'pages/learners/model/constants';
@@ -39,6 +39,7 @@ export default {
   *changeAvatar({ payload }, { call, put }) {
     const typedPayload = payload as UploadAvatarDTO;
     const data = createFormDataDto<UploadAvatarDTO>(typedPayload);
+
     try {
       yield call(uploadAvatarRequest, data);
       yield getDetailsAction(put, typedPayload.entityType, typedPayload.targetId);
@@ -49,8 +50,17 @@ export default {
     }
   },
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  *changeEmail({ payload }, { call, put }) {},
+  *changeEmail({ payload }, { call, put }) {
+    try {
+      // console.log(payload);
+      yield call(changeEmailRequest, payload);
+      AntMessages.editUserDetailsSuccess();
+    } catch (error) {
+      // console.log(error);
+      AntMessages.commonMessage('Wrong email');
+      yield commonEffects.putErrors(error, put);
+    }
+  },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   *changePassword({ payload }, { call, put }) {},

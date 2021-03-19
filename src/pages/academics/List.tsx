@@ -4,6 +4,7 @@ import { useDispatch } from 'dva';
 import { Button, message, PageHeader } from 'antd';
 
 import { ANT_MESSAGE_KEYS, MODAL_KEYS } from '@/constants';
+import type { CreateUserFormValues } from 'components';
 import {
   BreadcrumbItem,
   StandardTable,
@@ -12,7 +13,6 @@ import {
   useQuery,
   withModal,
   CreateUserModal,
-  CreateUserFormValues,
 } from 'components';
 import type { ConnectState } from 'models/connect';
 import { UserRoles } from 'enums/UserRoles';
@@ -49,7 +49,7 @@ const AcademicsList: React.FC<IAcademicsListProps> = ({ openModal }) => {
   const validationErrors = useSelector<ConnectState, API.ValidationApiError[]>(
     academicValidationErrorsSelector,
   );
-  console.log(academics);
+  // console.log(academics);
   useEffect(() => {
     if (!isObjectEmpty(queries)) {
       dispatch(getAcademicsListActionCreator({ ...queries, role: UserRoles.Academic }));

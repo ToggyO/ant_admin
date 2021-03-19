@@ -28,3 +28,10 @@ export async function uploadAvatarRequest(dto: UploadAvatarDTO) {
     data: dto,
   });
 }
+
+export async function changeEmailRequest<T>(data: T) {
+  return request<API.BaseResponse>(USERS.UPDATE_EMAIL, {
+    method: 'POST',
+    data,
+  });
+}

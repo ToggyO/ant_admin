@@ -13,6 +13,7 @@ const ChangeEmailModal: React.FC<IChangeEmailModalProps> = ({
   onSubmit,
   onCancel,
   afterClose,
+  // validationErrors,
   loading,
 }) => {
   const [key] = useState(MODAL_KEYS.CHANGE_EMAIL);

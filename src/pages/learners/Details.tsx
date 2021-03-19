@@ -3,6 +3,7 @@ import { useHistory, useSelector } from 'umi';
 import { useDispatch } from 'dva';
 import { PageHeader } from 'antd';
 
+import type { UserDetailsFormValues } from 'components';
 import {
   BreadcrumbItem,
   Loader,
@@ -10,8 +11,9 @@ import {
   useIdFromPath,
   useLoading,
   UserDetailsForm,
-  UserDetailsFormValues,
 } from 'components';
+
+import { EntityTypes } from 'enums/EntityTypes';
 
 import { learnerDetailsSelector } from './model/selectors';
 import { getBreadcrumbs } from './_components/breadcrumbs/details.breadcrumbs';
@@ -56,7 +58,13 @@ const LearnerDetails: React.FC = () => {
           itemRender: BreadcrumbItem,
         }}
       >
-        <UserDetailsForm onSubmit={handleEditUser} userData={learner} loading={loading} targetId={userId} />
+        <UserDetailsForm
+          onSubmit={handleEditUser}
+          userData={learner}
+          loading={loading}
+          targetId={userId}
+          entityType={EntityTypes.Learner}
+        />
       </PageHeader>
     </Loader>
   );

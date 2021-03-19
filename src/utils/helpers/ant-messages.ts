@@ -78,4 +78,12 @@ export class AntMessages {
       key: ANT_MESSAGE_KEYS.FILE.INVALID,
     });
   }
+
+  public static async commonMessage(content: string, duration: number = 5): Promise<void> {
+    await message.warning({
+      duration,
+      content,
+      key: ANT_MESSAGE_KEYS.FILE.INVALID,
+    });
+  }
 }

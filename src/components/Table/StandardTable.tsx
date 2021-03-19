@@ -6,7 +6,7 @@ import React from 'react';
 import { useHistory } from 'umi';
 import { Space, Table } from 'antd';
 
-import { onTableChange } from './helpers';
+// import { onTableChange } from './helpers';
 import { renderNoDataContent } from './helpers';
 import type { IStandardTableProps } from './interfaces';
 
@@ -18,6 +18,7 @@ export function StandardTable<T extends object>({
   pagination,
   rowKey,
   extraContent,
+  onTableChange,
   ...rest
 }: IStandardTableProps<T>): JSX.Element {
   const history = useHistory<any>();
@@ -29,7 +30,7 @@ export function StandardTable<T extends object>({
         // size={isMobile ? 'small' : 'default'}
         bordered
         className="custom-ant-table"
-        rowClassName={() => 'custom-ant-table__rows'}
+        rowClassName="custom-ant-table__rows"
         rowKey={rowKey}
         locale={{
           emptyText: renderNoDataContent(6, dataSource, loading),

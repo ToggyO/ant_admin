@@ -22,6 +22,7 @@ export const API_ENDPOINTS = {
     DETAILS: '/users.details',
     CREATE: '/users.create',
     UPDATE: '/users.update',
+    UPDATE_EMAIL: '/users.update-email',
     UPLOAD_AVATAR: '/users.update-avatar',
     BLOCK: '/users.delete',
   },
