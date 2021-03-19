@@ -18,3 +18,8 @@ export const changeAvatarActionCreator = (dto: UploadAvatarDTO) => ({
   type: getNamespace(EFFECTS.CHANGE_AVATAR),
   payload: dto,
 });
+
+export const changeEmailActionCreator = (payload: any) => ({
+  type: getNamespace(EFFECTS.CHANGE_EMAIL),
+  payload,
+});
